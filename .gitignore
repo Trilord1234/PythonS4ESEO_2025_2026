@@ -70,3 +70,5 @@ Thumbs.db
 !example_graph.json
 *.csv
 graphs/
+
+.Banana
