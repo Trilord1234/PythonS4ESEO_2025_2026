@@ -55,7 +55,20 @@ def dfs(graph: Graph, start: str) -> list[str]:
     """
     # TODO: implémenter DFS
     # Astuce : pile = list, visited = set
-    pass
+    if start not in nodes() :
+        raise ValueError(" le noeud de départ n'existe pas")
+    pile = []
+    pile = start
+
+    visite = set()
+    visite.add(start)
+
+    print(start)
+
+
+
+
+
 
 
 def dfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
