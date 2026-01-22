@@ -81,8 +81,6 @@ class Graph:
         if not self.has_edge(a,b):
             self.graph[a].append(b)
             self.graph[b].append(a)
-        else :
-            raise ValueError("Le node a ou b n'existe pas")
     
     def remove_node(self, node: str) -> None:
         """
@@ -114,12 +112,10 @@ class Graph:
         Raises:
             ValueError: Si l'arête n'existe pas
         """
-        if a in self.graph and b in self.graph:
-            if b in self.graph[a] and a in self.graph[b]:
-                self.graph[a].remove(b)
-                self.graph[b].remove(a)
-            else :
-                raise ValueError("Le noeud n'existe pas")
+        if not self.has_edge (a,b):
+            raise ValueError(f"le noeud entre {a} et {b} n'existe pas")
+        self.graph[a].remove(b)
+        self.graph[b].remove(a)
     
     def neighbors(self, node: str) -> list[str]:
         """
@@ -186,11 +182,13 @@ class Graph:
             [('A', 'B')]  # Ordre normalisé
         """
         result = set()
-        for node, voisin in self.graph.items():
-            for copain in voisin :
+        for node, liste_voisin in self.graph.items():
+            for copain in liste_voisin :
                 if node < copain:
+                    edge = (node, copain)
+                else :
                     edge = (copain, node)
-                    result.add(edge)
+                result.add(edge)
         return sorted(list(result))
     
     def __len__(self) -> int:
