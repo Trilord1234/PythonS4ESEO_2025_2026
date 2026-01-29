@@ -238,7 +238,7 @@ def bfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
         for neighbor in graph.neighbors(node):
             if neighbor not in seen:
                 seen.add(neighbor)
-                deq.append(neighbor, path + [neighbor])
+                deq.append((neighbor, path + [neighbor]))
 
 
 # ============================================================================
