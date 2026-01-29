@@ -52,6 +52,16 @@ def dfs(graph: Graph, start: str) -> list[str]:
            - Si déjà visité, continuer
            - Marquer comme visité
            - Empiler tous ses voisins non visités
+
+
+
+           Algorithme:
+        1. Créer une file avec le nœud de départ
+        2. Créer un ensemble de nœuds visités
+        3. Tant que la file n'est pas vide:
+           - Défiler un nœud
+           - Marquer comme visité
+           - Enfiler tous ses voisins non visités
     """
 
     if not graph.has_node(start):
@@ -162,7 +172,32 @@ def bfs(graph: Graph, start: str) -> list[str]:
     """
     # TODO: implémenter BFS
     # Astuce : file = deque(), visited = set
-    pass
+
+    if not graph.has_node(start):
+        raise ValueError(f"Le noeud {start} n'existe pas")
+
+    file = deque([start])
+    seen = set()
+    result = []
+
+    while file :
+        current = file.popleft()
+    
+        seen.add(current)
+        if current not in result:
+
+            result.append(current)
+        voisins = graph.neighbors(current)
+        
+
+        for neighbors in (voisins):
+            if neighbors not in seen:
+                file.append(neighbors)
+    return(result)
+
+
+
+
 
 
 def bfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
