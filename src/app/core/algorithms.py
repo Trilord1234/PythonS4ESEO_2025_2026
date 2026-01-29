@@ -55,16 +55,26 @@ def dfs(graph: Graph, start: str) -> list[str]:
     """
     # TODO: implémenter DFS
     # Astuce : pile = list, visited = set
-    if start not in nodes() :
-        raise ValueError(" le noeud de départ n'existe pas")
-    pile = []
-    pile = start
 
-    visite = set()
-    visite.add(start)
+    if not graph.has_node(start):
+        raise ValueError(f"Le noeud {start} n'existe pas")
 
-    print(start)
+    stack = [start]
+    seen = set()
+    
 
+    while stack is True :
+        current = stack.pop
+        if current in seen:
+            
+            seen.add(current)
+            result.append(current)
+            voisins = graph.neighbors(current)
+
+        for neighbors in (voisins):
+            if neighbors not in seen:
+                stack.append(neighbors)
+    return(stack)
 
 
 
@@ -97,8 +107,26 @@ def dfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
     """
     # TODO: implémenter
     # Astuce : pile contient (noeud, chemin) où chemin est une liste
-    pass
+    if not graph.has_node(start) or not graph.has_node(goal):
+        return None
+    stack = [(start, [start])]
+    seen = set()
 
+    while stack:
+        current_node, path = stack.pop()
+        if current_node == goal:
+            return path
+        if current_node in seen:
+            continue
+        seen.add(current_node)
+        voisins = graph.neighbors(current_node)
+        for neighbor in reversed(voisins):
+            if neighbor not in seen:
+                new_path = path + [neighbor]
+                stack.append((neighbor, new_path))
+    return None
+
+    
 
 # ============================================================================
 # PALIER C : BFS (Breadth-First Search / Parcours en largeur)
