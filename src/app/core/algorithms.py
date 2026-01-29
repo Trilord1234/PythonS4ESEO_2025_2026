@@ -170,8 +170,6 @@ def bfs(graph: Graph, start: str) -> list[str]:
            - Marquer comme visité
            - Enfiler tous ses voisins non visités
     """
-    # TODO: implémenter BFS
-    # Astuce : file = deque(), visited = set
 
     if not graph.has_node(start):
         raise ValueError(f"Le noeud {start} n'existe pas")
@@ -194,11 +192,6 @@ def bfs(graph: Graph, start: str) -> list[str]:
             if neighbors not in seen:
                 file.append(neighbors)
     return(result)
-
-
-
-
-
 
 def bfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
     """
@@ -229,8 +222,23 @@ def bfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
         Variante de BFS où on stocke le chemin complet dans la file.
         File contient des tuples (nœud, chemin_jusqu'ici).
     """
-    # TODO: implémenter
-    pass
+
+    if start == goal :
+        return [start]
+    
+    deq = deque([(start,[start])])
+    seen = set(start)
+
+    while deq : 
+        node, path = deq.popleft()
+    
+        if node == goal:
+            return path
+        
+        for neighbor in graph.neighbors(node):
+            if neighbor not in seen:
+                seen.add(neighbor)
+                deq.append(neighbor, path + [neighbor])
 
 
 # ============================================================================
