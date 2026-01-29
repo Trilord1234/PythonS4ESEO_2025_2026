@@ -53,32 +53,28 @@ def dfs(graph: Graph, start: str) -> list[str]:
            - Marquer comme visité
            - Empiler tous ses voisins non visités
     """
-    # TODO: implémenter DFS
-    # Astuce : pile = list, visited = set
 
     if not graph.has_node(start):
         raise ValueError(f"Le noeud {start} n'existe pas")
 
     stack = [start]
     seen = set()
-    
+    result = []
 
-    while stack is True :
-        current = stack.pop
+    while stack :
+        current = stack.pop()
+        
         if current in seen:
-            
-            seen.add(current)
-            result.append(current)
-            voisins = graph.neighbors(current)
+            continue
 
-        for neighbors in (voisins):
+        seen.add(current)
+        result.append(current)
+        voisins = graph.neighbors(current)
+
+        for neighbors in reversed(voisins):
             if neighbors not in seen:
                 stack.append(neighbors)
-    return(stack)
-
-
-
-
+    return(result)
 
 
 def dfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
@@ -105,8 +101,7 @@ def dfs_path(graph: Graph, start: str, goal: str) -> list[str] | None:
         Variante de DFS où on stocke le chemin complet dans la pile.
         Pile contient des tuples (nœud, chemin_jusqu'ici).
     """
-    # TODO: implémenter
-    # Astuce : pile contient (noeud, chemin) où chemin est une liste
+
     if not graph.has_node(start) or not graph.has_node(goal):
         return None
     stack = [(start, [start])]
