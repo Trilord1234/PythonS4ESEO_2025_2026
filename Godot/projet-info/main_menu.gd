@@ -7,7 +7,7 @@ func _ready():
 	$"Option Pop-up/OptionPopUp".visible = false
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://game.tscn")
+	get_tree().change_scene_to_file("res://Creation.tscn")
 
 func _on_option_pressed():
 	$"Option Pop-up/OptionPopUp".visible = true

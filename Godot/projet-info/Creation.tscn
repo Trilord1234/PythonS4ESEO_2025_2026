@@ -1,14 +1,16 @@
-[gd_scene format=3 uid="uid://dgs843kd80a42"]
+[gd_scene load_steps=2 format=3 uid="uid://dgs843kd80a42"]
+
+[ext_resource type="Script" uid="uid://dvxkcw1xf5mfe" path="res://planete_manager.gd" id="1_s6xhi"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Background" type="Control" parent="."]
+[node name="Background Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BackgroundColor" type="ColorRect" parent="Background"]
+[node name="BackgroundColor" type="ColorRect" parent="Background Manager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,3 +18,47 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Button Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Generation" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 521.0
+offset_right = 836.0
+offset_bottom = 616.0
+theme_override_font_sizes/font_size = 28
+text = "BOOM PLANETE"
+
+[node name="Planete Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 436.0
+offset_top = 234.0
+offset_right = 677.4795
+offset_bottom = 460.0
+script = ExtResource("1_s6xhi")
+
+[node name="Planete" type="TextureRect" parent="Planete Manager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Layer" type="TextureRect" parent="Planete Manager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="Button Manager/Generation" to="Planete Manager" method="_on_generation_pressed"]
