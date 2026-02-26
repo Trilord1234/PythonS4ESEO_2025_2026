@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ngpodr5pvymy"
-path="res://.godot/imported/Layer10.png-c66a4dd242d88c2c6671d206c3ea63b6.ctex"
+uid="uid://dba53ba5725l"
+path="res://.godot/imported/Layer4.png-3dd219a824ef6e676f0d7276ebbb6f5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PLANET-ARTWORK/Layer_sprite/Layer_sprite/Layer10.png"
-dest_files=["res://.godot/imported/Layer10.png-c66a4dd242d88c2c6671d206c3ea63b6.ctex"]
+source_file="res://PLANET-ARTWORK/Layer_sprite/Layer4.png"
+dest_files=["res://.godot/imported/Layer4.png-3dd219a824ef6e676f0d7276ebbb6f5f.ctex"]
 
 [params]
 
