@@ -1,9 +1,14 @@
-[gd_scene load_steps=49 format=3 uid="uid://b0gst8mgsy3gg"]
+[gd_scene format=3 uid="uid://b0gst8mgsy3gg"]
 
 [ext_resource type="Script" uid="uid://xfnpkfei6lum" path="res://main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://cqtbqyefbrbox" path="res://ARTWORKS/BACKGROUND-ARTWORK/Background Animation Sheet.png" id="2_7vrkn"]
 [ext_resource type="AudioStream" uid="uid://cnt4kej0dhueg" path="res://SOUND/Card Game.mp3" id="3_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://dl2e62ir5vdgt" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_start.png" id="4_0o4t1"]
 [ext_resource type="Script" uid="uid://desx01ih40tw7" path="res://audio_control.gd" id="4_jix8l"]
+[ext_resource type="Texture2D" uid="uid://b0sl26mm12sdx" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_start_appuyé.png" id="5_0k4wn"]
+[ext_resource type="Texture2D" uid="uid://ddjk8xk0meukp" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_options.png" id="6_j5v2v"]
+[ext_resource type="Texture2D" uid="uid://h2fxsuu51o15" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_options_appuyé.png" id="7_iotk1"]
+[ext_resource type="Texture2D" uid="uid://jc0w74not5lo" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_exit.png" id="8_w44g7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fu7sn"]
 atlas = ExtResource("2_7vrkn")
@@ -305,12 +310,12 @@ thickness = 6
 color = Color(0.216, 0.71, 0.784, 1)
 thickness = 6
 
-[node name="Main Menu" type="Node2D"]
+[node name="Main Menu" type="Node2D" unique_id=1577005496]
 script = ExtResource("1_06t4h")
 
-[node name="Background Manager" type="Node2D" parent="."]
+[node name="Background Manager" type="Node2D" parent="." unique_id=2039616444]
 
-[node name="AnimatedBackground" type="AnimatedSprite2D" parent="Background Manager"]
+[node name="AnimatedBackground" type="AnimatedSprite2D" parent="Background Manager" unique_id=363945211]
 position = Vector2(564.99994, 324)
 scale = Vector2(1.9329367, 1.8189209)
 sprite_frames = SubResource("SpriteFrames_0mfjv")
@@ -318,77 +323,68 @@ animation = &"Background_Animation"
 autoplay = "Background_Animation"
 frame_progress = 0.8669811
 
-[node name="Sound" type="AudioStreamPlayer" parent="Background Manager"]
+[node name="Sound" type="AudioStreamPlayer" parent="Background Manager" unique_id=128006748]
 stream = ExtResource("3_fu7sn")
 autoplay = true
 bus = &"Music"
 parameters/looping = false
 
-[node name="Button Manager" type="Control" parent="."]
+[node name="Button Manager" type="Control" parent="." unique_id=1216152995]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
+size_flags_horizontal = 4
 
-[node name="Start" type="Button" parent="Button Manager"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Button Manager" unique_id=140314003]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.48600003
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -168.0
-offset_top = -28.0
-offset_right = 158.5
-offset_bottom = 23.5
+offset_left = -127.87201
+offset_top = -12.0
+offset_right = -38.89868
+offset_bottom = 153.17712
 grow_horizontal = 2
 grow_vertical = 2
-text = "Start"
+scale = Vector2(2.6387017, 2.0167837)
 
-[node name="Option" type="Button" parent="Button Manager"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -168.0
-offset_top = 36.0
-offset_right = 160.0
-offset_bottom = 91.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Option"
+[node name="Start" type="TextureButton" parent="Button Manager/VBoxContainer" unique_id=1337445604]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_0o4t1")
+texture_pressed = ExtResource("5_0k4wn")
+texture_hover = ExtResource("5_0k4wn")
 
-[node name="Quit" type="Button" parent="Button Manager"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -168.0
-offset_top = 100.0
-offset_right = 160.0
-offset_bottom = 155.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Quit"
+[node name="Option" type="TextureButton" parent="Button Manager/VBoxContainer" unique_id=1175066741]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("6_j5v2v")
+texture_pressed = ExtResource("7_iotk1")
+texture_hover = ExtResource("7_iotk1")
 
-[node name="Option Pop-up" type="Control" parent="."]
+[node name="Quit" type="TextureButton" parent="Button Manager/VBoxContainer" unique_id=527392174]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("8_w44g7")
+
+[node name="Option Pop-up" type="Control" parent="." unique_id=402754520]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="OptionPopUp" type="Panel" parent="Option Pop-up"]
+[node name="OptionPopUp" type="Panel" parent="Option Pop-up" unique_id=478706717]
 layout_mode = 0
-offset_left = 381.0
-offset_top = 236.0
-offset_right = 764.3333
-offset_bottom = 489.0
+offset_left = 385.0
+offset_top = 265.0
+offset_right = 768.3333
+offset_bottom = 518.0
 
-[node name="ColorRect" type="ColorRect" parent="Option Pop-up/OptionPopUp"]
+[node name="ColorRect" type="ColorRect" parent="Option Pop-up/OptionPopUp" unique_id=753998170]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 6.0
@@ -396,7 +392,7 @@ offset_right = 377.0
 offset_bottom = 248.0
 color = Color(0, 0, 0, 1)
 
-[node name="_Option_" type="Label" parent="Option Pop-up/OptionPopUp"]
+[node name="_Option_" type="Label" parent="Option Pop-up/OptionPopUp" unique_id=1872123869]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 7.0
@@ -406,7 +402,7 @@ theme_override_font_sizes/font_size = 20
 text = "Option"
 horizontal_alignment = 1
 
-[node name="_Souns_" type="Label" parent="Option Pop-up/OptionPopUp"]
+[node name="_Souns_" type="Label" parent="Option Pop-up/OptionPopUp" unique_id=495124943]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 43.0
@@ -415,7 +411,7 @@ offset_bottom = 79.0
 theme_override_font_sizes/font_size = 20
 text = "  Sound :"
 
-[node name="Back" type="Button" parent="Option Pop-up/OptionPopUp"]
+[node name="Back" type="Button" parent="Option Pop-up/OptionPopUp" unique_id=2114514804]
 layout_mode = 0
 offset_left = 198.0
 offset_top = 210.0
@@ -423,7 +419,7 @@ offset_right = 383.0
 offset_bottom = 252.0
 text = "Back"
 
-[node name="Audio Control" type="HSlider" parent="Option Pop-up/OptionPopUp"]
+[node name="Audio Control" type="HSlider" parent="Option Pop-up/OptionPopUp" unique_id=1635358717]
 layout_mode = 0
 offset_left = 36.0
 offset_top = 77.0
@@ -438,8 +434,8 @@ value = 1.0
 script = ExtResource("4_jix8l")
 audio_bus_name = "Music"
 
-[connection signal="pressed" from="Button Manager/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Button Manager/Option" to="." method="_on_option_pressed"]
-[connection signal="pressed" from="Button Manager/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Button Manager/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Button Manager/VBoxContainer/Option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="Button Manager/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Option Pop-up/OptionPopUp/Back" to="." method="_on_back_pressed"]
 [connection signal="value_changed" from="Option Pop-up/OptionPopUp/Audio Control" to="Option Pop-up/OptionPopUp/Audio Control" method="_on_value_changed"]
