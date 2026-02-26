@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cnt4kej0dhueg"
-path="res://.godot/imported/Card Game.mp3-513aedf686f4a2b122b4ab31e97b6764.mp3str"
+path="res://.godot/imported/Card Game.mp3-fe42d5cbb951a174cf9bac1c0f4a7759.mp3str"
 
 [deps]
 
-source_file="res://Sound/Card Game.mp3"
-dest_files=["res://.godot/imported/Card Game.mp3-513aedf686f4a2b122b4ab31e97b6764.mp3str"]
+source_file="res://SOUND/Card Game.mp3"
+dest_files=["res://.godot/imported/Card Game.mp3-fe42d5cbb951a174cf9bac1c0f4a7759.mp3str"]
 
 [params]
 

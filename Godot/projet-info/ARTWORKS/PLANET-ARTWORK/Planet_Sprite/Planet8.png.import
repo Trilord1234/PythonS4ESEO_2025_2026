@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://u51cx83algax"
-path="res://.godot/imported/Planet8.png-3a9e2c81ca4ce3507f18bdc43afa6d0c.ctex"
+path="res://.godot/imported/Planet8.png-db0d91283b65dd419f31c4551bb6c86d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PLANET-ARTWORK/Planet_Sprite/Planet8.png"
-dest_files=["res://.godot/imported/Planet8.png-3a9e2c81ca4ce3507f18bdc43afa6d0c.ctex"]
+source_file="res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet8.png"
+dest_files=["res://.godot/imported/Planet8.png-db0d91283b65dd419f31c4551bb6c86d.ctex"]
 
 [params]
 

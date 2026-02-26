@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqtbqyefbrbox"
-path="res://.godot/imported/Background Animation Sheet.png-931eb192f2d1d7f195f2709005d16903.ctex"
+uid="uid://d2ovd5ytojwww"
+path="res://.godot/imported/Layer7.png-6965fb3105f87d5558451049fac89860.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Background Gif/Background Animation Sheet.png"
-dest_files=["res://.godot/imported/Background Animation Sheet.png-931eb192f2d1d7f195f2709005d16903.ctex"]
+source_file="res://ARTWORKS/BACKGROUND-ARTWORK/PLANET-ARTWORK/Layer_sprite/Layer_sprite/Layer7.png"
+dest_files=["res://.godot/imported/Layer7.png-6965fb3105f87d5558451049fac89860.ctex"]
 
 [params]
 

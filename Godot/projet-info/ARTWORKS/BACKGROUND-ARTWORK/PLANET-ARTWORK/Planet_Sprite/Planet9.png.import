@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm710nbh00rt6"
-path="res://.godot/imported/Layer9.png-5712b6aa434729be7b8acced7a948365.ctex"
+uid="uid://c0n65a62fclbl"
+path="res://.godot/imported/Planet9.png-12f8d7857bf716bfb88cd0c6932ea2f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Background Gif/PLANET-ARTWORK/Layer_sprite/Layer_sprite/Layer9.png"
-dest_files=["res://.godot/imported/Layer9.png-5712b6aa434729be7b8acced7a948365.ctex"]
+source_file="res://ARTWORKS/BACKGROUND-ARTWORK/PLANET-ARTWORK/Planet_Sprite/Planet9.png"
+dest_files=["res://.godot/imported/Planet9.png-12f8d7857bf716bfb88cd0c6932ea2f6.ctex"]
 
 [params]
 

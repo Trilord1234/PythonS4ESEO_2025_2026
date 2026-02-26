@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6q1c2gts8cvc"
-path="res://.godot/imported/Layer5.png-1197618f5e0042c919f6f7ab42abc0bc.ctex"
+path="res://.godot/imported/Layer5.png-5597e2fe26b36076b2939be6ecd0d752.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PLANET-ARTWORK/Layer_sprite/Layer5.png"
-dest_files=["res://.godot/imported/Layer5.png-1197618f5e0042c919f6f7ab42abc0bc.ctex"]
+source_file="res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer5.png"
+dest_files=["res://.godot/imported/Layer5.png-5597e2fe26b36076b2939be6ecd0d752.ctex"]
 
 [params]
 
