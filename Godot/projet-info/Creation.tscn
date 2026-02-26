@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgs843kd80a42"]
+[gd_scene load_steps=3 format=3 uid="uid://dgs843kd80a42"]
 
 [ext_resource type="Script" uid="uid://dvxkcw1xf5mfe" path="res://planete_manager.gd" id="1_s6xhi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6xhi"]
+size = Vector2(624, 568)
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,6 +22,75 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.32915837, 0.3291584, 0.3291584, 1)
 
+[node name="PlaneteBox" type="Control" parent="Background Manager"]
+anchors_preset = 0
+offset_left = 464.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 624.0
+
+[node name="Border" type="Control" parent="Background Manager/PlaneteBox"]
+anchors_preset = 0
+offset_right = 672.0
+offset_bottom = 616.0
+
+[node name="BorderBox1" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.023529412, 1, 1, 1)
+
+[node name="BorderBox2" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -9.684204
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BorderBox3" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.023529412, 1, 1, 1)
+
+[node name="BorderBox4" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32941177, 0.32941177, 0.32941177, 1)
+
+[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
+position = Vector2(331, 307)
+
+[node name="Area2D" type="Area2D" parent="Background Manager/PlaneteBox/HitBox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background Manager/PlaneteBox/HitBox/Area2D"]
+position = Vector2(5, 1)
+shape = SubResource("RectangleShape2D_s6xhi")
+
 [node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -27,20 +99,20 @@ offset_bottom = 40.0
 
 [node name="Generation" type="Button" parent="Button Manager"]
 layout_mode = 0
-offset_left = 283.0
-offset_top = 521.0
-offset_right = 836.0
-offset_bottom = 616.0
+offset_left = 8.0
+offset_top = 576.0
+offset_right = 376.0
+offset_bottom = 631.0
 theme_override_font_sizes/font_size = 28
 text = "BOOM PLANETE"
 
 [node name="Planete Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 342.0
-offset_top = 89.0
-offset_right = 786.0
-offset_bottom = 497.0
+offset_left = 488.0
+offset_top = 40.0
+offset_right = 1112.0
+offset_bottom = 608.0
 script = ExtResource("1_s6xhi")
 
 [node name="Planete" type="TextureRect" parent="Planete Manager"]
