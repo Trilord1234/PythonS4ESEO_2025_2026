@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b0gst8mgsy3gg"]
+[gd_scene format=3 uid="uid://b0gst8mgsy3gg"]
 
 [ext_resource type="Script" uid="uid://xfnpkfei6lum" path="res://main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://cqtbqyefbrbox" path="res://ARTWORKS/BACKGROUND-ARTWORK/Background Animation Sheet.png" id="2_7vrkn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ddjk8xk0meukp" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_options.png" id="6_j5v2v"]
 [ext_resource type="Texture2D" uid="uid://h2fxsuu51o15" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_options_appuyé.png" id="7_iotk1"]
 [ext_resource type="Texture2D" uid="uid://jc0w74not5lo" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_exit.png" id="8_w44g7"]
+[ext_resource type="Texture2D" uid="uid://b34e8ox04b0v7" path="res://ARTWORKS/BUTTON-ARTWORK/image (4).png" id="9_0o4t1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fu7sn"]
 atlas = ExtResource("2_7vrkn")
@@ -310,12 +311,12 @@ thickness = 6
 color = Color(0.216, 0.71, 0.784, 1)
 thickness = 6
 
-[node name="Main Menu" type="Node2D"]
+[node name="Main Menu" type="Node2D" unique_id=399838589]
 script = ExtResource("1_06t4h")
 
-[node name="Background Manager" type="Node2D" parent="."]
+[node name="Background Manager" type="Node2D" parent="." unique_id=1167931614]
 
-[node name="AnimatedBackground" type="AnimatedSprite2D" parent="Background Manager"]
+[node name="AnimatedBackground" type="AnimatedSprite2D" parent="Background Manager" unique_id=1781465897]
 position = Vector2(564.99994, 324)
 scale = Vector2(1.9329367, 1.8189209)
 sprite_frames = SubResource("SpriteFrames_0mfjv")
@@ -323,20 +324,20 @@ animation = &"Background_Animation"
 autoplay = "Background_Animation"
 frame_progress = 0.8669811
 
-[node name="Sound" type="AudioStreamPlayer" parent="Background Manager"]
+[node name="Sound" type="AudioStreamPlayer" parent="Background Manager" unique_id=1211537160]
 stream = ExtResource("3_fu7sn")
 autoplay = true
 bus = &"Music"
 parameters/looping = false
 
-[node name="Button Manager" type="Control" parent="."]
+[node name="Button Manager" type="Control" parent="." unique_id=723012654]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 size_flags_horizontal = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Button Manager"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Button Manager" unique_id=1023230707]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.48600003
@@ -351,40 +352,42 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.6387017, 2.0167837)
 
-[node name="Start" type="TextureButton" parent="Button Manager/VBoxContainer"]
+[node name="Start" type="TextureButton" parent="Button Manager/VBoxContainer" unique_id=97316737]
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("4_0o4t1")
 texture_pressed = ExtResource("5_0k4wn")
 texture_hover = ExtResource("5_0k4wn")
 
-[node name="Option" type="TextureButton" parent="Button Manager/VBoxContainer"]
+[node name="Option" type="TextureButton" parent="Button Manager/VBoxContainer" unique_id=816227521]
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("6_j5v2v")
 texture_pressed = ExtResource("7_iotk1")
 texture_hover = ExtResource("7_iotk1")
 
-[node name="Quit" type="TextureButton" parent="Button Manager/VBoxContainer"]
+[node name="Quit" type="TextureButton" parent="Button Manager/VBoxContainer" unique_id=1386176913]
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("8_w44g7")
+texture_pressed = ExtResource("9_0o4t1")
+texture_hover = ExtResource("9_0o4t1")
 
-[node name="Option Pop-up" type="Control" parent="."]
+[node name="Option Pop-up" type="Control" parent="." unique_id=261579384]
 visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="OptionPopUp" type="Panel" parent="Option Pop-up"]
+[node name="OptionPopUp" type="Panel" parent="Option Pop-up" unique_id=216564259]
 layout_mode = 0
 offset_left = 374.0
 offset_top = 307.0
 offset_right = 757.3333
 offset_bottom = 626.0
 
-[node name="ColorRect" type="ColorRect" parent="Option Pop-up/OptionPopUp"]
+[node name="ColorRect" type="ColorRect" parent="Option Pop-up/OptionPopUp" unique_id=799025910]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -393,7 +396,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="_Option_" type="Label" parent="Option Pop-up/OptionPopUp"]
+[node name="_Option_" type="Label" parent="Option Pop-up/OptionPopUp" unique_id=545578112]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 7.0
@@ -403,7 +406,7 @@ theme_override_font_sizes/font_size = 20
 text = "Option"
 horizontal_alignment = 1
 
-[node name="_Souns_" type="Label" parent="Option Pop-up/OptionPopUp"]
+[node name="_Souns_" type="Label" parent="Option Pop-up/OptionPopUp" unique_id=481418579]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 43.0
@@ -412,7 +415,7 @@ offset_bottom = 79.0
 theme_override_font_sizes/font_size = 20
 text = "  Sound :"
 
-[node name="Back" type="Button" parent="Option Pop-up/OptionPopUp"]
+[node name="Back" type="Button" parent="Option Pop-up/OptionPopUp" unique_id=278427038]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -425,7 +428,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Back"
 
-[node name="Audio Control" type="HSlider" parent="Option Pop-up/OptionPopUp"]
+[node name="Audio Control" type="HSlider" parent="Option Pop-up/OptionPopUp" unique_id=370250764]
 layout_mode = 0
 offset_left = 36.0
 offset_top = 77.0
