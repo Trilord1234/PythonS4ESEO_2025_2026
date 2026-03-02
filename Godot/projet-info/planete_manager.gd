@@ -29,9 +29,21 @@ var layer = [
 	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer11.png"),
 ]
 
-func _ready():
-	randomize()
+var movement = Vector2.ZERO
+var limit_x = 500
+var limit_y = 500
+var planet_size = 100
 
-func _on_generation_pressed():
+func _ready():
 	$Planete.texture = planete.pick_random()
 	$Layer.texture = layer.pick_random()
+	var angle = randf_range(0,2 * PI)
+	var speed = randf_range(100, 250)
+	movement = Vector2.RIGHT.rotated(angle) * speed
+
+func _process(delta):
+	position += movement * delta
+	if position.x <= 0 or position.x >= (limit_x - planet_size):
+		movement.x *= -1
+	if position.y <= 0 or position.y >= (limit_y - planet_size):
+		movement.y *= -1

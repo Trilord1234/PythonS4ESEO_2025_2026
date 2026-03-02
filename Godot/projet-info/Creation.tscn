@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgs843kd80a42"]
+[gd_scene load_steps=2 format=3 uid="uid://dgs843kd80a42"]
 
-[ext_resource type="Script" uid="uid://dvxkcw1xf5mfe" path="res://planete_manager.gd" id="1_s6xhi"]
+[ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6xhi"]
-size = Vector2(624, 568)
-
-[node name="Node2D" type="Node2D"]
+[node name="Creation" type="Node2D"]
+script = ExtResource("1_e6g1c")
 
 [node name="Background Manager" type="Control" parent="."]
 layout_mode = 3
@@ -85,11 +83,11 @@ color = Color(0.32941177, 0.32941177, 0.32941177, 1)
 [node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
 position = Vector2(331, 307)
 
-[node name="Area2D" type="Area2D" parent="Background Manager/PlaneteBox/HitBox"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background Manager/PlaneteBox/HitBox/Area2D"]
-position = Vector2(5, 1)
-shape = SubResource("RectangleShape2D_s6xhi")
+[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
+offset_left = -307.0
+offset_top = -283.0
+offset_right = 357.0
+offset_bottom = 325.0
 
 [node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
@@ -106,31 +104,4 @@ offset_bottom = 631.0
 theme_override_font_sizes/font_size = 28
 text = "BOOM PLANETE"
 
-[node name="Planete Manager" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 488.0
-offset_top = 40.0
-offset_right = 1112.0
-offset_bottom = 608.0
-script = ExtResource("1_s6xhi")
-
-[node name="Planete" type="TextureRect" parent="Planete Manager"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-
-[node name="Layer" type="TextureRect" parent="Planete Manager"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-
-[connection signal="pressed" from="Button Manager/Generation" to="Planete Manager" method="_on_generation_pressed"]
+[connection signal="pressed" from="Button Manager/Generation" to="." method="_on_generation_pressed"]
