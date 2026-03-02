@@ -89,6 +89,36 @@ offset_top = -283.0
 offset_right = 357.0
 offset_bottom = 325.0
 
+[node name="Info" type="Control" parent="Background Manager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -904.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Background Manager/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
+
+[node name="TextEdit" type="TextEdit" parent="Background Manager/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NB Planet = "
+
 [node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
