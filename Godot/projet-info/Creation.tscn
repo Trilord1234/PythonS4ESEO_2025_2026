@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgs843kd80a42"]
+[gd_scene load_steps=3 format=3 uid="uid://dgs843kd80a42"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
+[ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
 
 [node name="Creation" type="Node2D"]
 script = ExtResource("1_e6g1c")
@@ -11,14 +12,14 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BackgroundColor" type="ColorRect" parent="Background Manager"]
+[node name="BackgroundColor" type="TextureRect" parent="Background Manager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.32915837, 0.3291584, 0.3291584, 1)
+texture = ExtResource("2_qsw05")
 
 [node name="PlaneteBox" type="Control" parent="Background Manager"]
 anchors_preset = 0

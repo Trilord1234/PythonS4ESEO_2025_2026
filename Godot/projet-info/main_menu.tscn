@@ -1,7 +1,7 @@
 [gd_scene load_steps=55 format=3 uid="uid://b0gst8mgsy3gg"]
 
 [ext_resource type="Script" uid="uid://xfnpkfei6lum" path="res://main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://cqtbqyefbrbox" path="res://ARTWORKS/BACKGROUND-ARTWORK/Background Animation Sheet.png" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://cqtbqyefbrbox" path="res://ARTWORKS/BACKGROUND-ARTWORK/Main-Menu-Background/Background Animation Sheet.png" id="2_7vrkn"]
 [ext_resource type="AudioStream" uid="uid://cnt4kej0dhueg" path="res://SOUND/Card Game.mp3" id="3_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://dl2e62ir5vdgt" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_start.png" id="4_0o4t1"]
 [ext_resource type="Script" uid="uid://desx01ih40tw7" path="res://audio_control.gd" id="4_jix8l"]
