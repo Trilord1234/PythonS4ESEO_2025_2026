@@ -101,7 +101,7 @@ offset_bottom = -568.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Background Manager/Info"]
+[node name="BackColor" type="ColorRect" parent="Background Manager/Info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,14 +110,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="TextEdit" type="TextEdit" parent="Background Manager/Info"]
+[node name="NbPLanet" type="Label" parent="Background Manager/Info"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "NB Planet = "
+theme_override_font_sizes/font_size = 27
+text = "NB Planet = 0"
+vertical_alignment = 1
 
 [node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
