@@ -64,11 +64,13 @@ func _ready():
 	$Planete.texture = planete.pick_random()
 	$Layer.texture = layer.pick_random()
 	if randf() > 0.5:
+		$Planete.texture = planete_BW.pick_random()
 		var planet_color = Color.from_hsv(randf(), randf_range(0.3,0.8), 1.0)
 		$Planete.self_modulate = planet_color
 	else : 
 		$Planete.self_modulate = Color.WHITE
 	if randf() < 0.5:
+		$Layer.texture = layer_BW.pick_random()
 		var layer_color = Color.from_hsv(randf(), randf_range(0.3,0.8), 1.0)
 		$Layer.self_modulate = layer_color
 	else :
