@@ -133,7 +133,17 @@ offset_left = 8.0
 offset_top = 576.0
 offset_right = 376.0
 offset_bottom = 631.0
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 30
 text = "BOOM PLANETE"
 
+[node name="Clear" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 512.0
+offset_right = 376.0
+offset_bottom = 568.0
+theme_override_font_sizes/font_size = 35
+text = "CLEAR ALL"
+
 [connection signal="pressed" from="Button Manager/Generation" to="." method="_on_generation_pressed"]
+[connection signal="pressed" from="Button Manager/Clear" to="." method="_on_clear_pressed"]

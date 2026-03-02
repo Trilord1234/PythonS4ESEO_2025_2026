@@ -18,3 +18,10 @@ func _on_generation_pressed():
 		randf_range(100,box.size.y - 100)
 	)
 	box.add_child(new_planet)
+
+func _on_clear_pressed():
+	count = 0
+	$"Background Manager/Info/NbPLanet".text = "NB Planet = " + str(count)
+	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
+	for child in box.get_children():
+		child.queue_free()

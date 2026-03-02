@@ -42,6 +42,7 @@ var layer = [
 ]
 
 var layer_BW = [
+	null,
 	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer1_B&W.png"),
 	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer2_B&W.png"),
 	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer3_B&W.png"),
