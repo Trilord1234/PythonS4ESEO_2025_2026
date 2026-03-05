@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgs843kd80a42"]
+[gd_scene format=3 uid="uid://dgs843kd80a42"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
 [ext_resource type="Texture2D" uid="uid://hcrpsr4rua0b" path="res://ARTWORKS/ASSET-ARTWORK/Box-Creation.png" id="3_30pk3"]
+[ext_resource type="Texture2D" uid="uid://cbwff7lql1g4y" path="res://ARTWORKS/ASSET-ARTWORK/Cadre-Info.png" id="4_a4tru"]
 
-[node name="Creation" type="Node2D"]
+[node name="Creation" type="Node2D" unique_id=496094298]
 script = ExtResource("1_e6g1c")
 
-[node name="Background Manager" type="Control" parent="."]
+[node name="Background Manager" type="Control" parent="." unique_id=769843988]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BackgroundColor" type="TextureRect" parent="Background Manager"]
+[node name="BackgroundColor" type="TextureRect" parent="Background Manager" unique_id=1438181121]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,19 +23,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qsw05")
 
-[node name="PlaneteBox" type="Control" parent="Background Manager"]
+[node name="PlaneteBox" type="Control" parent="Background Manager" unique_id=479243769]
 anchors_preset = 0
 offset_left = 464.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 624.0
 
-[node name="Border" type="Control" parent="Background Manager/PlaneteBox"]
+[node name="Border" type="Control" parent="Background Manager/PlaneteBox" unique_id=690815187]
 anchors_preset = 0
 offset_right = 672.0
 offset_bottom = 616.0
 
-[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border"]
+[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border" unique_id=163455440]
 layout_mode = 0
 offset_left = -16.0
 offset_top = -8.0
@@ -42,28 +43,33 @@ offset_right = 680.0
 offset_bottom = 624.0
 texture = ExtResource("3_30pk3")
 
-[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
+[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox" unique_id=242415728]
 position = Vector2(331, 307)
 
-[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
+[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox" unique_id=1502563298]
 offset_left = -315.0
 offset_top = -283.0
 offset_right = 349.0
 offset_bottom = 325.0
 
-[node name="Info" type="Control" parent="Background Manager"]
+[node name="Info" type="Control" parent="Background Manager" unique_id=424787563]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -904.0
-offset_bottom = -568.0
+offset_right = -722.0
+offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackColor" type="ColorRect" parent="Background Manager/Info"]
+[node name="Control" type="Control" parent="Background Manager/Info" unique_id=129113712]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 320.0
+offset_bottom = 64.0
+
+[node name="BackColor" type="ColorRect" parent="Background Manager/Info/Control" unique_id=2105333709]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="NbPLanet" type="Label" parent="Background Manager/Info"]
+[node name="NbPLanet" type="Label" parent="Background Manager/Info/Control" unique_id=966151806]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,27 +89,74 @@ theme_override_font_sizes/font_size = 27
 text = "NB Planet = 0"
 vertical_alignment = 1
 
-[node name="Button Manager" type="Control" parent="."]
+[node name="InfoBox" type="Control" parent="Background Manager/Info" unique_id=1104390865]
+anchors_preset = 0
+offset_left = 13.0
+offset_top = 76.0
+offset_right = 434.0
+offset_bottom = 501.0
+
+[node name="Box-Info" type="TextureRect" parent="Background Manager/Info/InfoBox" unique_id=667042017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_right = 14.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a4tru")
+
+[node name="Label" type="Control" parent="Background Manager/Info/InfoBox" unique_id=1576490499]
+anchors_preset = 0
+offset_left = -13.0
+offset_top = -76.0
+offset_right = 35.0
+offset_bottom = -28.0
+
+[node name="Titre" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1868984331]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 96.0
+offset_right = 432.0
+offset_bottom = 160.0
+
+[node name="label" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=277805103]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 184.0
+offset_right = 432.0
+offset_bottom = 224.0
+
+[node name="Label" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=234795182]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button Manager" type="Control" parent="." unique_id=461790491]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 24.0
+offset_top = 248.0
+offset_right = 152.0
+offset_bottom = 288.0
 
-[node name="Generation" type="Button" parent="Button Manager"]
+[node name="Generation" type="Button" parent="Button Manager" unique_id=1081346934]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 576.0
-offset_right = 376.0
-offset_bottom = 631.0
+offset_right = 247.0
+offset_bottom = 640.0
 theme_override_font_sizes/font_size = 30
 text = "BOOM PLANETE"
 
-[node name="Clear" type="Button" parent="Button Manager"]
+[node name="Clear" type="Button" parent="Button Manager" unique_id=1353030939]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 512.0
-offset_right = 376.0
-offset_bottom = 568.0
+offset_left = 256.0
+offset_top = 576.0
+offset_right = 440.0
+offset_bottom = 640.0
 theme_override_font_sizes/font_size = 35
 text = "CLEAR ALL"
 
