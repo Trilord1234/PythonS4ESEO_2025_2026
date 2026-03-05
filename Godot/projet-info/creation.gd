@@ -8,7 +8,7 @@ func _ready() :
 
 func _on_generation_pressed():
 	count += 1
-	$"Background Manager/Info/NbPLanet".text = "NB Planet = " + str(count)
+	$"Background Manager/Info/Nb/NbPLanet".text = "NB Planet = " + str(count)
 	var new_planet = planet_manager.instantiate()
 	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
 	new_planet.limit_x = box.size.x
@@ -21,7 +21,7 @@ func _on_generation_pressed():
 
 func _on_clear_pressed():
 	count = 0
-	$"Background Manager/Info/NbPLanet".text = "NB Planet = " + str(count)
+	$"Background Manager/Info/Nb/NbPLanet".text = "NB Planet = " + str(count)
 	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
 	for child in box.get_children():
 		child.queue_free()

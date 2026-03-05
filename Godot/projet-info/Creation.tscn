@@ -62,14 +62,14 @@ offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="Background Manager/Info" unique_id=129113712]
+[node name="Nb" type="Control" parent="Background Manager/Info" unique_id=129113712]
 anchors_preset = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 320.0
 offset_bottom = 64.0
 
-[node name="BackColor" type="ColorRect" parent="Background Manager/Info/Control" unique_id=2105333709]
+[node name="BackColor" type="ColorRect" parent="Background Manager/Info/Nb" unique_id=2105333709]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="NbPLanet" type="Label" parent="Background Manager/Info/Control" unique_id=966151806]
+[node name="NbPLanet" type="Label" parent="Background Manager/Info/Nb" unique_id=966151806]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,32 +115,80 @@ offset_top = -76.0
 offset_right = 35.0
 offset_bottom = -28.0
 
-[node name="Titre" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1868984331]
+[node name="Nom_Planète" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1868984331]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 96.0
 offset_right = 432.0
 offset_bottom = 160.0
 
-[node name="label" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=277805103]
+[node name="Link" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=277805103]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 184.0
 offset_right = 432.0
 offset_bottom = 224.0
 
-[node name="Label" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=234795182]
+[node name="Type_planète" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=234795182]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 24.0
+offset_top = 248.0
+offset_right = 152.0
+offset_bottom = 287.0
+
+[node name="Poids" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=751310294]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 296.0
+offset_right = 152.0
+offset_bottom = 335.0
+
+[node name="Taille" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1493891010]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 344.0
+offset_right = 152.0
+offset_bottom = 383.0
+
+[node name="Gravité" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=342315057]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 392.0
+offset_right = 152.0
+offset_bottom = 431.0
+
+[node name="Habitable" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=2091506343]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 440.0
+offset_right = 152.0
+offset_bottom = 479.0
+
+[node name="Dangerosité" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1134025565]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 488.0
+offset_right = 152.0
+offset_bottom = 527.0
+
+[node name="Description" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=217989741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 168.0
+offset_top = 240.0
+offset_right = 384.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Button Manager" type="Control" parent="." unique_id=461790491]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 24.0
-offset_top = 248.0
-offset_right = 152.0
-offset_bottom = 288.0
+offset_left = 8.0
+offset_right = 56.0
+offset_bottom = 40.0
 
 [node name="Generation" type="Button" parent="Button Manager" unique_id=1081346934]
 layout_mode = 0
