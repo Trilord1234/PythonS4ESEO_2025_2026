@@ -112,3 +112,8 @@ func _process(delta):
 		movement.x *= -1
 	if position.y <= 0 or position.y >= (limit_y - planet_size):
 		movement.y *= -1
+
+signal planet_selected(planete_node)
+
+func _on_planet_button_pressed():
+	planet_selected.emit(self)

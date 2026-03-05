@@ -17,6 +17,7 @@ func _on_generation_pressed():
 		randf_range(100,box.size.x - 100),
 		randf_range(100,box.size.y - 100)
 	)
+	new_planet.planet_selected.connect(_on_planet_selected)
 	box.add_child(new_planet)
 
 func _on_clear_pressed():
@@ -25,3 +26,15 @@ func _on_clear_pressed():
 	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
 	for child in box.get_children():
 		child.queue_free()
+
+func _on_planet_selected(targeted_planet):
+	var planet_picture = $"Background Manager/Info/InfoBox/PlanetVisual/PlanetPicture"
+	
+	planet_picture.texture = targeted_planet.get_node("Planete").texture
+	planet_picture.self_modulate = targeted_planet.get_node("Planete").self_modulate
+	
+	var layer_picture = $"Background Manager/Info/InfoBox/PlanetVisual/LayerPicture"
+	layer_picture.texture = targeted_planet.get_node("Layer").texture
+	layer_picture.self_modulate = targeted_planet.get_node("Layer").self_modulate
+	
+	$"Background Manager/Info/InfoBox/Label/Description".text = targeted_planet.prompt_IA
