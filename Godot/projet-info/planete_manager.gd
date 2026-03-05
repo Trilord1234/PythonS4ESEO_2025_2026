@@ -1,85 +1,111 @@
 extends Control
 
 var planete = [
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet1.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet2.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet3.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet4.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet5.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet6.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet7.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet8.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet9.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet10.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet11.png")
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet1.png"), "description": "Elle présente de larges bandes obliques et ondulées évoquant des courants atmosphériques d'une planète gazeuse ou aquatique.", "couleurs": "Dominante bleue (bandes bleu clair sur fond bleu moyen)"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet2.png"), "description": "La surface est parsemée de taches et de cratères irréguliers, donnant un aspect rocheux, aride et martien.", "couleurs": "Dominante rouge vif (avec des taches et cratères rouge foncé/bordeaux)"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet3.png"), "description": "La planète est composée de rayures diagonales épaisses, nettes et parallèles.", "couleurs": "Dominante verte (alternance de rayures vert clair/pomme et vert foncé)"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet4.png"), "description": "Des motifs tourbillonnants, nébuleux et asymétriques se détachent sur un fond plus sombre. Aspect gazeux ou magique.", "couleurs": "Dominante violette (motifs violet clair sur fond violet sombre)"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet5.png"), "description": "Planète lumineuse. Un motif en spirale se fond dans un centre très clair. La surface est décorée de petites étincelles en forme de croix.", "couleurs": "Couleurs chaudes (centre jaune vif, spirale orange, étincelles blanches)"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet6.png"), "description": "Fond très sombre avec d'épaisses nervures ou coulées organiques qui semblent couler ou enlacer la planète.", "couleurs": "Fond rouge très sombre/bordeaux, nervures rose vif/magenta"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet7.png"), "description": "Planète de type 'Terre'. Composée de masses entremêlées évoquant des océans et des masses continentales ou végétales.", "couleurs": "Océans bleu moyen, continents en différentes nuances de vert"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet8.png"), "description": "Planète avec des motifs de quartiers ou de fuseaux incurvés convergeant vers les pôles, rappelant la structure d'un ballon de basket ou d'un melon.", "couleurs": "Alternance de bandes orange et marron"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet9.png"), "description": "Planète où sa surface est marquée par des tâches et des nuages irréguliers et nébuleux, se détachant sur un fond très sombre.", "couleurs": "Fond bleu nuit très sombre, taches violettes/magenta clair"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet10.png"), "description": "Représente une planète en destruction. L'écorce est rocheuse et parcourue de fissures. Une grande faille en diagonale laisse apparaître un noyau incandescent en fusion. Des débris de roche s'envolent en haut à gauche.", "couleurs": "Écorce gris foncé, noyau en dégradé jaune, orange et rouge"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet11.png"), "description": "Planète monstrueuse. Fond très sombre incrusté de multiples yeux avec pupilles. Les yeux sont répartis de manière chaotique et regardent dans plusieurs directions.", "couleurs": "Fond noir et violet foncé, yeux blancs avec pupilles noires"}
 ]
+
 var planete_BW = [
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet1_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet2_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet3_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet4_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet5_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet6_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet7_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet8_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet9_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet10_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet11_B&W.png"),
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet1_B&W.png"), "description": "Elle présente de larges bandes obliques et ondulées évoquant des courants atmosphériques d'une planète gazeuse ou aquatique."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet2_B&W.png"), "description": "La surface est parsemée de taches et de cratères irréguliers, donnant un aspect rocheux, aride et martien."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet3_B&W.png"), "description": "La planète est composée de rayures diagonales épaisses, nettes et parallèles."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet4_B&W.png"), "description": "Des motifs tourbillonnants, nébuleux et asymétriques se détachent sur un fond plus sombre. Aspect gazeux ou magique."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet5_B&W.png"), "description": "Planète lumineuse. Un motif en spirale se fond dans un centre très clair. La surface est décorée de petites étincelles en forme de croix."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet6_B&W.png"), "description": "Fond très sombre avec d'épaisses nervures ou coulées organiques qui semblent couler ou enlacer la planète."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet7_B&W.png"), "description": "Planète de type 'Terre'. Composée de masses entremêlées évoquant des océans et des masses continentales ou végétales."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet8_B&W.png"), "description": "Planète avec des motifs de quartiers ou de fuseaux incurvés convergeant vers les pôles, rappelant la structure d'un ballon de basket ou d'un melon."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet9_B&W.png"), "description": "Planète où sa surface est marquée par des tâches et des nuages irréguliers et nébuleux, se détachant sur un fond très sombre."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet10_B&W.png"), "description": "Représente une planète en destruction. L'écorce est rocheuse et parcourue de fissures. Une grande faille en diagonale laisse apparaître un noyau incandescent en fusion. Des débris de roche s'envolent en haut à gauche."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Planet_sprite_B&W/Planet11_B&W.png"), "description": "Planète monstrueuse. Fond très sombre incrusté de multiples yeux avec pupilles. Les yeux sont répartis de manière chaotique et regardent dans plusieurs directions."}
 ]
+
 var layer = [
-	null,
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer1.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer2.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer3.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer4.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer5.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer6.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer7.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer8.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer9.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer10.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer11.png"),
+	{"image": null, "description": "Il n'y a rien de particulier en orbite autour de cette planète."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer1.png"), "description": "Autour de la planète flottent plusieurs nuages épais et cotonneux, aux formes irrégulières.", "couleurs": "Blanc et gris"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer2.png"), "description": "La planète est traversée en diagonale par un grand trait ou anneau d'énergie lumineux, accompagné de quelques étoiles scintillantes.", "couleurs": "Jaune vif"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer3.png"), "description": "De petits véhicules spatiaux gravitent autour de la planète, notamment une soucoupe volante classique à dôme transparent, une petite fusée et un extraterrestre qui est tombé de son vaisseau.", "couleurs": "Soucoupe grise avec dôme bleu clair, fusée rouge avec vitre bleue, vaisseau extraterrestre vert"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer4.png"), "description": "La planète est infestée par une créature ressemblant à un ver spatial titanesque.", "couleurs": "Violet avec des pattes/pointes noires et des yeux rouges"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer5.png"), "description": "À l'intérieur de la planète, un grand œil avec une pupille incandescente y vit, et ses tentacules spectraux entourent la planète.", "couleurs": "Œil blanc, pupille rouge et jaune, tentacules blancs/gris clair"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer6.png"), "description": "L'environnement direct de la planète est parsemé de plusieurs bulles brillantes, de différentes tailles, flottant en apesanteur.", "couleurs": "Bleu clair avec des reflets blancs"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer7.png"), "description": "La planète est accompagnée d'un grand cristal volant et de projectiles.", "couleurs": "Losange rouge, projectiles noirs et blancs"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer8.png"), "description": "Une petite lune couverte de cratères orbite à proximité.", "couleurs": "Lune grise avec des cratères plus foncés, étincelles jaunes"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer9.png"), "description": "La scène est parasitée par des éléments d'interface rétro : une petite fenêtre d'erreur, entourée de croix et de cubes évoquant une 'texture manquante' en damier.", "couleurs": "Fenêtre grise et bleue, croix rouges, cubes en damier noir et magenta (rose fluo)"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer10.png"), "description": "Une adorable petite entité cosmique avec des marques sur les joues et deux points pour les yeux flotte joyeusement, enlaçant la planète.", "couleurs": "Corps blanc, yeux noirs, joues roses"},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite/Layer11.png"), "description": "Une étoile filante dotée d'une longue double traînée lumineuse traverse l'espace à proximité, accompagnée d'une petite étoile scintillante à quatre branches.", "couleurs": "Jaune vif"}
 ]
 
 var layer_BW = [
-	null,
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer1_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer2_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer3_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer4_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer5_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer6_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer7_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer8_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer9_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer10_B&W.png"),
-	preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer11_B&W.png"),
+	{"image": null, "description": "Il n'y a rien de particulier en orbite autour de cette planète."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer1_B&W.png"), "description": "Autour de la planète flottent plusieurs nuages épais et cotonneux, aux formes irrégulières."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer2_B&W.png"), "description": "La planète est traversée en diagonale par un grand trait ou anneau d'énergie lumineux, accompagné de quelques étoiles scintillantes."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer3_B&W.png"), "description": "De petits véhicules spatiaux gravitent autour de la planète, notamment une soucoupe volante classique à dôme transparent, une petite fusée et un extraterrestre qui est tombé de son vaisseau."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer4_B&W.png"), "description": "La planète est infestée par une créature ressemblant à un ver spatial titanesque."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer5_B&W.png"), "description": "À l'intérieur de la planète, un grand œil avec une pupille incandescente y vit, et ses tentacules spectraux entourent la planète."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer6_B&W.png"), "description": "L'environnement direct de la planète est parsemé de plusieurs bulles brillantes, de différentes tailles, flottant en apesanteur."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer7_B&W.png"), "description": "La planète possède un visage ouvrant la bouche en 'O' avec des yeux rigolos louchant."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer8_B&W.png"), "description": "Une petite lune couverte de cratères orbite à proximité, décorée de petites étincelles en forme de croix."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer9_B&W.png"), "description": "La scène est parasitée par des éléments d'interface rétro : une petite fenêtre d'erreur, entourée de croix et de cubes évoquant une 'texture manquante' en damier."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer10_B&W.png"), "description": "Une adorable petite entité cosmique avec des marques sur les joues et deux points pour les yeux flotte joyeusement, enlaçant la planète."},
+	{"image": preload("res://ARTWORKS/PLANET-ARTWORK/Layer_sprite_B&W/Layer11_B&W.png"), "description": "Une étoile filante dotée d'une longue double traînée lumineuse traverse l'espace à proximité, accompagnée d'une petite étoile scintillante à quatre branches."}
 ]
 
 var movement = Vector2.ZERO
 var limit_x = 500
 var limit_y = 500
 var planet_size = 100
+var prompt_IA = ""
 
 func _ready():
-	$Planete.texture = planete.pick_random()
-	$Layer.texture = layer.pick_random()
+	prompt_IA = "Invente un nom, le poids, la taille, l'habitabilité, son type, sa gravité, sa dangerosité et une anecdote pour cette planète. "
+	
 	if randf() > 0.5:
-		$Planete.texture = planete_BW.pick_random()
+		var planet_choice = planete_BW.pick_random()
+		$Planete.texture = planet_choice["image"]
 		var planet_color = Color.from_hsv(randf(), randf_range(0.3,0.8), 1.0)
 		$Planete.self_modulate = planet_color
-	else : 
+		var code_hexa = planet_color.to_html(false)
+		prompt_IA += "Visuellement : " + planet_choice["description"] + " Ses couleurs sont #" + code_hexa + ". "
+		
+	else:
+		var choix_planete = planete.pick_random()
+		$Planete.texture = choix_planete["image"]
 		$Planete.self_modulate = Color.WHITE
+		prompt_IA += "Visuellement : " + choix_planete["description"] + " Ses couleurs sont : " + choix_planete["couleurs"] + ". "
+		
 	if randf() < 0.5:
-		$Layer.texture = layer_BW.pick_random()
-		var layer_color = Color.from_hsv(randf(), randf_range(0.3,0.8), 1.0)
-		$Layer.self_modulate = layer_color
-	else :
+		var layer_choice = layer_BW.pick_random()
+		$Layer.texture = layer_choice["image"]
+		if layer_choice["image"] != null:
+			var layer_color = Color.from_hsv(randf(), randf_range(0.3, 0.8), 1.0)
+			$Layer.self_modulate = layer_color
+			var code_hexa = layer_color.to_html(false)
+			prompt_IA += layer_choice["description"] + " Ses couleurs sont #" + code_hexa + "."
+		else:
+			prompt_IA += layer_choice["description"]
+	else:
+		var layer_choice = layer.pick_random()
+		$Layer.texture = layer_choice["image"]
 		$Layer.self_modulate = Color.WHITE
+		if layer_choice["image"] != null:
+			prompt_IA += layer_choice["description"] + " Ses couleurs sont : " + layer_choice["couleurs"] + ". "
+		else:
+			prompt_IA += layer_choice["description"]
+			
 	var angle = randf_range(0,2 * PI)
 	var speed = randf_range(100, 250)
 	movement = Vector2.RIGHT.rotated(angle) * speed
-
+	
+	print(prompt_IA)
+	
 func _process(delta):
 	position += movement * delta
 	if position.x <= 0 or position.x >= (limit_x - planet_size):

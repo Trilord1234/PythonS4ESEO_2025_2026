@@ -1,20 +1,20 @@
-[gd_scene format=3 uid="uid://dgs843kd80a42"]
+[gd_scene load_steps=5 format=3 uid="uid://cqyr4eych6j7o"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
 [ext_resource type="Texture2D" uid="uid://hcrpsr4rua0b" path="res://ARTWORKS/ASSET-ARTWORK/Box-Creation.png" id="3_30pk3"]
 [ext_resource type="Texture2D" uid="uid://cbwff7lql1g4y" path="res://ARTWORKS/ASSET-ARTWORK/Cadre-Info.png" id="4_a4tru"]
 
-[node name="Creation" type="Node2D" unique_id=496094298]
+[node name="Creation" type="Node2D"]
 script = ExtResource("1_e6g1c")
 
-[node name="Background Manager" type="Control" parent="." unique_id=769843988]
+[node name="Background Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BackgroundColor" type="TextureRect" parent="Background Manager" unique_id=1438181121]
+[node name="BackgroundColor" type="TextureRect" parent="Background Manager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,19 +23,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qsw05")
 
-[node name="PlaneteBox" type="Control" parent="Background Manager" unique_id=479243769]
+[node name="PlaneteBox" type="Control" parent="Background Manager"]
 anchors_preset = 0
 offset_left = 464.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 624.0
 
-[node name="Border" type="Control" parent="Background Manager/PlaneteBox" unique_id=690815187]
+[node name="Border" type="Control" parent="Background Manager/PlaneteBox"]
 anchors_preset = 0
 offset_right = 672.0
 offset_bottom = 616.0
 
-[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border" unique_id=163455440]
+[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border"]
 layout_mode = 0
 offset_left = -16.0
 offset_top = -8.0
@@ -43,16 +43,16 @@ offset_right = 680.0
 offset_bottom = 624.0
 texture = ExtResource("3_30pk3")
 
-[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox" unique_id=242415728]
+[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
 position = Vector2(331, 307)
 
-[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox" unique_id=1502563298]
+[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
 offset_left = -315.0
 offset_top = -283.0
 offset_right = 349.0
 offset_bottom = 325.0
 
-[node name="Info" type="Control" parent="Background Manager" unique_id=424787563]
+[node name="Info" type="Control" parent="Background Manager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,14 +62,14 @@ offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Nb" type="Control" parent="Background Manager/Info" unique_id=129113712]
+[node name="Nb" type="Control" parent="Background Manager/Info"]
 anchors_preset = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 320.0
 offset_bottom = 64.0
 
-[node name="BackColor" type="ColorRect" parent="Background Manager/Info/Nb" unique_id=2105333709]
+[node name="BackColor" type="ColorRect" parent="Background Manager/Info/Nb"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="NbPLanet" type="Label" parent="Background Manager/Info/Nb" unique_id=966151806]
+[node name="NbPLanet" type="Label" parent="Background Manager/Info/Nb"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,14 +89,14 @@ theme_override_font_sizes/font_size = 27
 text = "NB Planet = 0"
 vertical_alignment = 1
 
-[node name="InfoBox" type="Control" parent="Background Manager/Info" unique_id=1104390865]
+[node name="InfoBox" type="Control" parent="Background Manager/Info"]
 anchors_preset = 0
 offset_left = 13.0
 offset_top = 76.0
 offset_right = 434.0
 offset_bottom = 501.0
 
-[node name="Box-Info" type="TextureRect" parent="Background Manager/Info/InfoBox" unique_id=667042017]
+[node name="Box-Info" type="TextureRect" parent="Background Manager/Info/InfoBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,70 +108,70 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_a4tru")
 
-[node name="Label" type="Control" parent="Background Manager/Info/InfoBox" unique_id=1576490499]
+[node name="Label" type="Control" parent="Background Manager/Info/InfoBox"]
 anchors_preset = 0
 offset_left = -13.0
 offset_top = -76.0
 offset_right = 35.0
 offset_bottom = -28.0
 
-[node name="Nom_Planète" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1868984331]
+[node name="Nom_Planète" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 96.0
 offset_right = 432.0
 offset_bottom = 160.0
 
-[node name="Link" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=277805103]
+[node name="Link" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 184.0
 offset_right = 432.0
 offset_bottom = 224.0
 
-[node name="Type_planète" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=234795182]
+[node name="Type_planète" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 248.0
 offset_right = 152.0
 offset_bottom = 287.0
 
-[node name="Poids" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=751310294]
+[node name="Poids" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 296.0
 offset_right = 152.0
 offset_bottom = 335.0
 
-[node name="Taille" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1493891010]
+[node name="Taille" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 344.0
 offset_right = 152.0
 offset_bottom = 383.0
 
-[node name="Gravité" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=342315057]
+[node name="Gravité" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 392.0
 offset_right = 152.0
 offset_bottom = 431.0
 
-[node name="Habitable" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=2091506343]
+[node name="Habitable" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 440.0
 offset_right = 152.0
 offset_bottom = 479.0
 
-[node name="Dangerosité" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=1134025565]
+[node name="Dangerosité" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 488.0
 offset_right = 152.0
 offset_bottom = 527.0
 
-[node name="Description" type="Label" parent="Background Manager/Info/InfoBox/Label" unique_id=217989741]
+[node name="Description" type="Label" parent="Background Manager/Info/InfoBox/Label"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,14 +183,14 @@ offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button Manager" type="Control" parent="." unique_id=461790491]
+[node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0
 offset_right = 56.0
 offset_bottom = 40.0
 
-[node name="Generation" type="Button" parent="Button Manager" unique_id=1081346934]
+[node name="Generation" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 576.0
@@ -199,7 +199,7 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 30
 text = "BOOM PLANETE"
 
-[node name="Clear" type="Button" parent="Button Manager" unique_id=1353030939]
+[node name="Clear" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 576.0

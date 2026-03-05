@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://c2l8di0sawmae"]
+[gd_scene load_steps=2 format=3 uid="uid://c2l8di0sawmae"]
 
 [ext_resource type="Script" uid="uid://dvxkcw1xf5mfe" path="res://planete_manager.gd" id="1_ggk2e"]
-[ext_resource type="Texture2D" uid="uid://bhwnojh51lscu" path="res://ARTWORKS/PLANET-ARTWORK/Planet_Sprite/Planet1.png" id="2_71l6d"]
 
-[node name="Planete Manager" type="Control" unique_id=1464578242]
+[node name="Planete Manager" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 320.0
@@ -12,7 +11,7 @@ offset_right = 384.0
 offset_bottom = 320.0
 script = ExtResource("1_ggk2e")
 
-[node name="Planete" type="TextureRect" parent="." unique_id=1177313324]
+[node name="Planete" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="Layer" type="TextureRect" parent="." unique_id=1032899342]
+[node name="Layer" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,11 +29,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="TextureButton" type="TextureButton" parent="." unique_id=1317521167]
+[node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_pressed = ExtResource("2_71l6d")
