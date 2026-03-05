@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgs843kd80a42"]
+[gd_scene load_steps=4 format=3 uid="uid://dgs843kd80a42"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
+[ext_resource type="Texture2D" uid="uid://hcrpsr4rua0b" path="res://ARTWORKS/ASSET-ARTWORK/Box-Creation.png" id="3_30pk3"]
 
 [node name="Creation" type="Node2D"]
 script = ExtResource("1_e6g1c")
@@ -33,61 +34,21 @@ anchors_preset = 0
 offset_right = 672.0
 offset_bottom = 616.0
 
-[node name="BorderBox1" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.023529412, 1, 1, 1)
-
-[node name="BorderBox2" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -9.684204
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="BorderBox3" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.023529412, 1, 1, 1)
-
-[node name="BorderBox4" type="ColorRect" parent="Background Manager/PlaneteBox/Border"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = -24.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.32941177, 0.32941177, 0.32941177, 1)
+[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 680.0
+offset_bottom = 624.0
+texture = ExtResource("3_30pk3")
 
 [node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
 position = Vector2(331, 307)
 
 [node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
-offset_left = -307.0
+offset_left = -315.0
 offset_top = -283.0
-offset_right = 357.0
+offset_right = 349.0
 offset_bottom = 325.0
 
 [node name="Info" type="Control" parent="Background Manager"]
