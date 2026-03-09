@@ -29,12 +29,28 @@ func _on_clear_pressed():
 
 func _on_planet_selected(targeted_planet):
 	var planet_picture = $"Background Manager/Info/InfoBox/PlanetVisual/PlanetPicture"
-	
-	planet_picture.texture = targeted_planet.get_node("Planete").texture
-	planet_picture.self_modulate = targeted_planet.get_node("Planete").self_modulate
-	
+	planet_picture.texture = targeted_planet.get_node("Planet").texture
+	planet_picture.self_modulate = targeted_planet.get_node("Planet").self_modulate
 	var layer_picture = $"Background Manager/Info/InfoBox/PlanetVisual/LayerPicture"
 	layer_picture.texture = targeted_planet.get_node("Layer").texture
 	layer_picture.self_modulate = targeted_planet.get_node("Layer").self_modulate
-	
 	$"Background Manager/Info/InfoBox/Label/Description".text = targeted_planet.prompt_IA
+	
+	if targeted_planet.donnees_ia_sauvegardees != null:
+		$"Background Manager/Info/InfoBox/Label/Name".text = targeted_planet.donnees_ia_sauvegardees["name"]
+		$"Background Manager/Info/InfoBox/Label/Type".text = "Type : " + str(targeted_planet.donnees_ia_sauvegardees["type"])
+		$"Background Manager/Info/InfoBox/Label/Weight".text = "Poids : " + str(targeted_planet.donnees_ia_sauvegardees["weight"])
+		$"Background Manager/Info/InfoBox/Label/Size".text = "Taille : " + str(targeted_planet.donnees_ia_sauvegardees["size"])
+		$"Background Manager/Info/InfoBox/Label/Gravity".text = "Gravité : " + str(targeted_planet.donnees_ia_sauvegardees["gravity"])
+		$"Background Manager/Info/InfoBox/Label/Habitable".text = "Habitable : " + str(targeted_planet.donnees_ia_sauvegardees["habitable"])
+		$"Background Manager/Info/InfoBox/Label/Level of danger".text = "Dangerosité : " + str(targeted_planet.donnees_ia_sauvegardees["level of danger"])
+		$"Background Manager/Info/InfoBox/Label/Description".text = str(targeted_planet.donnees_ia_sauvegardees["description"])
+	else:
+		$"Background Manager/Info/InfoBox/Label/Name".text = "Analyse en cours..."
+		$"Background Manager/Info/InfoBox/Label/Type".text = "Type : ..."
+		$"Background Manager/Info/InfoBox/Label/Weight".text = "Poids : ..."
+		$"Background Manager/Info/InfoBox/Label/Size".text = "Taille : ..."
+		$"Background Manager/Info/InfoBox/Label/Gravity".text = "Gravité : ..."
+		$"Background Manager/Info/InfoBox/Label/Habitable".text = "Habitable : ..."
+		$"Background Manager/Info/InfoBox/Label/Level of danger".text = "Dangerosité : ..."
+		$"Background Manager/Info/InfoBox/Label/Description".text = "Tako analyse l'atmosphère... Reclique dans un instant !"

@@ -63,22 +63,23 @@ var limit_x = 500
 var limit_y = 500
 var planet_size = 100
 var prompt_IA = ""
+var donnees_ia_sauvegardees = null
 
 func _ready():
 	prompt_IA = "Invente un nom, le poids, la taille, l'habitabilité, son type, sa gravité, sa dangerosité et une anecdote pour cette planète. "
 	
 	if randf() > 0.5:
 		var planet_choice = planete_BW.pick_random()
-		$Planete.texture = planet_choice["image"]
+		$Planet.texture = planet_choice["image"]
 		var planet_color = Color.from_hsv(randf(), randf_range(0.3,0.8), 1.0)
-		$Planete.self_modulate = planet_color
+		$Planet.self_modulate = planet_color
 		var code_hexa = planet_color.to_html(false)
 		prompt_IA += "Visuellement : " + planet_choice["description"] + " Ses couleurs sont #" + code_hexa + ". "
 		
 	else:
 		var choix_planete = planete.pick_random()
-		$Planete.texture = choix_planete["image"]
-		$Planete.self_modulate = Color.WHITE
+		$Planet.texture = choix_planete["image"]
+		$Planet.self_modulate = Color.WHITE
 		prompt_IA += "Visuellement : " + choix_planete["description"] + " Ses couleurs sont : " + choix_planete["couleurs"] + ". "
 		
 	if randf() < 0.5:
@@ -104,6 +105,7 @@ func _ready():
 	var speed = randf_range(100, 250)
 	movement = Vector2.RIGHT.rotated(angle) * speed
 	
+	python_call(prompt_IA)
 	print(prompt_IA)
 	
 func _process(delta):
@@ -117,3 +119,22 @@ signal planet_selected(planete_node)
 
 func _on_planet_button_pressed():
 	planet_selected.emit(self)
+
+func python_call(prompt):
+	var url = "http://127.0.0.1:8000/analyse"
+	var headers = ["Content-Type: application/json"]
+	var data_to_send = JSON.stringify({"prompt": prompt})
+
+	if not $RequestIA.request_completed.is_connected(_on_response_received):
+		$RequestIA.request_completed.connect(_on_response_received)
+	
+	$RequestIA.request(url, headers, HTTPClient.METHOD_POST, data_to_send)
+
+func _on_response_received(_result, response_code, _headers, body):
+	if response_code == 200:
+		var reponse_texte = body.get_string_from_utf8()
+		var IA_data = JSON.parse_string(reponse_texte)
+		
+		if IA_data != null:
+			donnees_ia_sauvegardees = IA_data
+			print("Infos IA générées pour une planète !")
