@@ -415,7 +415,7 @@ theme_override_font_sizes/font_size = 20
 text = "Option"
 horizontal_alignment = 1
 
-[node name="_Souns_" type="Label" parent="Option Pop-up/OptionPopUp"]
+[node name="_Sound_" type="Label" parent="Option Pop-up/OptionPopUp"]
 layout_mode = 0
 offset_top = 43.0
 offset_right = 336.0

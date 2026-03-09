@@ -8,6 +8,8 @@ app = Flask(__name__)
 from TakoAPIKey import api_key
 client = Groq(api_key=api_key)
 
+name_alerady_used = []
+
 system_prompt = """Tu es Tako, un générateur de lore pour un jeu vidéo. 
 Je vais te donner la description visuelle d'une planète. 
 Tu dois inventer des informations fascinantes et cohérentes avec le visuel, soit créatif.
@@ -27,6 +29,9 @@ def analyser_planete():
     data = request.json
     prompt_received = data.get("prompt", "")
     
+    if name_alerady_used:
+        prompt_received += f"\n\nCONTRAINTE STRICTE : Tu ne dois ABSOLUMENT PAS utiliser l'un de ces noms (ils existent déjà) : {', '.join(name_alerady_used)}."
+
     print("-" * 50)
     print(f"Reçu de Godot : {prompt_received}")
     
@@ -44,11 +49,21 @@ def analyser_planete():
         print(f"Réponse Tako : {IA_texte}")
         
         IA_dictionary = json.loads(IA_texte)
+
+        if "name" in IA_dictionary:
+            name_alerady_used.append(IA_dictionary["name"])
+            
         return jsonify(IA_dictionary)
 
     except Exception as e:
         print(f"Marche pas, erreur : {e}")
         return jsonify({"erreur": str(e)}), 500
+
+@app.route('/clear', methods=['POST'])
+def clear_memory():
+    name_alerady_used.clear()
+    print("Bip Boop... Mémoire des planètes EFFACÉE !")
+    return jsonify({"status": "Memoire vide"})
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")

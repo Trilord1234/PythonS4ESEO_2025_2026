@@ -26,6 +26,15 @@ func _on_clear_pressed():
 	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
 	for child in box.get_children():
 		child.queue_free()
+	erase_IA_memory()
+
+func erase_IA_memory():
+	var url = "http://127.0.0.1:8000/clear"
+	var entetes = ["Content-Type: application/json"]
+	var requeste_clear = HTTPRequest.new()
+	add_child(requeste_clear)
+	requeste_clear.request_completed.connect(func(_result, _response_code, _headers, _body): requeste_clear.queue_free())
+	requeste_clear.request(url, entetes, HTTPClient.METHOD_POST, "{}")
 
 func _on_planet_selected(targeted_planet):
 	var planet_picture = $"Background Manager/Info/InfoBox/PlanetVisual/PlanetPicture"
