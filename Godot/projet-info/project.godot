@@ -19,6 +19,10 @@ run/main_scene="uid://b0gst8mgsy3gg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

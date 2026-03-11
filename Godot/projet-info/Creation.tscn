@@ -52,24 +52,22 @@ offset_top = -283.0
 offset_right = 349.0
 offset_bottom = 325.0
 
-[node name="Info" type="Control" parent="Background Manager"]
-layout_mode = 1
+[node name="Info" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -722.0
-offset_bottom = -144.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Nb" type="Control" parent="Background Manager/Info"]
+[node name="Nb" type="Control" parent="Info"]
 anchors_preset = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 320.0
 offset_bottom = 64.0
 
-[node name="BackColor" type="ColorRect" parent="Background Manager/Info/Nb"]
+[node name="BackColor" type="ColorRect" parent="Info/Nb"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,7 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="NbPLanet" type="Label" parent="Background Manager/Info/Nb"]
+[node name="NbPLanet" type="Label" parent="Info/Nb"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,14 +87,14 @@ theme_override_font_sizes/font_size = 27
 text = "NB Planet = 0"
 vertical_alignment = 1
 
-[node name="InfoBox" type="Control" parent="Background Manager/Info"]
+[node name="InfoBox" type="Control" parent="Info"]
 anchors_preset = 0
 offset_left = 13.0
 offset_top = 76.0
 offset_right = 434.0
 offset_bottom = 501.0
 
-[node name="Box-Info" type="TextureRect" parent="Background Manager/Info/InfoBox"]
+[node name="Box-Info" type="TextureRect" parent="Info/InfoBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,14 +106,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_a4tru")
 
-[node name="PlanetVisual" type="Control" parent="Background Manager/Info/InfoBox"]
+[node name="PlanetVisual" type="Control" parent="Info/InfoBox"]
 anchors_preset = 0
 offset_left = 11.0
 offset_top = 20.0
 offset_right = 139.0
 offset_bottom = 148.0
 
-[node name="PlanetPicture" type="TextureRect" parent="Background Manager/Info/InfoBox/PlanetVisual"]
+[node name="PlanetPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,7 +121,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LayerPicture" type="TextureRect" parent="Background Manager/Info/InfoBox/PlanetVisual"]
+[node name="LayerPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,14 +129,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Control" parent="Background Manager/Info/InfoBox"]
+[node name="Label" type="Control" parent="Info/InfoBox"]
 anchors_preset = 0
 offset_left = -13.0
 offset_top = -76.0
 offset_right = 35.0
 offset_bottom = -28.0
 
-[node name="Name" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Name" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 96.0
@@ -150,7 +148,7 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 45
 horizontal_alignment = 1
 
-[node name="Type" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Type" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 240.0
@@ -160,7 +158,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Weight" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Weight" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 280.0
@@ -170,7 +168,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Size" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Size" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 344.0
@@ -180,7 +178,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Gravity" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Gravity" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 408.0
@@ -190,7 +188,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Habitable" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Habitable" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 448.0
@@ -200,7 +198,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Level of danger" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Level of danger" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 504.0
@@ -210,7 +208,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Description" type="Label" parent="Background Manager/Info/InfoBox/Label"]
+[node name="Description" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -227,12 +225,67 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="AllPLanetMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 464.0
+offset_top = 24.0
+offset_right = 1128.0
+offset_bottom = 624.0
+
+[node name="Black" type="ColorRect" parent="AllPLanetMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Grey" type="ColorRect" parent="AllPLanetMenu"]
+layout_mode = 0
+offset_right = 664.0
+offset_bottom = 104.0
+color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+
+[node name="_PlanetMenu_" type="Label" parent="AllPLanetMenu"]
+layout_mode = 0
+offset_right = 664.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.83333325, 1, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 60
+text = "Planet Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="List" type="Control" parent="AllPLanetMenu"]
+anchors_preset = 0
+offset_top = 104.0
+offset_right = 664.0
+offset_bottom = 600.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AllPLanetMenu/List"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AllPLanetMenu/List/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 8.0
-offset_right = 56.0
-offset_bottom = 40.0
+offset_right = 24.0
+offset_bottom = 24.0
 
 [node name="Generation" type="Button" parent="Button Manager"]
 layout_mode = 0
@@ -252,5 +305,13 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 35
 text = "CLEAR ALL"
 
+[node name="PlanetMenu" type="TextureButton" parent="Button Manager"]
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 24.0
+offset_right = 1128.0
+offset_bottom = 72.0
+
 [connection signal="pressed" from="Button Manager/Generation" to="." method="_on_generation_pressed"]
 [connection signal="pressed" from="Button Manager/Clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="Button Manager/PlanetMenu" to="." method="_on_planet_menu_pressed"]

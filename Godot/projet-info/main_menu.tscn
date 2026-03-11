@@ -326,7 +326,6 @@ frame_progress = 0.8669811
 
 [node name="Sound" type="AudioStreamPlayer" parent="Background Manager"]
 stream = ExtResource("3_fu7sn")
-autoplay = true
 bus = &"Music"
 parameters/looping = false
 

@@ -63,7 +63,7 @@ var limit_x = 500
 var limit_y = 500
 var planet_size = 100
 var prompt_IA = ""
-var donnees_ia_sauvegardees = null
+var data_IA_save = null
 
 func _ready():
 	prompt_IA = "Invente un nom, le poids, la taille, l'habitabilité, son type, sa gravité, sa dangerosité et une anecdote pour cette planète. "
@@ -136,5 +136,5 @@ func _on_response_received(_result, response_code, _headers, body):
 		var IA_data = JSON.parse_string(reponse_texte)
 		
 		if IA_data != null:
-			donnees_ia_sauvegardees = IA_data
+			data_IA_save = IA_data
 			print("Infos IA générées pour une planète !")
