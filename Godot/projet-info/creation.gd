@@ -71,6 +71,7 @@ func PlanetMenuReload():
 	for child in container.get_children():
 		child.queue_free()
 	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
+	
 	for planet in box.get_children():
 		if planet.data_IA_save != null and planet.data_IA_save.has("name"):
 			var ligne = HBoxContainer.new()
@@ -99,7 +100,8 @@ func PlanetMenuReload():
 			text_planet.text = planet_name + " - (" + planet_type + ")"
 			text_planet.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			text_planet.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			text_planet.add_theme_font_size_override("font_size", 20)
+			text_planet.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+			text_planet.add_theme_font_size_override("font_size", 30)
 			
 			var btn_select = Button.new()
 			btn_select.text = "Selectionner"
@@ -124,7 +126,7 @@ func PlanetMenuReload():
 			)
 			
 			var phantom = Control.new()
-			phantom.custom_minimum_size = Vector2(15,0)
+			phantom.custom_minimum_size = Vector2(5,0)
 			
 			ligne.add_child(box_picture)
 			ligne.add_child(text_planet)
@@ -132,7 +134,7 @@ func PlanetMenuReload():
 			ligne.add_child(phantom)
 			
 			container.add_child(ligne)
-			
+
 func _on_planet_menu_pressed() :
 	if open == false :
 		PlanetMenuReload()
