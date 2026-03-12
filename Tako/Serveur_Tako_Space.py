@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import os
 import json
 from groq import Groq
+from graph import Graph
 
 app = Flask(__name__)
 
@@ -64,6 +65,17 @@ def clear_memory():
     name_alerady_used.clear()
     print("Bip Boop... Mémoire des planètes EFFACÉE !")
     return jsonify({"status": "Memoire vide"})
+
+graph = Graph()
+node = data.get("node", "")
+g.add_node(node)
+print(f"Nœud ajouté : {node} | Graphe actuel : {g.nodes()}")
+
+
+
+
+
+
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")
