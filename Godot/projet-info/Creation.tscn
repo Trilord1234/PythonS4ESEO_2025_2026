@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqyr4eych6j7o"]
+[gd_scene load_steps=7 format=3 uid="uid://cqyr4eych6j7o"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
 [ext_resource type="Texture2D" uid="uid://hcrpsr4rua0b" path="res://ARTWORKS/ASSET-ARTWORK/Box-Creation.png" id="3_30pk3"]
 [ext_resource type="Texture2D" uid="uid://cbwff7lql1g4y" path="res://ARTWORKS/ASSET-ARTWORK/Cadre-Info.png" id="4_a4tru"]
 [ext_resource type="Script" uid="uid://ojj0virwd556" path="res://all_planet_menu.gd" id="5_w4rd3"]
+[ext_resource type="Texture2D" uid="uid://cvnb03kb83547" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_planet_menu.png" id="6_3fdxf"]
 
 [node name="Creation" type="Node2D"]
 script = ExtResource("1_e6g1c")
@@ -310,10 +311,12 @@ text = "CLEAR ALL"
 
 [node name="PlanetMenu" type="TextureButton" parent="Button Manager"]
 layout_mode = 0
-offset_left = 1080.0
+offset_left = 1088.0001
 offset_top = 24.0
-offset_right = 1128.0
-offset_bottom = 72.0
+offset_right = 1113.0001
+offset_bottom = 49.0
+scale = Vector2(1.5905781, 1.5952502)
+texture_normal = ExtResource("6_3fdxf")
 
 [node name="Button" type="Button" parent="Button Manager"]
 layout_mode = 0
