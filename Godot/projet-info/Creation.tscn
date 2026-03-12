@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cqyr4eych6j7o"]
+[gd_scene load_steps=0 format=3 uid="uid://d1ty83pvd8pik"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
