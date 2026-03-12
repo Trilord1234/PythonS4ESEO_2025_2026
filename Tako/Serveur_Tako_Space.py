@@ -3,7 +3,6 @@ import os
 import json
 from groq import Groq
 from graph import Graph
-
 app = Flask(__name__)
 
 from TakoAPIKey import api_key
@@ -24,6 +23,8 @@ Tu dois OBLIGATOIREMENT répondre au format JSON strict avec ces 8 clés exactes
 "level of danger" (ex: Extrême, Modérée, Pacifique, ect...),
 "description" (ex: Une phrase contenant des anecdote longue sur la planète).
 N'ajoute aucun texte avant ou après le JSON et n'utilise aucun code hexadécimal dans ta réponsse."""
+
+space_graph = Graph()
 
 @app.route('/analyse', methods=['POST'])
 def analyser_planete():
@@ -53,6 +54,9 @@ def analyser_planete():
 
         if "name" in IA_dictionary:
             name_alerady_used.append(IA_dictionary["name"])
+            planet = IA_dictionary["name"]
+            space_graph.add_node(planet)
+            print(f"Nœud ajouté : {planet} | Graphe actuel : {space_graph.nodes()}")
             
         return jsonify(IA_dictionary)
 
@@ -62,21 +66,16 @@ def analyser_planete():
 
 @app.route('/clear', methods=['POST'])
 def clear_memory():
+    global space_graph
     name_alerady_used.clear()
     print("Bip Boop... Mémoire des planètes EFFACÉE !")
+    space_graph = Graph()
     return jsonify({"status": "Memoire vide"})
-
-graph = Graph()
-node = data.get("node", "")
-g.add_node(node)
-print(f"Nœud ajouté : {node} | Graphe actuel : {g.nodes()}")
-
-
-
-
-
 
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")
     app.run(port=8000)
+
+
+    print("Hello print")
