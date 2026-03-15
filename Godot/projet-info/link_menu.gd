@@ -5,20 +5,33 @@ var open = false
 func _ready() :
 	$".".visible = false
 
-func PlanetMenuReload():
-	var container = $"List/ScrollContainer/VBoxContainer"
+func LinkMenuReload(planet_source):
+	var container = $ScrollContainer/VBoxContainer
 	for child in container.get_children():
 		child.queue_free()
-	var box = $"../Background Manager/PlaneteBox/HitBox/HitBox_Box"
+	var box = $"../../../Background Manager/PlaneteBox/HitBox/HitBox_Box"
+	var line_created = get_node("/root/Creation").line_created
 	
 	for planet in box.get_children():
 		if "data_IA_save" in planet:
 			if planet.data_IA_save != null and planet.data_IA_save.has("name"):
+				
+				if planet == planet_source:
+					continue
+					
+				var link_already_created = false
+				for dict in line_created:
+					if (dict["Planet_A"] == planet_source and dict["Planet_B"] == planet) or (dict["Planet_A"] == planet and dict["Planet_B"] == planet_source):
+						link_already_created = true
+						break
+				if link_already_created == true:
+					continue
+					
 				var ligne = HBoxContainer.new()
-				ligne.add_theme_constant_override("separation", 20)
+				ligne.add_theme_constant_override("separation", 10)
 				ligne.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				var box_picture = Control.new()
-				box_picture.custom_minimum_size = Vector2(80,80)
+				box_picture.custom_minimum_size = Vector2(40,40)
 				
 				var icone = TextureRect.new()
 				icone.texture = planet.get_node("Planet").texture
@@ -41,13 +54,13 @@ func PlanetMenuReload():
 				text_planet.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 				text_planet.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				text_planet.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-				text_planet.add_theme_font_size_override("font_size", 30)
+				text_planet.add_theme_font_size_override("font_size", 14)
 				
-				var btn_select = Button.new()
-				btn_select.text = "Selectionner"
-				btn_select.custom_minimum_size = Vector2(120, 50)
-				btn_select.size_flags_horizontal = Control.SIZE_SHRINK_END
-				btn_select.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+				var btn_link = Button.new()
+				btn_link.text = "Link"
+				btn_link.custom_minimum_size = Vector2(70, 30)
+				btn_link.size_flags_horizontal = Control.SIZE_SHRINK_END
+				btn_link.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 				
 				var btn_color = StyleBoxFlat.new()
 				btn_color.bg_color = Color(0.18, 0.40, 0.58)
@@ -55,14 +68,16 @@ func PlanetMenuReload():
 				btn_color.corner_radius_top_right = 5
 				btn_color.corner_radius_bottom_left = 5
 				btn_color.corner_radius_bottom_right = 5
-				btn_select.add_theme_stylebox_override("normal", btn_color)
+				btn_link.add_theme_stylebox_override("normal", btn_color)
 				
 				var btn_color_hover = btn_color.duplicate()
 				btn_color_hover.bg_color = Color(0.28, 0.50, 0.68)
-				btn_select.add_theme_stylebox_override("hover", btn_color_hover)
+				btn_link.add_theme_stylebox_override("hover", btn_color_hover)
 				
-				btn_select.pressed.connect(func() :
-					get_parent()._on_planet_selected(planet)
+				btn_link.pressed.connect(func() :
+					get_node("/root/Creation").create_line(planet_source, planet)
+					$".".visible = false
+					open = false
 				)
 				
 				var phantom = Control.new()
@@ -70,14 +85,17 @@ func PlanetMenuReload():
 				
 				ligne.add_child(box_picture)
 				ligne.add_child(text_planet)
-				ligne.add_child(btn_select)
+				ligne.add_child(btn_link)
 				ligne.add_child(phantom)
 				
 				container.add_child(ligne)
 
-func _on_planet_menu_pressed() :
+func _on_link_pressed():
+	var planet_active = get_node("/root/Creation").planet_selected
+	if planet_active == null :
+		return
 	if open == false :
-		PlanetMenuReload()
+		LinkMenuReload(planet_active)
 		$".".visible = true
 		open = true
 	else :

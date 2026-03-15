@@ -72,10 +72,34 @@ def clear_memory():
     space_graph = Graph()
     return jsonify({"status": "Memoire vide"})
 
+@app.route('/link', methods=['POST'])
+def lier_planetes():
+    data = request.json
+    Planet_A = data.get("planet_A")
+    Planet_B = data.get("planet_B")
+    
+    if Planet_A and Planet_B :
+        space_graph.add_edge(Planet_A, Planet_B )
+        
+        print("-" * 50)
+        print(f"Nouvelle liaison : {Planet_A} <---> {Planet_B }")
+        print(f"Réseau galactique actuel : {space_graph.edges()}")
+        
+        return jsonify({"status": "Liaison enregistrée avec succès"})
+    else:
+        return jsonify({"erreur": "Il manque une planète pour faire le lien !"}), 400
+
+@app.route('/neighbors', methods=['POST'])
+def get_voisins():
+    data = request.json
+    name_planet = data.get("planet")
+    
+    if name_planet and space_graph.has_node(name_planet):
+        copains = space_graph.neighbors(name_planet)
+        return jsonify({"neighbors": copains})
+    else:
+        return jsonify({"neighbors": []})
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")
     app.run(port=8000)
-
-
-    print("Hello print")

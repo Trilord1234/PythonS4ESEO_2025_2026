@@ -1,24 +1,25 @@
-[gd_scene load_steps=0 format=3 uid="uid://d1ty83pvd8pik"]
+[gd_scene load_steps=10 format=3 uid="uid://d1ty83pvd8pik"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
 [ext_resource type="Texture2D" uid="uid://hcrpsr4rua0b" path="res://ARTWORKS/ASSET-ARTWORK/Box-Creation.png" id="3_30pk3"]
 [ext_resource type="Texture2D" uid="uid://cbwff7lql1g4y" path="res://ARTWORKS/ASSET-ARTWORK/Cadre-Info.png" id="4_a4tru"]
-[ext_resource type="Script" path="res://all_planet_menu.gd" id="5_w4rd3"]
+[ext_resource type="Script" uid="uid://ojj0virwd556" path="res://all_planet_menu.gd" id="5_w4rd3"]
 [ext_resource type="Texture2D" uid="uid://cvnb03kb83547" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_planet_menu.png" id="6_3fdxf"]
+[ext_resource type="Script" uid="uid://1n2kusax0at5" path="res://link_menu.gd" id="6_qvtys"]
 [ext_resource type="Texture2D" uid="uid://dvw15rvidb0ps" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_planet_menu_appuyé.png" id="7_o4k7a"]
 [ext_resource type="Texture2D" uid="uid://c8w1b2fgca6da" path="res://ARTWORKS/BUTTON-ARTWORK/pixil-frame-0 (1).png" id="8_o4k7a"]
 
-[node name="Creation" type="Node2D" unique_id=1950666580]
+[node name="Creation" type="Node2D"]
 script = ExtResource("1_e6g1c")
 
-[node name="Background Manager" type="Control" parent="." unique_id=1222958263]
+[node name="Background Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BackgroundColor" type="TextureRect" parent="Background Manager" unique_id=477136046]
+[node name="BackgroundColor" type="TextureRect" parent="Background Manager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,19 +28,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qsw05")
 
-[node name="PlaneteBox" type="Control" parent="Background Manager" unique_id=394627592]
+[node name="PlaneteBox" type="Control" parent="Background Manager"]
 anchors_preset = 0
 offset_left = 464.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 624.0
 
-[node name="Border" type="Control" parent="Background Manager/PlaneteBox" unique_id=125019324]
+[node name="Border" type="Control" parent="Background Manager/PlaneteBox"]
 anchors_preset = 0
 offset_right = 672.0
 offset_bottom = 616.0
 
-[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border" unique_id=782037499]
+[node name="TextureRect" type="TextureRect" parent="Background Manager/PlaneteBox/Border"]
 layout_mode = 0
 offset_left = -16.0
 offset_top = -8.0
@@ -47,189 +48,16 @@ offset_right = 680.0
 offset_bottom = 624.0
 texture = ExtResource("3_30pk3")
 
-[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox" unique_id=1948849961]
+[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
 position = Vector2(331, 307)
 
-[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox" unique_id=556947458]
+[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
 offset_left = -315.0
 offset_top = -283.0
 offset_right = 349.0
 offset_bottom = 325.0
 
-[node name="Info" type="Control" parent="." unique_id=602112299]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Nb" type="Control" parent="Info" unique_id=665952333]
-anchors_preset = 0
-offset_left = 16.0
-offset_top = 8.0
-offset_right = 320.0
-offset_bottom = 64.0
-
-[node name="BackColor" type="ColorRect" parent="Info/Nb" unique_id=1852406492]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
-
-[node name="NbPLanet" type="Label" parent="Info/Nb" unique_id=1889746571]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 27
-text = "NB Planet = 0"
-vertical_alignment = 1
-
-[node name="InfoBox" type="Control" parent="Info" unique_id=865193551]
-anchors_preset = 0
-offset_left = 13.0
-offset_top = 76.0
-offset_right = 434.0
-offset_bottom = 501.0
-
-[node name="Box-Info" type="TextureRect" parent="Info/InfoBox" unique_id=449585502]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -5.0
-offset_right = 14.0
-offset_bottom = 67.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_a4tru")
-
-[node name="PlanetVisual" type="Control" parent="Info/InfoBox" unique_id=90977502]
-anchors_preset = 0
-offset_left = 11.0
-offset_top = 20.0
-offset_right = 139.0
-offset_bottom = 148.0
-
-[node name="PlanetPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual" unique_id=343715357]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LayerPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual" unique_id=13385616]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Control" parent="Info/InfoBox" unique_id=50115644]
-anchors_preset = 0
-offset_left = -13.0
-offset_top = -76.0
-offset_right = 35.0
-offset_bottom = -28.0
-
-[node name="Name" type="Label" parent="Info/InfoBox/Label" unique_id=1193149547]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 96.0
-offset_right = 432.0
-offset_bottom = 160.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0.9166665, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 45
-horizontal_alignment = 1
-
-[node name="Type" type="Label" parent="Info/InfoBox/Label" unique_id=416652145]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 240.0
-offset_right = 152.0
-offset_bottom = 296.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Weight" type="Label" parent="Info/InfoBox/Label" unique_id=1007013189]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 280.0
-offset_right = 152.0
-offset_bottom = 319.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Size" type="Label" parent="Info/InfoBox/Label" unique_id=1122205084]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 344.0
-offset_right = 152.0
-offset_bottom = 392.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Gravity" type="Label" parent="Info/InfoBox/Label" unique_id=712137599]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 408.0
-offset_right = 152.0
-offset_bottom = 464.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Habitable" type="Label" parent="Info/InfoBox/Label" unique_id=1464436791]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 448.0
-offset_right = 152.0
-offset_bottom = 503.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Level of danger" type="Label" parent="Info/InfoBox/Label" unique_id=17214026]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 504.0
-offset_right = 152.0
-offset_bottom = 552.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="Description" type="Label" parent="Info/InfoBox/Label" unique_id=1776427102]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 168.0
-offset_top = 240.0
-offset_right = 384.0
-offset_bottom = 504.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 13
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="AllPlanetMenu" type="Control" parent="." unique_id=1587607310]
+[node name="AllPlanetMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 464.0
@@ -238,7 +66,7 @@ offset_right = 1128.0
 offset_bottom = 624.0
 script = ExtResource("5_w4rd3")
 
-[node name="Black" type="ColorRect" parent="AllPlanetMenu" unique_id=1443535141]
+[node name="Black" type="ColorRect" parent="AllPlanetMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -247,13 +75,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Grey" type="ColorRect" parent="AllPlanetMenu" unique_id=1918272995]
+[node name="Grey" type="ColorRect" parent="AllPlanetMenu"]
 layout_mode = 0
 offset_right = 664.0
 offset_bottom = 104.0
 color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
-[node name="_PlanetMenu_" type="Label" parent="AllPlanetMenu" unique_id=1575482388]
+[node name="_PlanetMenu_" type="Label" parent="AllPlanetMenu"]
 layout_mode = 0
 offset_right = 664.0
 offset_bottom = 104.0
@@ -265,14 +93,14 @@ text = "Planet Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="List" type="Control" parent="AllPlanetMenu" unique_id=1566213007]
+[node name="List" type="Control" parent="AllPlanetMenu"]
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 104.0
 offset_right = 664.0
 offset_bottom = 600.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AllPlanetMenu/List" unique_id=414240992]
+[node name="ScrollContainer" type="ScrollContainer" parent="AllPlanetMenu/List"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -282,18 +110,229 @@ grow_vertical = 2
 size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AllPlanetMenu/List/ScrollContainer" unique_id=1219805369]
+[node name="VBoxContainer" type="VBoxContainer" parent="AllPlanetMenu/List/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button Manager" type="Control" parent="." unique_id=1490419094]
+[node name="Info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Nb" type="Control" parent="Info"]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 320.0
+offset_bottom = 64.0
+
+[node name="BackColor" type="ColorRect" parent="Info/Nb"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
+
+[node name="NbPLanet" type="Label" parent="Info/Nb"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 27
+text = "NB Planet = 0"
+vertical_alignment = 1
+
+[node name="InfoBox" type="Control" parent="Info"]
+anchors_preset = 0
+offset_left = 13.0
+offset_top = 76.0
+offset_right = 434.0
+offset_bottom = 501.0
+
+[node name="Box-Info" type="TextureRect" parent="Info/InfoBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_right = 14.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a4tru")
+
+[node name="PlanetVisual" type="Control" parent="Info/InfoBox"]
+anchors_preset = 0
+offset_left = 11.0
+offset_top = 20.0
+offset_right = 139.0
+offset_bottom = 148.0
+
+[node name="PlanetPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LayerPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Control" parent="Info/InfoBox"]
+anchors_preset = 0
+offset_left = -13.0
+offset_top = -76.0
+offset_right = 35.0
+offset_bottom = -28.0
+
+[node name="Name" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 96.0
+offset_right = 432.0
+offset_bottom = 160.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.9166665, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 45
+horizontal_alignment = 1
+
+[node name="Type" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 240.0
+offset_right = 152.0
+offset_bottom = 296.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Weight" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 280.0
+offset_right = 152.0
+offset_bottom = 319.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Size" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 344.0
+offset_right = 152.0
+offset_bottom = 392.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Gravity" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 408.0
+offset_right = 152.0
+offset_bottom = 464.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Habitable" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 448.0
+offset_right = 152.0
+offset_bottom = 503.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Level of danger" type="Label" parent="Info/InfoBox/Label"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 504.0
+offset_right = 152.0
+offset_bottom = 552.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Info/InfoBox/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 168.0
+offset_top = 240.0
+offset_right = 392.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+horizontal_scroll_mode = 0
+
+[node name="Description" type="Label" parent="Info/InfoBox/Label/ScrollContainer"]
+custom_minimum_size = Vector2(270, 312)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LinkMenu" type="Control" parent="Info/InfoBox"]
+anchors_preset = 0
+offset_left = 427.0
+offset_top = 92.0
+offset_right = 627.0
+offset_bottom = 244.0
+script = ExtResource("6_qvtys")
+
+[node name="ColorRect" type="ColorRect" parent="Info/InfoBox/LinkMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.27752772, 0.27752772, 0.27752772, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Info/InfoBox/LinkMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Info/InfoBox/LinkMenu/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 24.0
 offset_bottom = 24.0
 
-[node name="Generation" type="Button" parent="Button Manager" unique_id=86587904]
+[node name="Generation" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 576.0
@@ -302,7 +341,7 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 30
 text = "BOOM PLANETE"
 
-[node name="Clear" type="Button" parent="Button Manager" unique_id=944950011]
+[node name="Clear" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 576.0
@@ -311,7 +350,7 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 35
 text = "CLEAR ALL"
 
-[node name="PlanetMenu" type="TextureButton" parent="Button Manager" unique_id=935441831]
+[node name="PlanetMenu" type="TextureButton" parent="Button Manager"]
 layout_mode = 0
 offset_left = 1088.0001
 offset_top = 24.0
@@ -322,7 +361,7 @@ texture_normal = ExtResource("6_3fdxf")
 texture_pressed = ExtResource("7_o4k7a")
 texture_hover = ExtResource("8_o4k7a")
 
-[node name="Button" type="Button" parent="Button Manager" unique_id=508699186]
+[node name="Link" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 184.0
@@ -334,3 +373,4 @@ text = "Link"
 [connection signal="pressed" from="Button Manager/Generation" to="." method="_on_generation_pressed"]
 [connection signal="pressed" from="Button Manager/Clear" to="." method="_on_clear_pressed"]
 [connection signal="pressed" from="Button Manager/PlanetMenu" to="AllPlanetMenu" method="_on_planet_menu_pressed"]
+[connection signal="pressed" from="Button Manager/Link" to="Info/InfoBox/LinkMenu" method="_on_link_pressed"]
