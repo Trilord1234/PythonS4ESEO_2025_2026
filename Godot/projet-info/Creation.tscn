@@ -54,7 +54,7 @@ position = Vector2(331, 307)
 [node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
 offset_left = -315.0
 offset_top = -283.0
-offset_right = 349.0
+offset_right = 357.0
 offset_bottom = 325.0
 
 [node name="AllPlanetMenu" type="Control" parent="."]

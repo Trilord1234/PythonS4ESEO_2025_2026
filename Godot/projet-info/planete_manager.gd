@@ -110,10 +110,18 @@ func _ready():
 	
 func _process(delta):
 	position += movement * delta
-	if position.x <= 0 or position.x >= (limit_x - planet_size):
-		movement.x *= -1
-	if position.y <= 0 or position.y >= (limit_y - planet_size):
-		movement.y *= -1
+	if position.x <= 0:
+		position.x = 0 
+		movement.x = abs(movement.x)
+	elif position.x >= (limit_x - planet_size):
+		position.x = limit_x - planet_size
+		movement.x = -abs(movement.x)
+	if position.y <= 0:
+		position.y = 0
+		movement.y = abs(movement.y)
+	elif position.y >= (limit_y - planet_size):
+		position.y = limit_y - planet_size
+		movement.y = -abs(movement.y)
 
 signal planet_selected(planete_node)
 
