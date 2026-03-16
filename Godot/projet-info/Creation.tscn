@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1ty83pvd8pik"]
+[gd_scene load_steps=10 format=3 uid="uid://xaav4h8ejdeo"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
@@ -296,13 +296,21 @@ autowrap_mode = 2
 
 [node name="LinkMenu" type="Control" parent="Info/InfoBox"]
 anchors_preset = 0
-offset_left = 427.0
-offset_top = 92.0
-offset_right = 627.0
-offset_bottom = 244.0
+offset_left = 155.0
+offset_top = 172.0
+offset_right = 419.0
+offset_bottom = 476.0
 script = ExtResource("6_qvtys")
 
-[node name="ColorRect" type="ColorRect" parent="Info/InfoBox/LinkMenu"]
+[node name="Outline" type="ColorRect" parent="Info/InfoBox/LinkMenu"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 272.0
+offset_bottom = 312.0
+color = Color(0, 0, 0, 1)
+
+[node name="GreyBox" type="ColorRect" parent="Info/InfoBox/LinkMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
