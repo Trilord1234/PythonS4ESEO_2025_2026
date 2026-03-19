@@ -6,6 +6,7 @@ var planet_selected = null
 var line_created = []
 
 func _ready() :
+	$"Button Manager/Supprimer".visible = false
 	randomize()
 
 func _process(_delta):
@@ -51,6 +52,7 @@ func erase_IA_memory():
 
 func _on_planet_selected(targeted_planet):
 	planet_selected = targeted_planet
+	
 	var menu_link = $Info/InfoBox/LinkMenu
 	if menu_link.open == true:
 		menu_link.LinkMenuReload(targeted_planet)
@@ -61,7 +63,7 @@ func _on_planet_selected(targeted_planet):
 	layer_picture.texture = targeted_planet.get_node("Layer").texture
 	layer_picture.self_modulate = targeted_planet.get_node("Layer").self_modulate
 	$"Info/InfoBox/Label/ScrollContainer/Description".text = targeted_planet.prompt_IA
-	
+	$"Button Manager/Supprimer"	.visible = true
 	if targeted_planet.data_IA_save != null:
 		$"Info/InfoBox/Label/Name".text = targeted_planet.data_IA_save["name"]
 		$"Info/InfoBox/Label/Type".text = "Type : " + str(targeted_planet.data_IA_save["type"])
@@ -86,7 +88,8 @@ func _on_planet_selected(targeted_planet):
 					var neighbors_list = ", ".join(reponse["neighbors"])
 					$"Info/InfoBox/Label/ScrollContainer/Description".text += "\n\nReliée à : " + neighbors_list
 			neighbors.queue_free()
-		)
+			)
+		 
 		neighbors.request(url, header, HTTPClient.METHOD_POST, data)
 	else:
 		$"Info/InfoBox/Label/Name".text = "Analyse en cours..."
@@ -122,3 +125,8 @@ func create_line (planet_A, planet_B):
 				_on_planet_selected(planet_selected)
 	)
 	requeste_link.request(url, header, HTTPClient.METHOD_POST, data)
+
+func _on_supprimer_pressed():
+	count -= 1
+	$"Info/Nb/NbPLanet".text = "NB Planet = " + str(count)
+	planet_selected.queue_free()
