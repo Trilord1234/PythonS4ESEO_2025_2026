@@ -6,7 +6,7 @@ var planet_selected = null
 var line_created = []
 
 func _ready() :
-	$"Button Manager/Supprimer".visible = false
+	$"Button Manager/Delete".visible = false
 	randomize()
 
 func _process(_delta):
@@ -63,7 +63,7 @@ func _on_planet_selected(targeted_planet):
 	layer_picture.texture = targeted_planet.get_node("Layer").texture
 	layer_picture.self_modulate = targeted_planet.get_node("Layer").self_modulate
 	$"Info/InfoBox/Label/ScrollContainer/Description".text = targeted_planet.prompt_IA
-	$"Button Manager/Supprimer"	.visible = true
+	$"Button Manager/Delete".visible = true
 	if targeted_planet.data_IA_save != null:
 		$"Info/InfoBox/Label/Name".text = targeted_planet.data_IA_save["name"]
 		$"Info/InfoBox/Label/Type".text = "Type : " + str(targeted_planet.data_IA_save["type"])
@@ -126,7 +126,36 @@ func create_line (planet_A, planet_B):
 	)
 	requeste_link.request(url, header, HTTPClient.METHOD_POST, data)
 
-func _on_supprimer_pressed():
+func _on_delete_pressed():
+	if planet_selected == null:
+		return
 	count -= 1
 	$"Info/Nb/NbPLanet".text = "NB Planet = " + str(count)
+	for i in range(line_created.size() - 1, -1, -1):
+		var dict = line_created[i]
+		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
+			dict["Line"].queue_free() 
+			line_created.remove_at(i) 
 	planet_selected.queue_free()
+	planet_selected = null
+	$"Info/InfoBox/Label/Name".text = "Planète supprimée."
+	$"Info/InfoBox/Label/Type".text = ""
+	$"Info/InfoBox/Label/ScrollContainer/Description".text = ""
+	$Info/InfoBox/Label/Type.text = ""
+	$Info/InfoBox/Label/Weight.text = ""
+	$Info/InfoBox/Label/Size.text = ""
+	$Info/InfoBox/Label/Gravity.text = ""
+	$Info/InfoBox/Label/Habitable.text = ""
+	$"Info/InfoBox/Label/Level of danger".text = ""
+	
+
+func _on_delete_link_pressed():
+	if planet_selected == null:
+		return
+	
+	
+	for i in range(line_created.size() - 1, -1, -1):
+		var dict = line_created[i]
+		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
+			dict["Line"].queue_free() 
+			line_created.remove_at(i)
