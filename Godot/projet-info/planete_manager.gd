@@ -147,9 +147,9 @@ func _on_response_received(_result, response_code, _headers, body):
 			data_IA_save = IA_data
 			var planet_name = IA_data["name"]
 			GlobalData.universe[planet_name] = {
-				"texture_planete": $Planet.texture,
-				"couleur_planete": $Planet.self_modulate,
-				"texture_layer": $Layer.texture,
-				"couleur_layer": $Layer.self_modulate,
-				"donnees_IA": IA_data}
+				"planet_texture": $Planet.texture,
+				"planet_color": $Planet.self_modulate,
+				"layer_texture": $Layer.texture,
+				"layer_color": $Layer.self_modulate,
+				"IA_data": IA_data}
 			print("Infos IA générées pour une planète !")

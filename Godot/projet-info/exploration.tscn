@@ -1,11 +1,14 @@
-[gd_scene load_steps=53 format=3 uid="uid://cacj805f1yc77"]
+[gd_scene load_steps=56 format=3 uid="uid://cacj805f1yc77"]
 
 [ext_resource type="Script" uid="uid://g2iq48jvkw68" path="res://exploration.gd" id="1_88ct5"]
 [ext_resource type="Texture2D" uid="uid://b3m1dkuvdb3b6" path="res://ARTWORKS/BACKGROUND-ARTWORK/Exploration-Background/Background Exploration.png" id="1_wyjkc"]
 [ext_resource type="Texture2D" uid="uid://bpci702c521me" path="res://ARTWORKS/TAKO-ARTWORK/Idle1/Tako-Idle1-Animation.png" id="2_c4mc6"]
 [ext_resource type="Texture2D" uid="uid://b00jmdnljy8xs" path="res://ARTWORKS/TAKO-ARTWORK/Idle2/Tako-Animation-Idle2.png" id="3_88ct5"]
+[ext_resource type="Texture2D" uid="uid://hcrpsr4rua0b" path="res://ARTWORKS/ASSET-ARTWORK/Box-Creation.png" id="3_pgb1d"]
+[ext_resource type="Texture2D" uid="uid://dko5bu0s4yxdd" path="res://ARTWORKS/ASSET-ARTWORK/Tako-Dialogue-Box.png" id="4_00hbf"]
 [ext_resource type="Texture2D" uid="uid://bexag3thhjxcc" path="res://ARTWORKS/TAKO-ARTWORK/Talk/Tako-Animation-Talk.png" id="4_5taav"]
 [ext_resource type="Texture2D" uid="uid://bgfh84i4v421h" path="res://ARTWORKS/SPACESHIP-ARTWORK/Spaceship.png" id="5_c4mc6"]
+[ext_resource type="Texture2D" uid="uid://c8fjurnxuwk5q" path="res://ARTWORKS/ASSET-ARTWORK/Option-Box.png" id="5_v7tqu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_770sp"]
 atlas = ExtResource("2_c4mc6")
@@ -358,31 +361,69 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_wyjkc")
 
+[node name="Box Manager" type="Control" parent="Background Manager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BoxExploration" type="TextureRect" parent="Background Manager/Box Manager"]
+layout_mode = 0
+offset_left = 216.0
+offset_right = 928.0
+offset_bottom = 648.0
+texture = ExtResource("3_pgb1d")
+
+[node name="HitBox_BoxExploration" type="ReferenceRect" parent="Background Manager/Box Manager/BoxExploration"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 680.0
+offset_bottom = 616.0
+
+[node name="BoxTakoDialogue" type="TextureRect" parent="Background Manager/Box Manager"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 224.0
+offset_right = 224.0
+offset_bottom = 640.0
+texture = ExtResource("4_00hbf")
+
+[node name="BoxSpaceCommand" type="TextureRect" parent="Background Manager/Box Manager"]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 640.0
+texture = ExtResource("5_v7tqu")
+
 [node name="Tako Manager" type="Node2D" parent="."]
 position = Vector2(24, 24)
 
 [node name="Tako" type="AnimatedSprite2D" parent="Tako Manager"]
-position = Vector2(96.5, 96.5)
-scale = Vector2(6.366667, 6.366667)
+position = Vector2(92.25, 88.24999)
+scale = Vector2(7.183334, 6.9166665)
 sprite_frames = SubResource("SpriteFrames_avi3x")
 animation = &"Talk"
 frame_progress = 0.41713655
 
-[node name="ColorRect" type="ColorRect" parent="Tako Manager"]
-offset_right = 192.0
-offset_bottom = 40.0
+[node name="TakoLabel" type="ColorRect" parent="Tako Manager"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 200.0
+offset_bottom = 24.0
 color = Color(0.3180198, 0.31801978, 0.31801975, 1)
 
-[node name="ColorRect" type="ColorRect" parent="Tako Manager/ColorRect"]
+[node name="BlackSquare" type="ColorRect" parent="Tako Manager/TakoLabel"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 184.0
+offset_right = 208.0
 offset_bottom = 32.0
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="Tako Manager"]
-offset_right = 192.0
+[node name="-Tako-" type="Label" parent="Tako Manager/TakoLabel"]
+layout_mode = 0
+offset_right = 216.0
 offset_bottom = 42.0
 theme_override_font_sizes/font_size = 28
 text = "TAKO"
@@ -392,9 +433,10 @@ vertical_alignment = 1
 [node name="SpaceShip Manager" type="Node2D" parent="."]
 
 [node name="SpaceShip" type="TextureRect" parent="SpaceShip Manager"]
-offset_left = 512.0
-offset_top = 496.0
-offset_right = 721.4663
-offset_bottom = 709.0
-scale = Vector2(0.61107683, 0.61107683)
+z_index = 10
+offset_left = 544.0
+offset_top = 528.0
+offset_right = 867.4636
+offset_bottom = 851.4636
+scale = Vector2(0.19785835, 0.19785835)
 texture = ExtResource("5_c4mc6")

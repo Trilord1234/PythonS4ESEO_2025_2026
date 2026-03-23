@@ -5,8 +5,8 @@ from groq import Groq
 from graph import Graph
 app = Flask(__name__)
 
-from TakoAPIKey import api_key
-client = Groq(api_key=api_key)
+from TakoAPIKey import api_key, api_key_backup
+client = Groq(api_key=api_key_backup) #or api_key
 
 name_alerady_used = []
 
@@ -99,6 +99,28 @@ def get_voisins():
         return jsonify({"neighbors": copains})
     else:
         return jsonify({"neighbors": []})
+
+@app.route('/radar', methods=['POST'])
+def space_radar():
+    data = request.json
+    start = data.get("planet")
+    if not start or not space_graph.has_node(start):
+        return jsonify({"rank": {}, "link": []})
+    distance = {start: 0}
+    queue = [start]
+    rank = {"0":[start], "1":[], "2":[], "3":[]}
+    link = []
+    while queue:
+        current_planet = queue.pop(0)
+        current_distance = distance[current_planet]
+        if current_distance < 3:
+            for neighbors in space_graph.neighbors(current_planet):
+                if neighbors not in distance:
+                    distance[neighbors] = current_distance +1
+                    queue.append(neighbors)
+                    rank[str(distance[neighbors])].append(neighbors)
+                    link.append([current_planet,neighbors])
+    return jsonify({"rank":rank, "link": link})
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")
