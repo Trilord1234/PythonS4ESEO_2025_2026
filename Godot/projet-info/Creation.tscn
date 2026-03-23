@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://xaav4h8ejdeo"]
+[gd_scene load_steps=10 format=3 uid="uid://bv32e7eowpgb7"]
 
 [ext_resource type="Script" uid="uid://bnu5j5qg2rgfq" path="res://creation.gd" id="1_e6g1c"]
 [ext_resource type="Texture2D" uid="uid://cinql1du846nv" path="res://ARTWORKS/BACKGROUND-ARTWORK/Creation-Background/Background Creation.jpg" id="2_qsw05"]
@@ -10,16 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://dvw15rvidb0ps" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_planet_menu_appuyé.png" id="7_o4k7a"]
 [ext_resource type="Texture2D" uid="uid://c8w1b2fgca6da" path="res://ARTWORKS/BUTTON-ARTWORK/pixil-frame-0 (1).png" id="8_o4k7a"]
 
-[node name="Creation" type="Node2D" unique_id=2047314413]
+[node name="Creation" type="Node2D"]
 script = ExtResource("1_e6g1c")
 
-[node name="Background Manager" type="Control" parent="." unique_id=1678371032]
+[node name="Background Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BackgroundColor" type="TextureRect" parent="Background Manager" unique_id=373817716]
+[node name="BackgroundColor" type="TextureRect" parent="Background Manager"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,19 +28,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qsw05")
 
-[node name="PlaneteBox" type="Control" parent="Background Manager" unique_id=2088624207]
+[node name="PlaneteBox" type="Control" parent="Background Manager"]
 anchors_preset = 0
 offset_left = 464.0
 offset_top = 16.0
 offset_right = 1136.0
 offset_bottom = 624.0
 
-[node name="Border" type="Control" parent="Background Manager/PlaneteBox" unique_id=2036366583]
+[node name="Border" type="Control" parent="Background Manager/PlaneteBox"]
 anchors_preset = 0
 offset_right = 672.0
 offset_bottom = 616.0
 
-[node name="BorderBox" type="TextureRect" parent="Background Manager/PlaneteBox/Border" unique_id=1138150638]
+[node name="BorderBox" type="TextureRect" parent="Background Manager/PlaneteBox/Border"]
 layout_mode = 0
 offset_left = -16.0
 offset_top = -8.0
@@ -48,16 +48,16 @@ offset_right = 680.0
 offset_bottom = 624.0
 texture = ExtResource("3_30pk3")
 
-[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox" unique_id=590156850]
+[node name="HitBox" type="Node2D" parent="Background Manager/PlaneteBox"]
 position = Vector2(331, 307)
 
-[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox" unique_id=206488875]
+[node name="HitBox_Box" type="ReferenceRect" parent="Background Manager/PlaneteBox/HitBox"]
 offset_left = -315.0
 offset_top = -283.0
 offset_right = 357.0
 offset_bottom = 325.0
 
-[node name="AllPlanetMenu" type="Control" parent="." unique_id=471949248]
+[node name="AllPlanetMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 464.0
@@ -66,7 +66,7 @@ offset_right = 1128.0
 offset_bottom = 624.0
 script = ExtResource("5_w4rd3")
 
-[node name="Black" type="ColorRect" parent="AllPlanetMenu" unique_id=516615861]
+[node name="Black" type="ColorRect" parent="AllPlanetMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -75,13 +75,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Grey" type="ColorRect" parent="AllPlanetMenu" unique_id=1745060966]
+[node name="Grey" type="ColorRect" parent="AllPlanetMenu"]
 layout_mode = 0
 offset_right = 664.0
 offset_bottom = 104.0
 color = Color(0.24477637, 0.2447764, 0.24477637, 1)
 
-[node name="_PlanetMenu_" type="Label" parent="AllPlanetMenu" unique_id=1396088607]
+[node name="_PlanetMenu_" type="Label" parent="AllPlanetMenu"]
 layout_mode = 0
 offset_right = 664.0
 offset_bottom = 104.0
@@ -93,14 +93,14 @@ text = "Planet Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="List" type="Control" parent="AllPlanetMenu" unique_id=522781370]
+[node name="List" type="Control" parent="AllPlanetMenu"]
 anchors_preset = 0
 offset_left = 8.0
 offset_top = 104.0
 offset_right = 664.0
 offset_bottom = 600.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AllPlanetMenu/List" unique_id=1398243596]
+[node name="ScrollContainer" type="ScrollContainer" parent="AllPlanetMenu/List"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,12 +110,12 @@ grow_vertical = 2
 size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AllPlanetMenu/List/ScrollContainer" unique_id=1737457102]
+[node name="VBoxContainer" type="VBoxContainer" parent="AllPlanetMenu/List/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Info" type="Control" parent="." unique_id=1619488173]
+[node name="Info" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,14 +123,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Nb" type="Control" parent="Info" unique_id=24430144]
+[node name="Nb" type="Control" parent="Info"]
 anchors_preset = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 320.0
 offset_bottom = 64.0
 
-[node name="BackColor" type="ColorRect" parent="Info/Nb" unique_id=1430584498]
+[node name="BackColor" type="ColorRect" parent="Info/Nb"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,7 +139,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
 
-[node name="NbPLanet" type="Label" parent="Info/Nb" unique_id=634011337]
+[node name="NbPLanet" type="Label" parent="Info/Nb"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -150,14 +150,14 @@ theme_override_font_sizes/font_size = 27
 text = "NB Planet = 0"
 vertical_alignment = 1
 
-[node name="InfoBox" type="Control" parent="Info" unique_id=1681317100]
+[node name="InfoBox" type="Control" parent="Info"]
 anchors_preset = 0
 offset_left = 13.0
 offset_top = 76.0
 offset_right = 434.0
 offset_bottom = 501.0
 
-[node name="Box-Info" type="TextureRect" parent="Info/InfoBox" unique_id=1595375851]
+[node name="Box-Info" type="TextureRect" parent="Info/InfoBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,14 +169,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_a4tru")
 
-[node name="PlanetVisual" type="Control" parent="Info/InfoBox" unique_id=979663846]
+[node name="PlanetVisual" type="Control" parent="Info/InfoBox"]
 anchors_preset = 0
 offset_left = 11.0
 offset_top = 20.0
 offset_right = 139.0
 offset_bottom = 148.0
 
-[node name="PlanetPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual" unique_id=377622235]
+[node name="PlanetPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,7 +184,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LayerPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual" unique_id=244436315]
+[node name="LayerPicture" type="TextureRect" parent="Info/InfoBox/PlanetVisual"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,14 +192,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Control" parent="Info/InfoBox" unique_id=1150252205]
+[node name="Label" type="Control" parent="Info/InfoBox"]
 anchors_preset = 0
 offset_left = -13.0
 offset_top = -76.0
 offset_right = 35.0
 offset_bottom = -28.0
 
-[node name="Name" type="Label" parent="Info/InfoBox/Label" unique_id=1286286617]
+[node name="Name" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 96.0
@@ -211,7 +211,7 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 45
 horizontal_alignment = 1
 
-[node name="Type" type="Label" parent="Info/InfoBox/Label" unique_id=854768323]
+[node name="Type" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 240.0
@@ -221,7 +221,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Weight" type="Label" parent="Info/InfoBox/Label" unique_id=1677394561]
+[node name="Weight" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 280.0
@@ -231,7 +231,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Size" type="Label" parent="Info/InfoBox/Label" unique_id=1044780149]
+[node name="Size" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 344.0
@@ -241,7 +241,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Gravity" type="Label" parent="Info/InfoBox/Label" unique_id=1154982907]
+[node name="Gravity" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 408.0
@@ -251,7 +251,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Habitable" type="Label" parent="Info/InfoBox/Label" unique_id=1142861202]
+[node name="Habitable" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 448.0
@@ -261,7 +261,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Level of danger" type="Label" parent="Info/InfoBox/Label" unique_id=1774234542]
+[node name="Level of danger" type="Label" parent="Info/InfoBox/Label"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 504.0
@@ -271,7 +271,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Info/InfoBox/Label" unique_id=862075239]
+[node name="ScrollContainer" type="ScrollContainer" parent="Info/InfoBox/Label"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -285,7 +285,7 @@ grow_vertical = 2
 size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
-[node name="Description" type="Label" parent="Info/InfoBox/Label/ScrollContainer" unique_id=1422522470]
+[node name="Description" type="Label" parent="Info/InfoBox/Label/ScrollContainer"]
 custom_minimum_size = Vector2(270, 312)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -294,7 +294,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="LinkMenu" type="Control" parent="Info/InfoBox" unique_id=1444030084]
+[node name="LinkMenu" type="Control" parent="Info/InfoBox"]
 anchors_preset = 0
 offset_left = 155.0
 offset_top = 172.0
@@ -302,7 +302,7 @@ offset_right = 419.0
 offset_bottom = 476.0
 script = ExtResource("6_qvtys")
 
-[node name="Outline" type="ColorRect" parent="Info/InfoBox/LinkMenu" unique_id=237021711]
+[node name="Outline" type="ColorRect" parent="Info/InfoBox/LinkMenu"]
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0
@@ -310,7 +310,7 @@ offset_right = 272.0
 offset_bottom = 312.0
 color = Color(0, 0, 0, 1)
 
-[node name="GreyBox" type="ColorRect" parent="Info/InfoBox/LinkMenu" unique_id=1298228548]
+[node name="GreyBox" type="ColorRect" parent="Info/InfoBox/LinkMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -319,7 +319,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.27752772, 0.27752772, 0.27752772, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Info/InfoBox/LinkMenu" unique_id=397920463]
+[node name="ScrollContainer" type="ScrollContainer" parent="Info/InfoBox/LinkMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -329,18 +329,18 @@ grow_vertical = 2
 size_flags_vertical = 4
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Info/InfoBox/LinkMenu/ScrollContainer" unique_id=1641695030]
+[node name="VBoxContainer" type="VBoxContainer" parent="Info/InfoBox/LinkMenu/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button Manager" type="Control" parent="." unique_id=425181170]
+[node name="Button Manager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 24.0
 offset_bottom = 24.0
 
-[node name="Delete" type="Button" parent="Button Manager" unique_id=647375641]
+[node name="Delete" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 103.0
 offset_top = 203.0
@@ -350,7 +350,7 @@ theme_override_font_sizes/font_size = 14
 text = "Delete
 "
 
-[node name="Generation" type="Button" parent="Button Manager" unique_id=407017949]
+[node name="Generation" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 576.0
@@ -359,7 +359,7 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 30
 text = "BOOM PLANETE"
 
-[node name="Clear" type="Button" parent="Button Manager" unique_id=306835798]
+[node name="Clear" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 576.0
@@ -368,7 +368,7 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 35
 text = "CLEAR ALL"
 
-[node name="PlanetMenu" type="TextureButton" parent="Button Manager" unique_id=51550847]
+[node name="PlanetMenu" type="TextureButton" parent="Button Manager"]
 layout_mode = 0
 offset_left = 1088.0001
 offset_top = 24.0
@@ -379,7 +379,7 @@ texture_normal = ExtResource("6_3fdxf")
 texture_pressed = ExtResource("7_o4k7a")
 texture_hover = ExtResource("8_o4k7a")
 
-[node name="Link" type="Button" parent="Button Manager" unique_id=1383836508]
+[node name="Link" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 184.0
@@ -388,7 +388,7 @@ offset_bottom = 224.0
 theme_override_font_sizes/font_size = 23
 text = "Link"
 
-[node name="DeleteLink" type="Button" parent="Button Manager" unique_id=1343844024]
+[node name="DeleteLink" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 312.0
 offset_top = 184.0
@@ -397,9 +397,18 @@ offset_bottom = 224.0
 text = "Delete Link
 "
 
+[node name="Button" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 1008.0
+offset_top = 592.0
+offset_right = 1152.0
+offset_bottom = 648.0
+text = "Next"
+
 [connection signal="pressed" from="Button Manager/Delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="Button Manager/Generation" to="." method="_on_generation_pressed"]
 [connection signal="pressed" from="Button Manager/Clear" to="." method="_on_clear_pressed"]
 [connection signal="pressed" from="Button Manager/PlanetMenu" to="AllPlanetMenu" method="_on_planet_menu_pressed"]
 [connection signal="pressed" from="Button Manager/Link" to="Info/InfoBox/LinkMenu" method="_on_link_pressed"]
 [connection signal="pressed" from="Button Manager/DeleteLink" to="." method="_on_delete_link_pressed"]
+[connection signal="pressed" from="Button Manager/Button" to="." method="_on_button_pressed"]

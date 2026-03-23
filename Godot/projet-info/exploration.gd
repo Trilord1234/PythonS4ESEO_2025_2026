@@ -38,15 +38,15 @@ func build_planet_map(data):
 	var box = $"Background Manager/Box Manager/BoxExploration/HitBox_BoxExploration"
 	var left_border = box.global_position.x
 	var width_border = box.size.x
-	var right_border = left_border + width_border
+	var _right_border = left_border + width_border
 	var up_border = box.global_position.y
 	var height_border = box.size.y
 	var down_border = up_border + height_border
 	var box_border = {
-		"0" : {"y" : down_border - (height_border*0.15), "scale" : 2.5},
-		"1" : {"y" : down_border - (height_border*0.45), "scale" : 1.7},
-		"2" : {"y" : down_border - (height_border*0.70), "scale" : 1.2},
-		"3" : {"y" : up_border + (height_border*0.10), "scale" : 0.6},
+		"0" : {"y" : down_border - (height_border*0.15), "scale" : 3},
+		"1" : {"y" : down_border - (height_border*0.45), "scale" : 2},
+		"2" : {"y" : down_border - (height_border*0.70), "scale" : 1.4},
+		"3" : {"y" : up_border + (height_border*0.10), "scale" : 0.8},
 	}
 	var rank = data["rank"]
 	for depth in ["0","1","2","3"] :
@@ -58,17 +58,31 @@ func build_planet_map(data):
 				var planet_name = liste[i]
 				if not GlobalData.universe.has(planet_name): continue
 				var x_location = 0
+				var y_variation = 0
 				if depth == "0":
 					x_location = left_border + (width_border/2)
 				else :
 					var min_x = left_border + (i * distance_btw_planet) + 40
 					var max_x = left_border + ((i+1) * distance_btw_planet) -40
 					x_location = randf_range(min_x, max_x)
-				var coordinates = Vector2(x_location, box_border[depth]["y"])
+					y_variation = randf_range(-40,40)
+				var coordinates = Vector2(x_location, box_border[depth]["y"] + y_variation)
 				planet_position[planet_name] = coordinates
 				var noeud = create_visual_map(planet_name, box_border[depth]["scale"])
 				noeud.position = coordinates
 				planet_folder.add_child(noeud)
+	if data.has("secondary_link"):
+		var secondary_link = data["secondary_link"]
+		for family in secondary_link :
+			var parent = family[0]
+			var child = family[1]
+			if planet_position.has(parent) and planet_position.has(child):
+				var line = Line2D.new()
+				line.add_point(planet_position[parent])
+				line.add_point(planet_position[child])
+				line.width = 2
+				line.default_color = Color(1, 0, 1, 0.6)
+				line_folder.add_child(line)
 	var link = data["link"]
 	for family in link :
 		var parent = family[0]

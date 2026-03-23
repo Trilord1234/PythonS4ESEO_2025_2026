@@ -152,10 +152,13 @@ func _on_delete_pressed():
 func _on_delete_link_pressed():
 	if planet_selected == null:
 		return
-	
-	
 	for i in range(line_created.size() - 1, -1, -1):
 		var dict = line_created[i]
 		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
 			dict["Line"].queue_free() 
 			line_created.remove_at(i)
+
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://exploration.tscn")

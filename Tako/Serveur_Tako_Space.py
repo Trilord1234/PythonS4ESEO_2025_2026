@@ -105,22 +105,31 @@ def space_radar():
     data = request.json
     start = data.get("planet")
     if not start or not space_graph.has_node(start):
-        return jsonify({"rank": {}, "link": []})
+        return jsonify({"rank": {}, "link": [], "secondary_link" : []})
     distance = {start: 0}
     queue = [start]
     rank = {"0":[start], "1":[], "2":[], "3":[]}
     link = []
+    secondary_link = []
+    alerady_seen = set()
     while queue:
         current_planet = queue.pop(0)
         current_distance = distance[current_planet]
         if current_distance < 3:
             for neighbors in space_graph.neighbors(current_planet):
+                link_check = tuple(sorted([current_planet, neighbors]))
                 if neighbors not in distance:
                     distance[neighbors] = current_distance +1
                     queue.append(neighbors)
                     rank[str(distance[neighbors])].append(neighbors)
-                    link.append([current_planet,neighbors])
-    return jsonify({"rank":rank, "link": link})
+                    if link_check not in alerady_seen:
+                        alerady_seen.add(link_check)
+                        link.append([current_planet,neighbors])
+                else :
+                    if link_check not in alerady_seen:
+                        alerady_seen.add(link_check)
+                        secondary_link.append([current_planet,neighbors])
+    return jsonify({"rank":rank, "link": link, "secondary_link" : secondary_link})
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")
