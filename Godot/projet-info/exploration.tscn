@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cacj805f1yc77"]
+[gd_scene load_steps=62 format=3 uid="uid://cacj805f1yc77"]
 
 [ext_resource type="Script" uid="uid://g2iq48jvkw68" path="res://exploration.gd" id="1_88ct5"]
 [ext_resource type="Texture2D" uid="uid://b3m1dkuvdb3b6" path="res://ARTWORKS/BACKGROUND-ARTWORK/Exploration-Background/Background Exploration.png" id="1_wyjkc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bexag3thhjxcc" path="res://ARTWORKS/TAKO-ARTWORK/Talk/Tako-Animation-Talk.png" id="4_5taav"]
 [ext_resource type="Texture2D" uid="uid://bgfh84i4v421h" path="res://ARTWORKS/SPACESHIP-ARTWORK/Spaceship.png" id="5_c4mc6"]
 [ext_resource type="Texture2D" uid="uid://c8fjurnxuwk5q" path="res://ARTWORKS/ASSET-ARTWORK/Option-Box.png" id="5_v7tqu"]
+[ext_resource type="Script" uid="uid://556afjvi07gh" path="res://space_ship_manager.gd" id="9_00hbf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_770sp"]
 atlas = ExtResource("2_c4mc6")
@@ -343,6 +344,32 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_00hbf"]
+offsets = PackedFloat32Array(0, 0.4919355, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.50620204, 0.27715978, 1, 0.89, 0.2848, 0.2848, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v7tqu"]
+gradient = SubResource("Gradient_00hbf")
+
+[sub_resource type="Curve" id="Curve_qabf2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8wdfd"]
+curve = SubResource("Curve_qabf2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_00hbf"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_8wdfd")
+color_ramp = SubResource("GradientTexture1D_v7tqu")
+
 [node name="Exploration" type="Node2D"]
 script = ExtResource("1_88ct5")
 
@@ -432,12 +459,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SpaceShip Manager" type="Node2D" parent="."]
+position = Vector2(488, 232)
+script = ExtResource("9_00hbf")
 
 [node name="SpaceShip" type="TextureRect" parent="SpaceShip Manager"]
-z_index = 10
-offset_left = 544.0
-offset_top = 528.0
-offset_right = 867.4636
-offset_bottom = 851.4636
+z_index = 8
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 291.46362
+offset_bottom = 283.46362
 scale = Vector2(0.19785835, 0.19785835)
 texture = ExtResource("5_c4mc6")
+
+[node name="FireInTheHole" type="GPUParticles2D" parent="SpaceShip Manager"]
+z_index = 5
+position = Vector2(-10, 16)
+amount = 50
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_00hbf")
+
+[node name="FireInTheHole2" type="GPUParticles2D" parent="SpaceShip Manager"]
+z_index = 5
+position = Vector2(10, 16)
+amount = 50
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_00hbf")
