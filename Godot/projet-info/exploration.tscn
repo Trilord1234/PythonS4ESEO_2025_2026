@@ -367,6 +367,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="BoxExploration" type="TextureRect" parent="Background Manager/Box Manager"]
+z_index = 10
 layout_mode = 0
 offset_left = 216.0
 offset_right = 928.0

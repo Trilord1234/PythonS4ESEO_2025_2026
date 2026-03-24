@@ -98,21 +98,52 @@ func build_planet_map(data):
 func create_visual_map(planet_name, size):
 	var data = GlobalData.universe[planet_name]
 	var visual = Node2D.new()
-	visual.scale = Vector2(size, size)
+	var animated_visual = Node2D.new()
+	animated_visual.scale = Vector2(size,size)
+	visual.add_child(animated_visual)
 	var planet = Sprite2D.new()
 	planet.texture = data["planet_texture"]
 	planet.self_modulate = data["planet_color"]
 	var layer = Sprite2D.new()
 	layer.texture = data["layer_texture"]
 	layer.self_modulate = data["layer_color"]
-	visual.add_child(planet)
-	visual.add_child(layer)
+	animated_visual.add_child(planet)
+	animated_visual.add_child(layer)
 	var btn = Button.new()
 	btn.flat = true
 	btn.custom_minimum_size = Vector2(100,100)
 	btn.position = Vector2(-50,-50)
 	btn.pressed.connect(func(): planet_exploration(planet_name))
-	visual.add_child(btn)
+	animated_visual.add_child(btn)
+	var float_animation = visual.create_tween().set_loops()
+	var random = randf_range(2,4)
+	var float_height = randf_range(8,15)
+	float_animation.tween_property(animated_visual, "position:y", -float_height, random).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_animation.tween_property(animated_visual, "position:y", float_height, random).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	float_animation.custom_step(randf_range(0.0, 2.0))
+	var base_scale = Vector2(size,size)
+	var hoever_scale = base_scale * 1.2
+	visual.set_meta("hoever_animation", null)
+	visual.set_meta("wiggle_animation", null)
+	btn.mouse_entered.connect(func():
+		var hoever_t = visual.create_tween()
+		hoever_t.tween_property(animated_visual, "scale", hoever_scale, 0.2).set_trans(Tween.TRANS_QUAD)
+		visual.set_meta("hoever_animation", hoever_t)
+		var wiggle_t = visual.create_tween().set_loops()
+		wiggle_t.tween_property(animated_visual, "rotation_degrees",5, 0.3).set_ease(Tween.EASE_IN_OUT)
+		wiggle_t.tween_property(animated_visual, "rotation_degrees",-5, 0.6).set_ease(Tween.EASE_IN_OUT)
+		wiggle_t.tween_property(animated_visual, "rotation_degrees", 0, 0.3).set_ease(Tween.EASE_IN_OUT)
+		visual.set_meta("wiggle_animation", wiggle_t)
+	)
+	btn.mouse_exited.connect(func():
+		var hoever_kill = visual.get_meta("hoever_animation")
+		if hoever_kill != null and hoever_kill.is_valid(): hoever_kill.kill()
+		var wiggle_kill = visual.get_meta("wiggle_animation")
+		if wiggle_kill != null and wiggle_kill.is_valid(): wiggle_kill.kill()
+		var reset = visual.create_tween().set_parallel(true)
+		reset.tween_property(animated_visual, "scale", base_scale,0.2).set_trans(Tween.TRANS_QUAD)
+		reset.tween_property(animated_visual, "rotation_degrees", 0, 0.2).set_trans(Tween.TRANS_QUAD)
+	)
 	return visual
 
 func planet_exploration(destination_name):
