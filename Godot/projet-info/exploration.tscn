@@ -463,7 +463,7 @@ scale = Vector2(7.183334, 6.9166665)
 sprite_frames = SubResource("SpriteFrames_avi3x")
 animation = &"Idle2"
 autoplay = "Idle2"
-frame_progress = 0.03796505
+frame_progress = 0.14648294
 
 [node name="TakoLabel" type="ColorRect" parent="Tako Manager"]
 offset_left = -16.0

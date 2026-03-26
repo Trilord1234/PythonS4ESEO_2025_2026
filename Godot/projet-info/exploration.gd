@@ -70,6 +70,9 @@ func build_planet_map(data):
 				planet_position[planet_name] = coordinates
 				var noeud = create_visual_map(planet_name, box_border[depth]["scale"])
 				noeud.position = coordinates
+				var depth_int = depth.to_int()
+				var light = 1 - (depth_int*0.125)
+				noeud.modulate = Color(light, light, light, 1)
 				planet_folder.add_child(noeud)
 	if data.has("secondary_link"):
 		var secondary_link = data["secondary_link"]

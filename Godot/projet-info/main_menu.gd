@@ -5,6 +5,7 @@ var delay = 0.01
 
 func _ready():
 	$"Option Pop-up/OptionPopUp".visible = false
+	GlobalData.erase_python_memory()
 
 func _on_start_pressed():
 	get_tree().change_scene_to_file("res://Creation.tscn")
