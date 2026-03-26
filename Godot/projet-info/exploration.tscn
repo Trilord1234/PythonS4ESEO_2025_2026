@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cacj805f1yc77"]
+[gd_scene load_steps=71 format=3 uid="uid://cacj805f1yc77"]
 
 [ext_resource type="Script" uid="uid://g2iq48jvkw68" path="res://exploration.gd" id="1_88ct5"]
 [ext_resource type="Texture2D" uid="uid://b3m1dkuvdb3b6" path="res://ARTWORKS/BACKGROUND-ARTWORK/Exploration-Background/Background Exploration.png" id="1_wyjkc"]
@@ -11,7 +11,13 @@
 [ext_resource type="Script" uid="uid://bxs3k1j6q31ob" path="res://box_tako_dialogue.gd" id="5_qabf2"]
 [ext_resource type="Texture2D" uid="uid://c8fjurnxuwk5q" path="res://ARTWORKS/ASSET-ARTWORK/Option-Box.png" id="5_v7tqu"]
 [ext_resource type="Script" uid="uid://bh1g3pmo43xxe" path="res://tako_manager.gd" id="6_v7tqu"]
+[ext_resource type="Texture2D" uid="uid://dol6jonselwr3" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tajo-Bug.png" id="8_nyiyb"]
 [ext_resource type="Script" uid="uid://556afjvi07gh" path="res://space_ship_manager.gd" id="9_00hbf"]
+[ext_resource type="Texture2D" uid="uid://b2sa2k82po13x" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Dead.png" id="9_8exjl"]
+[ext_resource type="Texture2D" uid="uid://cv286po63ybk7" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Huh.png" id="10_22gb7"]
+[ext_resource type="Texture2D" uid="uid://ri4o06dh3huk" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Coeur.png" id="13_uu63r"]
+[ext_resource type="Texture2D" uid="uid://yoo52s1hi507" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-SIlly.png" id="14_drbd5"]
+[ext_resource type="Texture2D" uid="uid://skni7svwxhs" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Vide.png" id="16_2wa3f"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qabf2"]
 polygon = PackedVector2Array(8, 616, 704, 616, 704, 648, 8, 648)
@@ -200,6 +206,30 @@ region = Rect2(0, 90, 30, 30)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("8_nyiyb")
+}],
+"loop": true,
+"name": &"Bug",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_8exjl")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_22gb7")
+}],
+"loop": true,
+"name": &"Huh?",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_770sp")
 }, {
 "duration": 1.0,
@@ -315,6 +345,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("13_uu63r")
+}],
+"loop": true,
+"name": &"Love",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_drbd5")
+}],
+"loop": true,
+"name": &"Silly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8lonk")
 }, {
 "duration": 1.0,
@@ -346,6 +392,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Talk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_2wa3f")
+}],
+"loop": true,
+"name": &"Vide",
 "speed": 5.0
 }]
 
@@ -461,9 +515,8 @@ script = ExtResource("6_v7tqu")
 position = Vector2(92.25, 88.24999)
 scale = Vector2(7.183334, 6.9166665)
 sprite_frames = SubResource("SpriteFrames_avi3x")
-animation = &"Idle2"
+animation = &"Huh?"
 autoplay = "Idle2"
-frame_progress = 0.14648294
 
 [node name="TakoLabel" type="ColorRect" parent="Tako Manager"]
 offset_left = -16.0

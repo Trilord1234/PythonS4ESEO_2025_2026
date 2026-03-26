@@ -199,4 +199,3 @@ func _on_delete_link_pressed():
 		$".".visible = false
 		$"../../../Button Manager/DeleteAll_Link".visible = false
 		open = false
-	

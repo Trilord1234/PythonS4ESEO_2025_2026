@@ -156,11 +156,9 @@ func _on_delete_pressed():
 	$Info/InfoBox/Label/Gravity.text = ""
 	$Info/InfoBox/Label/Habitable.text = ""
 	$"Info/InfoBox/Label/Level of danger".text = ""
-	for i in range(line_created.size() - 1, -1, -1):
-		var dict = line_created[i]
-		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
-			dict["Line"].queue_free() 
-			line_created.remove_at(i)
+
+func _on_next_pressed() -> void:
+	get_tree().change_scene_to_file("res://exploration.tscn")
 
 func _on_delete_all_link_pressed():
 	for i in range(line_created.size() - 1, -1, -1):
