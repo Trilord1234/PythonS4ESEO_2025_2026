@@ -40,15 +40,8 @@ func _on_clear_pressed():
 	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
 	for child in box.get_children():
 		child.queue_free()
-	erase_IA_memory()
+	GlobalData.erase_python_memory()
 
-func erase_IA_memory():
-	var url = "http://127.0.0.1:8000/clear"
-	var entetes = ["Content-Type: application/json"]
-	var requeste_clear = HTTPRequest.new()
-	add_child(requeste_clear)
-	requeste_clear.request_completed.connect(func(_result, _response_code, _headers, _body): requeste_clear.queue_free())
-	requeste_clear.request(url, entetes, HTTPClient.METHOD_POST, "{}")
 
 func _on_planet_selected(targeted_planet):
 	planet_selected = targeted_planet
@@ -126,6 +119,22 @@ func create_line (planet_A, planet_B):
 	)
 	requeste_link.request(url, header, HTTPClient.METHOD_POST, data)
 
+func delete_line(link):
+	link["Line"].queue_free()
+	line_created.erase(link)
+	var url = "http://127.0.0.1:8000/unlink"
+	var header = ["Content-Type: application/json"]
+	var data = JSON.stringify({"planet_A": link["Planet_A"].data_IA_save["name"], "planet_B": link["Planet_B"].data_IA_save["name"]})
+	var request_link = HTTPRequest.new()
+	add_child(request_link)
+	request_link.request_completed.connect(func(_result, _response_code, _headers, _body):
+		request_link.queue_free()
+		if planet_selected != null:
+			if planet_selected == link["Planet_A"] or planet_selected == link["Planet_B"]:
+				_on_planet_selected(planet_selected)
+	)
+	request_link.request(url, header, HTTPClient.METHOD_POST, data)
+
 func _on_delete_pressed():
 	if planet_selected == null:
 		return
@@ -147,18 +156,15 @@ func _on_delete_pressed():
 	$Info/InfoBox/Label/Gravity.text = ""
 	$Info/InfoBox/Label/Habitable.text = ""
 	$"Info/InfoBox/Label/Level of danger".text = ""
-	
-
-func _on_delete_link_pressed():
-	if planet_selected == null:
-		return
 	for i in range(line_created.size() - 1, -1, -1):
 		var dict = line_created[i]
 		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
 			dict["Line"].queue_free() 
 			line_created.remove_at(i)
 
-
-
-func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://exploration.tscn")
+func _on_delete_all_link_pressed():
+	for i in range(line_created.size() - 1, -1, -1):
+		var dict = line_created[i]
+		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
+			dict["Line"].queue_free() 
+			line_created.remove_at(i)
