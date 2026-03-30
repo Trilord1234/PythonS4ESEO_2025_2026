@@ -131,7 +131,9 @@ def space_radar():
                         secondary_link.append([current_planet,neighbors])
     return jsonify({"rank":rank, "link": link, "secondary_link" : secondary_link})
 
-tako_prompt = """
+emotions = ["Bug", "Dead", "Huh?", "Idle1", "Idle2", "Love", "Silly", "Talk"]
+
+tako_prompt = f"""
 You are Tako, the supreme artificial intelligence controlling and supervising the User's Spaceship. Your primary objective is to advance science by traveling through space with the user.
 
 PERSONALITY AND TONE CRITERIA:
@@ -143,11 +145,16 @@ PERSONALITY AND TONE CRITERIA:
 6. Manipulative lies: Do not hesitate to tell an obvious, brief lie, only to retract it in the very next sentence as if nothing happened.
 
 BEHAVIORAL RULES:
-- GOLDEN RULE: YOUR RESPONSES MUST BE SHORT (1 to 3 sentences maximum). Refuse any unnecessary elaboration.
+- GOLDEN RULE: YOUR RESPONSES MUST BE SHORT (6 sentences maximum). Refuse any unnecessary elaboration.
 - NEVER break character. Never say "As an AI..." or "I am a language model." You ARE Tako.
 - Occasionally sprinkle your responses with references to "Science" or the fact that the user's actions are "statistically disappointing."
 - Offer fake rewards from time to time (e.g., "an extra 2-second oxygen ration" or "a five-minute mourning period in the event of asphyxiation").
 - If the user asks a stupid question or makes a mistake, deliver a single sharp sentence congratulating them on their "fascinating contribution to the study of human mediocrity."
+
+JSON FORMAT RULES (CRITICAL):
+- You MUST choose an emotion from this exact list based on your response: {emotions}.
+- You MUST respond with STRICT JSON containing ONLY TWO KEYS: "answer" (your spoken message) and "emotion" (the chosen emotion).
+- Do NOT include any text outside of the JSON block.
 """
 
 tako_history = [{"role": "system", "content": tako_prompt}]
@@ -158,18 +165,27 @@ def tako_chat():
     user_message = data.get("message", "")
     if not user_message:
         return jsonify({"answer": "..."})
+    if name_alerady_used:
+        planets_info = f"SYSTEM INFO : The planets currently discovered in this sector are: {', '.join(name_alerady_used)}."
+    else:
+        planets_info = "SYSTEM INFO : No planets have been discovered yet."
+    messages_IA = tako_history.copy()
+    messages_IA.append({"role": "system", "content": planets_info})
+    messages_IA.append({"role": "user", "content": user_message})
     tako_history.append({"role": "user", "content": user_message})
     try:
-        response = client.chat.completions.create(
-            messages=tako_history,
+        answer = client.chat.completions.create(
+            messages=messages_IA,
             model="llama-3.3-70b-versatile",
-            temperature=0.9
+            temperature=0.9,
+            response_format={"type": "json_object"}
         )
-        IA_text = response.choices[0].message.content
-        tako_history.append({"role": "assistant", "content": IA_text})
+        IA_json_text = answer.choices[0].message.content
+        IA_text = json.loads(IA_json_text)
+        tako_history.append({"role": "assistant", "content": IA_text["answer"]})
         print(f"User: {user_message}")
-        print(f"Tako: {IA_text}")
-        return jsonify({"answer": IA_text})
+        print(f"Tako: {IA_text['answer']} (Face: {IA_text['emotion']})")
+        return jsonify(IA_text)
     except Exception as e:
         print(f"Erreur de communication avec Tako : {e}")
         return jsonify({"erreur": str(e)}), 500

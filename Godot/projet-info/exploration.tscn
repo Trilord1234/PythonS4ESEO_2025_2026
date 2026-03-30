@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b2sa2k82po13x" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Dead.png" id="9_8exjl"]
 [ext_resource type="Texture2D" uid="uid://cv286po63ybk7" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Huh.png" id="10_22gb7"]
 [ext_resource type="Texture2D" uid="uid://ri4o06dh3huk" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Coeur.png" id="13_uu63r"]
-[ext_resource type="Texture2D" uid="uid://yoo52s1hi507" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-SIlly.png" id="14_drbd5"]
+[ext_resource type="Texture2D" uid="uid://yoo52s1hi507" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Silly.png" id="14_drbd5"]
 [ext_resource type="Texture2D" uid="uid://skni7svwxhs" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Vide.png" id="16_2wa3f"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qabf2"]
@@ -515,7 +515,7 @@ script = ExtResource("6_v7tqu")
 position = Vector2(92.25, 88.24999)
 scale = Vector2(7.183334, 6.9166665)
 sprite_frames = SubResource("SpriteFrames_avi3x")
-animation = &"Huh?"
+animation = &"Silly"
 autoplay = "Idle2"
 
 [node name="TakoLabel" type="ColorRect" parent="Tako Manager"]
