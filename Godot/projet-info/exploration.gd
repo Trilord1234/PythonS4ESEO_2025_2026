@@ -116,7 +116,10 @@ func create_visual_map(planet_name, size):
 	btn.flat = true
 	btn.custom_minimum_size = Vector2(100,100)
 	btn.position = Vector2(-50,-50)
-	btn.pressed.connect(func(): planet_exploration(planet_name))
+	btn.pressed.connect(func(): 
+		planet_exploration(planet_name)
+		update_tako_location(data)
+	)
 	animated_visual.add_child(btn)
 	var float_animation = visual.create_tween().set_loops()
 	var random = randf_range(2,4)
@@ -153,3 +156,12 @@ func planet_exploration(destination_name):
 	current_planet = destination_name
 	print("On se déplace en: " + destination_name)
 	get_planet_map(current_planet)
+
+func update_tako_location(planet_info):
+	var url = "http://127.0.0.1:8000/set_current_planet"
+	var headers = ["Content-Type: application/json"]
+	var body = JSON.stringify(planet_info)
+	var request = HTTPRequest.new()
+	add_child(request)
+	request.request_completed.connect(func(_r, _c, _h, _b): request.queue_free())
+	request.request(url, headers, HTTPClient.METHOD_POST, body)

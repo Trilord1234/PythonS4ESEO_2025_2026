@@ -383,14 +383,14 @@ texture_hover = ExtResource("8_o4k7a")
 layout_mode = 0
 offset_left = 168.0
 offset_top = 184.0
-offset_right = 304.0
+offset_right = 296.0
 offset_bottom = 224.0
 theme_override_font_sizes/font_size = 23
 text = "Link"
 
 [node name="DeleteLink" type="Button" parent="Button Manager"]
 layout_mode = 0
-offset_left = 312.0
+offset_left = 304.0
 offset_top = 184.0
 offset_right = 432.0
 offset_bottom = 224.0

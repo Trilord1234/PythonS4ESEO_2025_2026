@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cacj805f1yc77"]
+[gd_scene load_steps=72 format=3 uid="uid://cacj805f1yc77"]
 
 [ext_resource type="Script" uid="uid://g2iq48jvkw68" path="res://exploration.gd" id="1_88ct5"]
 [ext_resource type="Texture2D" uid="uid://b3m1dkuvdb3b6" path="res://ARTWORKS/BACKGROUND-ARTWORK/Exploration-Background/Background Exploration.png" id="1_wyjkc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bxs3k1j6q31ob" path="res://box_tako_dialogue.gd" id="5_qabf2"]
 [ext_resource type="Texture2D" uid="uid://c8fjurnxuwk5q" path="res://ARTWORKS/ASSET-ARTWORK/Option-Box.png" id="5_v7tqu"]
 [ext_resource type="Script" uid="uid://bh1g3pmo43xxe" path="res://tako_manager.gd" id="6_v7tqu"]
+[ext_resource type="Script" uid="uid://i78ia4kyy1u2" path="res://box_space_command.gd" id="7_8exjl"]
 [ext_resource type="Texture2D" uid="uid://dol6jonselwr3" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tajo-Bug.png" id="8_nyiyb"]
 [ext_resource type="Script" uid="uid://556afjvi07gh" path="res://space_ship_manager.gd" id="9_00hbf"]
 [ext_resource type="Texture2D" uid="uid://b2sa2k82po13x" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Dead.png" id="9_8exjl"]
@@ -506,6 +507,46 @@ offset_top = 8.0
 offset_right = 1144.0
 offset_bottom = 640.0
 texture = ExtResource("5_v7tqu")
+script = ExtResource("7_8exjl")
+
+[node name="_Control Panel_" type="Label" parent="Background Manager/Box Manager/BoxSpaceCommand"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 216.0
+offset_bottom = 64.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 27
+text = "Control Pannel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Radar" type="ColorRect" parent="Background Manager/Box Manager/BoxSpaceCommand"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 208.0
+offset_bottom = 248.0
+color = Color(0, 0, 0, 1)
+
+[node name="Planet" type="TextureRect" parent="Background Manager/Box Manager/BoxSpaceCommand/Radar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Layer" type="TextureRect" parent="Background Manager/Box Manager/BoxSpaceCommand/Radar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Log&All" type="ColorRect" parent="Background Manager/Box Manager/BoxSpaceCommand"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 376.0
+offset_right = 208.0
+offset_bottom = 568.0
+color = Color(0, 0, 0, 1)
 
 [node name="Tako Manager" type="Node2D" parent="."]
 position = Vector2(24, 24)
@@ -568,3 +609,41 @@ position = Vector2(10, 16)
 amount = 50
 lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_00hbf")
+
+[node name="Button Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 264.0
+offset_right = 1128.0
+offset_bottom = 296.0
+text = "SCAN"
+
+[node name="Button2" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 304.0
+offset_right = 1128.0
+offset_bottom = 336.0
+text = "HyperSpeed"
+
+[node name="Button3" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 344.0
+offset_right = 1128.0
+offset_bottom = 376.0
+text = "Logbook"
+
+[node name="Button4" type="Button" parent="Button Manager"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 584.0
+offset_right = 1128.0
+offset_bottom = 616.0
+text = "Battle"
