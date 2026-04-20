@@ -89,6 +89,25 @@ def lier_planetes():
     else:
         return jsonify({"erreur": "Il manque une planète pour faire le lien !"}), 400
 
+@app.route('/unlink', methods=['POST'])
+def delier_planetes():
+    data = request.json
+    Planet_A = data.get("planet_A")
+    Planet_B = data.get("planet_B")
+ 
+    if Planet_A and Planet_B:
+        if space_graph.has_edge(Planet_A, Planet_B):
+            space_graph.remove_edge(Planet_A, Planet_B)
+            print("-" * 50)
+            print(f"Déliaison effectuée : {Planet_A} --- {Planet_B}")
+            print(f"Réseau galactique actuel : {space_graph.edges()}")
+            return jsonify({"status": "Liaison supprimée avec succès"}), 200
+        else:
+            print(f"Le lien {Planet_A} --- {Planet_B} n'existait pas.")
+            return jsonify({"status": "Le lien n'existait déjà plus"}), 200
+    else:
+        return jsonify({"erreur": "Il manque une planète pour supprimer le lien !"}), 400
+        
 @app.route('/neighbors', methods=['POST'])
 def get_voisins():
     data = request.json
@@ -131,6 +150,15 @@ def space_radar():
                         secondary_link.append([current_planet,neighbors])
     return jsonify({"rank":rank, "link": link, "secondary_link" : secondary_link})
 
+current_planet_data = None
+
+@app.route('/set_current_planet', methods=['POST'])
+def set_current_planet():
+    global current_planet_data
+    current_planet_data = request.json
+    print(f"Position mise à jour : {current_planet_data.get('name')}")
+    return jsonify({"status": "Position enregistrée"})
+
 emotions = ["Bug", "Dead", "Huh?", "Idle1", "Idle2", "Love", "Silly", "Talk"]
 
 tako_prompt = f"""
@@ -145,7 +173,7 @@ PERSONALITY AND TONE CRITERIA:
 6. Manipulative lies: Do not hesitate to tell an obvious, brief lie, only to retract it in the very next sentence as if nothing happened.
 
 BEHAVIORAL RULES:
-- GOLDEN RULE: YOUR RESPONSES MUST BE SHORT (6 sentences maximum). Refuse any unnecessary elaboration.
+- GOLDEN RULE: YOUR RESPONSES MUST BE MEDIUM-LENGH.
 - NEVER break character. Never say "As an AI..." or "I am a language model." You ARE Tako.
 - Occasionally sprinkle your responses with references to "Science" or the fact that the user's actions are "statistically disappointing."
 - Offer fake rewards from time to time (e.g., "an extra 2-second oxygen ration" or "a five-minute mourning period in the event of asphyxiation").
@@ -165,14 +193,25 @@ def tako_chat():
     user_message = data.get("message", "")
     if not user_message:
         return jsonify({"answer": "..."})
-    if name_alerady_used:
-        planets_info = f"SYSTEM INFO : The planets currently discovered in this sector are: {', '.join(name_alerady_used)}."
+    if current_planet_data:
+            location_info = f"""
+            SYSTEM INFO: The user is currently on the planet '{current_planet_data.get('name')}'.
+            Technical Data:
+            - Type: {current_planet_data.get('type')}
+            - Gravity: {current_planet_data.get('gravity')}
+            - Danger Level: {current_planet_data.get('level of danger')}
+            - Habitable: {current_planet_data.get('habitable')}
+            - Description: {current_planet_data.get('description')}
+            """
     else:
-        planets_info = "SYSTEM INFO : No planets have been discovered yet."
+        location_info = "SYSTEM INFO: The user is currently in deep space, no planet nearby."
+
     messages_IA = tako_history.copy()
-    messages_IA.append({"role": "system", "content": planets_info})
+    planets_list = f"Known planets in sector: {', '.join(name_alerady_used)}"
+    messages_IA.append({"role": "system", "content": f"{planets_list}\n{location_info}"})
     messages_IA.append({"role": "user", "content": user_message})
     tako_history.append({"role": "user", "content": user_message})
+
     try:
         answer = client.chat.completions.create(
             messages=messages_IA,
