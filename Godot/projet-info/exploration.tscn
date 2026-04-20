@@ -532,13 +532,13 @@ color = Color(0, 0, 0, 1)
 
 [node name="Planet" type="TextureRect" parent="Background Manager/Box Manager/BoxSpaceCommand/Radar"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 192.0
+offset_bottom = 192.0
 
 [node name="Layer" type="TextureRect" parent="Background Manager/Box Manager/BoxSpaceCommand/Radar"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 192.0
+offset_bottom = 192.0
 
 [node name="Log&All" type="ColorRect" parent="Background Manager/Box Manager/BoxSpaceCommand"]
 layout_mode = 0
@@ -547,6 +547,12 @@ offset_top = 376.0
 offset_right = 208.0
 offset_bottom = 568.0
 color = Color(0, 0, 0, 1)
+
+[node name="Texte Log" type="RichTextLabel" parent="Background Manager/Box Manager/BoxSpaceCommand/Log&All"]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 191.0
+scroll_following = true
 
 [node name="Tako Manager" type="Node2D" parent="."]
 position = Vector2(24, 24)
@@ -616,7 +622,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="Button Manager"]
+[node name="Scan" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 936.0
 offset_top = 264.0
@@ -624,7 +630,7 @@ offset_right = 1128.0
 offset_bottom = 296.0
 text = "SCAN"
 
-[node name="Button2" type="Button" parent="Button Manager"]
+[node name="HyperSpeed" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 936.0
 offset_top = 304.0
@@ -632,18 +638,20 @@ offset_right = 1128.0
 offset_bottom = 336.0
 text = "HyperSpeed"
 
-[node name="Button3" type="Button" parent="Button Manager"]
+[node name="LogBook" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 936.0
 offset_top = 344.0
 offset_right = 1128.0
 offset_bottom = 376.0
-text = "Logbook"
+text = "LogBook"
 
-[node name="Button4" type="Button" parent="Button Manager"]
+[node name="Battle" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 936.0
 offset_top = 584.0
 offset_right = 1128.0
 offset_bottom = 616.0
 text = "Battle"
+
+[connection signal="pressed" from="Button Manager/Scan" to="Background Manager/Box Manager/BoxSpaceCommand" method="_on_scan_pressed"]

@@ -13,6 +13,7 @@ func _ready():
 	add_child(line_folder)
 	add_child(planet_folder)
 	current_planet = GlobalData.universe.keys().pick_random()
+	$"Background Manager/Box Manager/BoxSpaceCommand".prepare_new_scan(current_planet)
 	get_planet_map(current_planet)
 
 func get_planet_map(planet_name) :
@@ -155,6 +156,7 @@ func create_visual_map(planet_name, size):
 func planet_exploration(destination_name):
 	current_planet = destination_name
 	print("On se déplace en: " + destination_name)
+	$"Background Manager/Box Manager/BoxSpaceCommand".prepare_new_scan(current_planet)
 	get_planet_map(current_planet)
 
 func update_tako_location(planet_info):

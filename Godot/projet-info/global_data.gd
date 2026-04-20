@@ -1,6 +1,7 @@
 extends Node
 
 var universe = {}
+var scanned_planets = []
 
 func erase_python_memory():
 	var url = "http://127.0.0.1:8000/clear"
