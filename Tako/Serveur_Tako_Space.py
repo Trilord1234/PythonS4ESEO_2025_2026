@@ -3,12 +3,14 @@ import os
 import json
 from groq import Groq
 from graph import Graph
+from algorithms import dfs_path
 app = Flask(__name__)
 
-from TakoAPIKey import api_key, api_key_backup
+from TakoAPIKey import api_key_backup
 client = Groq(api_key=api_key_backup) #or api_key
 
 name_alerady_used = []
+planet_db = {}
 
 system_prompt = """Tu es Tako, un générateur de lore pour un jeu vidéo. 
 Je vais te donner la description visuelle d'une planète. 
@@ -55,6 +57,7 @@ def analyser_planete():
         if "name" in IA_dictionary:
             name_alerady_used.append(IA_dictionary["name"])
             planet = IA_dictionary["name"]
+            planet_db[planet] = IA_dictionary
             space_graph.add_node(planet)
             print(f"Nœud ajouté : {planet} | Graphe actuel : {space_graph.nodes()}")
             
@@ -68,6 +71,7 @@ def analyser_planete():
 def clear_memory():
     global space_graph
     name_alerady_used.clear()
+    planet_db.clear()
     print("Bip Boop... Mémoire des planètes EFFACÉE !")
     space_graph = Graph()
     return jsonify({"status": "Memoire vide"})
@@ -159,6 +163,23 @@ def set_current_planet():
     print(f"Position mise à jour : {current_planet_data.get('name')}")
     return jsonify({"status": "Position enregistrée"})
 
+@app.route('/hyperspeed_route', methods=['POST'])
+def calculer_route_dfs():
+    data = request.json
+    start = data.get("start")
+    end = data.get("end")
+    if not start or not end:
+        return jsonify({"erreur": "Coordonnées incomplètes"}), 400
+    if not space_graph.has_node(start) or not space_graph.has_node(end):
+        return jsonify({"erreur": "Planète inconnue dans le réseau"}), 404
+    chemin = dfs_path(space_graph, start, end)
+    if chemin:
+        print(f"Saut Hyperspatial DFS calculé : {' -> '.join(chemin)}")
+        return jsonify({"status": "success", "path": chemin})
+    else:
+        print(f"Aucune route possible entre {start} et {end}")
+        return jsonify({"status": "no_path"}), 200
+
 emotions = ["Bug", "Dead", "Huh?", "Idle1", "Idle2", "Love", "Silly", "Talk"]
 
 tako_prompt = f"""
@@ -228,6 +249,55 @@ def tako_chat():
     except Exception as e:
         print(f"Erreur de communication avec Tako : {e}")
         return jsonify({"erreur": str(e)}), 500
+
+@app.route('/save_graph', methods=['POST'])
+def save_graph_json():
+    data = request.json
+    scanned_planets = data.get("scanned_planets", [])
+    def build_structured_data(mask_unknown=False):
+        output = {}
+        unknown_counter = 1
+        name_map = {}
+        for node in space_graph.nodes():
+            if not mask_unknown or node in scanned_planets:
+                name_map[node] = node
+            else:
+                name_map[node] = f"??? ({unknown_counter})"
+                unknown_counter += 1
+        for node in space_graph.nodes():
+            real_name = node
+            display_name = name_map[node]
+            voisins_bruts = space_graph.neighbors(real_name)
+            voisins_affiches = [name_map[v] for v in voisins_bruts]
+            output[display_name] = {
+                "voisins": voisins_affiches,
+                "caractéristiques": {}
+            }
+            if not mask_unknown or node in scanned_planets:
+                infos = planet_db.get(real_name, {})
+                output[display_name]["caractéristiques"] = {
+                    "name": infos.get("name", real_name),
+                    "type": infos.get("type", "Inconnu"),
+                    "weight": infos.get("weight", "Inconnu"),
+                    "size": infos.get("size", "Inconnu"),
+                    "gravity": infos.get("gravity", "Inconnu"),
+                    "habitable": infos.get("habitable", "Inconnu"),
+                    "level of danger": infos.get("level of danger", "Inconnu"),
+                    "description": infos.get("description", "Aucune description disponible.")
+                }
+            else:
+                output[display_name]["caractéristiques"] = {
+                    "status": "Données cryptées ou non scannées"
+                }
+        return output
+    full_graph = build_structured_data(mask_unknown=False)
+    masked_graph = build_structured_data(mask_unknown=True)
+    with open("graph_complet.json", "w", encoding="utf-8") as f:
+        json.dump(full_graph, f, indent=4, ensure_ascii=False)
+    with open("graph_decouvert.json", "w", encoding="utf-8") as f:
+        json.dump(masked_graph, f, indent=4, ensure_ascii=False)
+    print("Fichiers JSON générés avec succès !")
+    return jsonify({"status": "Fichiers sauvegardés"})
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")

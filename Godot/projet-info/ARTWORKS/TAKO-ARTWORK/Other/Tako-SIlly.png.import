@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yoo52s1hi507"
-path="res://.godot/imported/Tako-Silly.png-e58ef649bd68607da5ab64828eb32276.ctex"
+path="res://.godot/imported/Tako-SIlly.png-34bdd34ee6bfedf8db6588c21170f82c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Silly.png"
-dest_files=["res://.godot/imported/Tako-Silly.png-e58ef649bd68607da5ab64828eb32276.ctex"]
+source_file="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-SIlly.png"
+dest_files=["res://.godot/imported/Tako-SIlly.png-34bdd34ee6bfedf8db6588c21170f82c.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://cacj805f1yc77"]
+[gd_scene load_steps=75 format=3 uid="uid://cacj805f1yc77"]
 
 [ext_resource type="Script" uid="uid://g2iq48jvkw68" path="res://exploration.gd" id="1_88ct5"]
 [ext_resource type="Texture2D" uid="uid://b3m1dkuvdb3b6" path="res://ARTWORKS/BACKGROUND-ARTWORK/Exploration-Background/Background Exploration.png" id="1_wyjkc"]
@@ -8,16 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://dko5bu0s4yxdd" path="res://ARTWORKS/ASSET-ARTWORK/Tako-Dialogue-Box.png" id="4_00hbf"]
 [ext_resource type="Texture2D" uid="uid://bexag3thhjxcc" path="res://ARTWORKS/TAKO-ARTWORK/Talk/Tako-Animation-Talk.png" id="4_5taav"]
 [ext_resource type="Texture2D" uid="uid://bgfh84i4v421h" path="res://ARTWORKS/SPACESHIP-ARTWORK/Spaceship.png" id="5_c4mc6"]
-[ext_resource type="Script" uid="uid://bxs3k1j6q31ob" path="res://box_tako_dialogue.gd" id="5_qabf2"]
+[ext_resource type="Script" path="res://box_tako_dialogue.gd" id="5_qabf2"]
 [ext_resource type="Texture2D" uid="uid://c8fjurnxuwk5q" path="res://ARTWORKS/ASSET-ARTWORK/Option-Box.png" id="5_v7tqu"]
-[ext_resource type="Script" uid="uid://bh1g3pmo43xxe" path="res://tako_manager.gd" id="6_v7tqu"]
+[ext_resource type="Script" path="res://tako_manager.gd" id="6_v7tqu"]
 [ext_resource type="Script" uid="uid://i78ia4kyy1u2" path="res://box_space_command.gd" id="7_8exjl"]
 [ext_resource type="Texture2D" uid="uid://dol6jonselwr3" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tajo-Bug.png" id="8_nyiyb"]
-[ext_resource type="Script" uid="uid://556afjvi07gh" path="res://space_ship_manager.gd" id="9_00hbf"]
+[ext_resource type="Script" path="res://space_ship_manager.gd" id="9_00hbf"]
 [ext_resource type="Texture2D" uid="uid://b2sa2k82po13x" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Dead.png" id="9_8exjl"]
 [ext_resource type="Texture2D" uid="uid://cv286po63ybk7" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Huh.png" id="10_22gb7"]
 [ext_resource type="Texture2D" uid="uid://ri4o06dh3huk" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Coeur.png" id="13_uu63r"]
-[ext_resource type="Texture2D" uid="uid://yoo52s1hi507" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Silly.png" id="14_drbd5"]
+[ext_resource type="Texture2D" uid="uid://yoo52s1hi507" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-SIlly.png" id="14_drbd5"]
 [ext_resource type="Texture2D" uid="uid://skni7svwxhs" path="res://ARTWORKS/TAKO-ARTWORK/Other/Tako-Vide.png" id="16_2wa3f"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qabf2"]
@@ -431,6 +431,24 @@ scale_curve = SubResource("CurveTexture_8wdfd")
 color_ramp = SubResource("GradientTexture1D_v7tqu")
 collision_mode = 2
 
+[sub_resource type="Gradient" id="Gradient_8exjl"]
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0.65294117, 0.5, 0.17058824, 1, 0.30588236, 1, 0.34117648, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0.9254902, 1, 0, 1, 0, 0, 0, 1, 0.55529416, 1, 0.39999998, 1, 0.32156864, 0, 0.96862745, 1, 0.16078436, 0.49999985, 0.9843137, 1, 0, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_22gb7"]
+gradient = SubResource("Gradient_8exjl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uu63r"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 500, 0)
+scale_min = 4.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_22gb7")
+
 [node name="Exploration" type="Node2D"]
 script = ExtResource("1_88ct5")
 
@@ -554,6 +572,27 @@ offset_right = 192.0
 offset_bottom = 191.0
 scroll_following = true
 
+[node name="HyperSpeedBox" type="ColorRect" parent="Background Manager/Box Manager/BoxSpaceCommand/Log&All"]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 192.0
+color = Color(0, 0, 0, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background Manager/Box Manager/BoxSpaceCommand/Log&All/HyperSpeedBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background Manager/Box Manager/BoxSpaceCommand/Log&All/HyperSpeedBox/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="Tako Manager" type="Node2D" parent="."]
 position = Vector2(24, 24)
 script = ExtResource("6_v7tqu")
@@ -638,13 +677,13 @@ offset_right = 1128.0
 offset_bottom = 336.0
 text = "HyperSpeed"
 
-[node name="LogBook" type="Button" parent="Button Manager"]
+[node name="Save JSON" type="Button" parent="Button Manager"]
 layout_mode = 0
 offset_left = 936.0
 offset_top = 344.0
 offset_right = 1128.0
 offset_bottom = 376.0
-text = "LogBook"
+text = "Save JSON"
 
 [node name="Battle" type="Button" parent="Button Manager"]
 layout_mode = 0
@@ -654,4 +693,15 @@ offset_right = 1128.0
 offset_bottom = 616.0
 text = "Battle"
 
+[node name="Conffettis" type="GPUParticles2D" parent="Button Manager/Battle"]
+position = Vector2(96, 16)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_uu63r")
+
 [connection signal="pressed" from="Button Manager/Scan" to="Background Manager/Box Manager/BoxSpaceCommand" method="_on_scan_pressed"]
+[connection signal="pressed" from="Button Manager/HyperSpeed" to="Background Manager/Box Manager/BoxSpaceCommand" method="_on_hyper_speed_pressed"]
+[connection signal="pressed" from="Button Manager/Save JSON" to="Background Manager/Box Manager/BoxSpaceCommand" method="_on_save_json_pressed"]
+[connection signal="pressed" from="Button Manager/Battle" to="Background Manager/Box Manager/BoxSpaceCommand" method="_on_battle_pressed"]
