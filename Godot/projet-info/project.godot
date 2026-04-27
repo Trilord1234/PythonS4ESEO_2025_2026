@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 GlobalData="*res://global_data.gd"
 BackGroundMusic="*res://back_ground_music.tscn"
+PlanetData="*res://planet_data.gd"
 
 [editor_plugins]
 

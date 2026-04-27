@@ -14,6 +14,19 @@ var target_planet = ""
 @onready var particles = $"../../../Button Manager/Battle/Conffettis"
 
 func _ready():
+	"""
+	Initialise l'interface et les signaux au chargement de la scène.
+
+	Configure le texte de démarrage du journal de bord, masque les éléments 
+	secondaires (radar, menu hyperspatial) et connecte les signaux des boutons 
+	(Hyperspeed, Sauvegarde JSON) à leurs fonctions respectives.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	if log_display:
 		log_display.text = "> SYSTÈME DÉMARRÉ.\n> Radar en attente..."
 	hyper_speed_box.hide()
@@ -25,6 +38,19 @@ func _ready():
 		btn_save_json.pressed.connect(_on_save_json_pressed)
 
 func update_hyperspeed_destinations():
+	"""
+	Génère dynamiquement l'interface de sélection des destinations hyperspatiales.
+
+	Nettoie la liste actuelle puis crée un bouton interactif pour chaque planète 
+	présente dans 'GlobalData.scanned_planets'. Chaque bouton intègre l'icône 
+	générée procéduralement (texture + layer) et le nom de la planète.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	if not list_container: return
 	for child in list_container.get_children():
 		child.queue_free()
@@ -69,6 +95,19 @@ func update_hyperspeed_destinations():
 		list_container.add_child(btn_row)
 
 func executer_saut_hyperspeed(destination: String):
+	"""
+	Calcule et déclenche un saut hyperspatial vers la destination choisie.
+
+	Envoie une requête HTTP POST à la route '/hyperspeed_route' du serveur Python 
+	pour calculer le chemin via l'algorithme DFS. Si une route valide est renvoyée, 
+	elle est affichée dans le log avant de lancer la transition vers la nouvelle planète.
+
+	Args:
+	destination (String) : Le nom de la planète cible à atteindre.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	scroll_menu.hide()
 	log_display.show()
 	log_display.text += "\n\n> CALCUL DE LA ROUTE HYPERSPATIALE..."
@@ -97,6 +136,19 @@ func executer_saut_hyperspeed(destination: String):
 	request.request(url, headers, HTTPClient.METHOD_POST, data)
 
 func prepare_new_scan(planet_name: String):
+	"""
+	Configure le système de bord lors de l'arrivée en orbite d'une planète.
+
+	Définit la nouvelle cible. Si la planète a déjà été scannée auparavant, 
+	ses données visuelles et textuelles sont immédiatement restaurées. Sinon, 
+	le radar est masqué en attendant une action de scan manuel de l'utilisateur.
+
+	Args:
+	planet_name (String) : Le nom de la planète sur laquelle le joueur vient d'arriver.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	target_planet = planet_name
 	if GlobalData.scanned_planets.has(target_planet):
 		log_display.text += "\n> Arrivée en orbite.\n> Données locales récupérées depuis la mémoire."
@@ -106,11 +158,36 @@ func prepare_new_scan(planet_name: String):
 		log_display.text += "\n> Arrivée en orbite.\n> Prêt pour le scan."
 
 func hide_radar():
+	"""
+	Masque l'affichage visuel de la planète sur le radar.
+
+	Désactive la visibilité des nœuds 'TextureRect' de la planète de base 
+	et de son calque superposé (layer).
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	if radar_planet and radar_layer:
 		radar_planet.hide()
 		radar_layer.hide()
 
 func _on_scan_pressed():
+	"""
+	Valide et exécute l'analyse d'une planète inconnue.
+
+	Vérifie que la cible est valide et n'a pas déjà été analysée. Si les conditions 
+	sont remplies, la planète est ajoutée à la base de données explorée, 
+	les destinations hyperspatiales sont mises à jour, et les données sont affichées.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	if target_planet == "":
 		log_display.text += "\n> ERREUR : Aucune cible."
 		return
@@ -125,6 +202,19 @@ func _on_scan_pressed():
 	display_planet_data()
 	
 func display_planet_data():
+	"""
+	Affiche les caractéristiques visuelles et les données de l'IA sur le radar.
+
+	Récupère les informations générées par le serveur (textures, couleurs, 
+	nom, type, niveau de danger) depuis 'GlobalData', met à jour les nœuds 
+	visuels pour faire apparaître la planète, et imprime le rapport dans le log.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	var data = GlobalData.universe[target_planet]
 	
 	radar_planet.texture = data["planet_texture"]
@@ -144,6 +234,19 @@ func display_planet_data():
 	log_display.text += "\n> Danger : " + str(p_danger)
 
 func _on_save_json_pressed():
+	"""
+	Déclenche la sauvegarde de l'état de l'univers sur le serveur.
+
+	Envoie une requête HTTP POST à la route '/save_graph' du serveur Python 
+	avec la liste des planètes scannées pour générer les fichiers JSON persistants. 
+	Affiche un message de succès ou d'erreur dans le journal de bord.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	log_display.text += "\n\n> SAUVEGARDE JSON EN COURS..."
 	var url = "http://127.0.0.1:8000/save_graph"
 	var headers = ["Content-Type: application/json"]
@@ -160,6 +263,18 @@ func _on_save_json_pressed():
 	request.request(url, headers, HTTPClient.METHOD_POST, data)
 
 func _on_hyper_speed_pressed():
+	"""
+	Alterne l'affichage entre le journal de bord et le menu de saut hyperspatial.
+
+	Gère l'interface utilisateur en masquant le menu Hyperspeed pour afficher le log, 
+	ou inversement. Met à jour la liste des destinations à chaque ouverture du menu.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	if hyper_speed_box.visible:
 		hyper_speed_box.hide()
 		log_display.show()
@@ -168,7 +283,19 @@ func _on_hyper_speed_pressed():
 		hyper_speed_box.show()
 		update_hyperspeed_destinations()
 
-func _on_battle_pressed() -> void:
+func _on_battle_pressed():
+	"""
+	Déclenche un événement humoristique (Easter Egg) dans l'interface.
+
+	Active un émetteur de particules (confettis) et affiche un message ironique 
+	de l'IA Tako dans le journal de bord concernant la survie de l'utilisateur.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	particles.restart() 
 	particles.emitting = true
 	log_display.text += "\n\n>FÉLICITATIONS !"

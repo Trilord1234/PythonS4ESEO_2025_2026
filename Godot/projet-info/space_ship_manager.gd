@@ -4,48 +4,40 @@ extends Node2D
 @onready var box = $"../Background Manager/Box Manager/BoxExploration/HitBox_BoxExploration"
 var targeted_position = Vector2.ZERO
 
-"""
-Initialise la position cible sur la position actuelle du vaisseau au démarrage.
-
-Cette fonction s'assure qu'au moment où la scène est chargée, l'objet ne tente pas
-de se déplacer vers une coordonnée par défaut (comme (0,0)). En alignant
-'targeted_position' sur la position globale réelle du vaisseau ('spaceship'),
-on garantit que l'objet reste immobile ou commence son cycle de mouvement
-exactement là où se trouve le véhicule spatial.
-
-Args:
-Aucun.
-
-Returns:
-void : Ne retourne aucune valeur.
-"""
-
 func _ready():
+	"""
+	Initialise la position cible sur la position actuelle du vaisseau au démarrage.
+
+	Cette fonction s'assure qu'au moment où la scène est chargée, l'objet ne tente pas
+	de se déplacer vers une coordonnée par défaut (comme (0,0)). En alignant
+	'targeted_position' sur la position globale réelle du vaisseau ('spaceship'),
+	on garantit que l'objet reste immobile ou commence son cycle de mouvement
+	exactement là où se trouve le véhicule spatial.
+
+	Args:
+	Aucun.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	targeted_position = spaceship.global_position
 
-"""
-Gère le mouvement fluide, les limites de zone et l'inclinaison dynamique du vaisseau.
-
-Cette fonction effectue les opérations suivantes à chaque frame :
-
-Sécurité : Vérifie que le vaisseau et sa zone de confinement existent toujours.
-
-Cible : Met à jour la destination si la souris survole la zone autorisée ('box').
-
-Déplacement : Utilise une interpolation linéaire ('lerp') pour un mouvement fluide vers la cible.
-
-Confinement : Restreint la position du vaisseau à l'intérieur des parois de la box avec des marges de sécurité.
-
-Esthétique : Calcule une inclinaison (rotation) basée sur la vélocité horizontale pour simuler un effet de virage aérodynamique.
-
-Args:
-delta (float): Le temps écoulé depuis la frame précédente.
-
-Returns:
-void : Ne retourne aucune valeur.
-"""
-
 func _process(delta):
+	"""
+	Gère le mouvement fluide, les limites de zone et l'inclinaison dynamique du vaisseau.
+	Cette fonction effectue les opérations suivantes à chaque frame :
+	Sécurité : Vérifie que le vaisseau et sa zone de confinement existent toujours.
+	Cible : Met à jour la destination si la souris survole la zone autorisée ('box').
+	Déplacement : Utilise une interpolation linéaire ('lerp') pour un mouvement fluide vers la cible.
+	Confinement : Restreint la position du vaisseau à l'intérieur des parois de la box avec des marges de sécurité.
+	Esthétique : Calcule une inclinaison (rotation) basée sur la vélocité horizontale pour simuler un effet de virage aérodynamique.
+
+	Args:
+	delta (float): Le temps écoulé depuis la frame précédente.
+
+	Returns:
+	void : Ne retourne aucune valeur.
+	"""
 	if not is_instance_valid(spaceship) or not is_instance_valid(box):
 		return
 	var cursor_position = get_global_mouse_position()
