@@ -36,8 +36,21 @@ N'ajoute aucun texte avant ou après le JSON et n'utilise aucun code hexadécima
 
 space_graph = Graph()
 
+
 @app.route('/analyse', methods=['POST'])
 def analyser_planete():
+    """
+    Génère procéduralement le lore et les caractéristiques d'une planète via l'IA Groq.
+
+    Reçoit les informations visuelles (prompt + chemins des textures) depuis Godot. 
+    Interroge l'API LLM en forçant une réponse au format JSON strict. Si la réponse 
+    est valide, la planète est ajoutée au graphe galactique (space_graph) et ses 
+    données sont stockées dans la base de données interne du serveur.
+
+    Returns:
+        Response: Un objet JSON contenant les données générées par l'IA (nom, type, etc.), 
+                  ou un code d'erreur 500 en cas de défaillance.
+    """
     data = request.json
     prompt_received = data.get("prompt", "")
     visual_look = data.get("look", {})
@@ -79,6 +92,16 @@ def analyser_planete():
 
 @app.route('/clear', methods=['POST'])
 def clear_memory():
+    """
+    Réinitialise intégralement la mémoire du serveur.
+
+    Vide l'historique des noms générés, efface la base de données des planètes 
+    et recrée une nouvelle instance vierge pour le graphe spatial. Utilisé 
+    pour recommencer une partie depuis zéro.
+
+    Returns:
+        Response: Un message de confirmation de la suppression des données.
+    """
     global space_graph
     name_alerady_used.clear()
     planet_db.clear()
@@ -88,6 +111,16 @@ def clear_memory():
 
 @app.route('/link', methods=['POST'])
 def lier_planetes():
+    """
+    Crée une liaison (arête) bidirectionnelle entre deux planètes dans le graphe.
+
+    Args (via requête JSON):
+        planet_A (str): Le nom de la première planète.
+        planet_B (str): Le nom de la seconde planète.
+
+    Returns:
+        Response: Un message de succès (200) ou une erreur (400) si un paramètre manque.
+    """
     data = request.json
     Planet_A = data.get("planet_A")
     Planet_B = data.get("planet_B")
@@ -105,6 +138,18 @@ def lier_planetes():
 
 @app.route('/unlink', methods=['POST'])
 def delier_planetes():
+    """
+    Supprime une liaison (arête) existante entre deux planètes.
+
+    Vérifie d'abord que le lien existe dans le graphe spatial avant de le détruire.
+
+    Args (via requête JSON):
+        planet_A (str): Le nom de la première planète.
+        planet_B (str): Le nom de la seconde planète.
+
+    Returns:
+        Response: Un statut de succès, même si la liaison était déjà inexistante.
+    """
     data = request.json
     Planet_A = data.get("planet_A")
     Planet_B = data.get("planet_B")
@@ -124,6 +169,15 @@ def delier_planetes():
         
 @app.route('/neighbors', methods=['POST'])
 def get_voisins():
+    """
+    Récupère la liste des planètes directement connectées (voisins) à une planète cible.
+
+    Args (via requête JSON):
+        planet (str): Le nom de la planète dont on cherche les voisins.
+
+    Returns:
+        Response: Une liste JSON des noms des planètes adjacentes.
+    """
     data = request.json
     name_planet = data.get("planet")
     
@@ -135,6 +189,20 @@ def get_voisins():
 
 @app.route('/radar', methods=['POST'])
 def space_radar():
+    """
+    Analyse les environs spatiaux à l'aide de l'algorithme BFS (Parcours en Largeur).
+
+    Explore le graphe couche par couche à partir de la planète courante jusqu'à une 
+    distance maximale de 3 sauts. Trie les planètes découvertes par leur rang d'éloignement 
+    et répertorie les liaisons primaires et secondaires pour l'affichage visuel du radar.
+
+    Args (via requête JSON):
+        planet (str): Le nom de la planète de départ (centre du radar).
+
+    Returns:
+        Response: Un dictionnaire complexe contenant le rang des planètes (1, 2, ou 3 sauts) 
+                  et les arêtes (link et secondary_link) pour dessiner la carte.
+    """
     data = request.json
     start = data.get("planet")
     if not start or not space_graph.has_node(start):
@@ -168,6 +236,15 @@ current_planet_data = None
 
 @app.route('/set_current_planet', methods=['POST'])
 def set_current_planet():
+    """
+    Met à jour la position actuelle du joueur dans la mémoire du serveur.
+
+    Permet de fournir un contexte spatial (les caractéristiques locales) au système 
+    de dialogue de l'IA Tako.
+
+    Returns:
+        Response: Confirmation de l'enregistrement de la position.
+    """
     global current_planet_data
     current_planet_data = request.json
     print(f"Position mise à jour : {current_planet_data.get('name')}")
@@ -175,6 +252,20 @@ def set_current_planet():
 
 @app.route('/hyperspeed_route', methods=['POST'])
 def calculer_route_dfs():
+    """
+    Calcule un itinéraire de saut hyperspatial en utilisant l'algorithme DFS.
+
+    Fait appel à la fonction externe 'dfs_path' pour trouver un chemin valide 
+    dans le graphe entre une planète de départ et une destination lointaine.
+
+    Args (via requête JSON):
+        start (str): Le nom de la planète de départ.
+        end (str): Le nom de la planète d'arrivée ciblée.
+
+    Returns:
+        Response: Une liste représentant le chemin calculé, ou un statut 'no_path' 
+                  si la destination est inaccessible.
+    """
     data = request.json
     start = data.get("start")
     end = data.get("end")
@@ -220,6 +311,20 @@ tako_history = [{"role": "system", "content": tako_prompt}]
 
 @app.route('/chat', methods=['POST'])
 def tako_chat():
+    """
+    Gère la logique conversationnelle de l'IA de bord, Tako.
+
+    Intègre un prompt système strict définissant la personnalité sarcastique de l'IA, 
+    ajoute le contexte de la planète actuelle où se trouve le joueur, et conserve 
+    l'historique des messages pour maintenir la cohérence de la discussion. Force 
+    également l'IA à renvoyer une émotion précise pour animer l'interface Godot.
+
+    Args (via requête JSON):
+        message (str): La phrase saisie par l'utilisateur.
+
+    Returns:
+        Response: Le message textuel de Tako et son émotion, formatés en JSON.
+    """
     data = request.json
     user_message = data.get("message", "")
     if not user_message:
@@ -262,6 +367,19 @@ def tako_chat():
 
 @app.route('/save_graph', methods=['POST'])
 def save_graph_json():
+    """
+    Exporte et sauvegarde l'état actuel de l'univers sous forme de fichiers JSON.
+
+    Génère deux fichiers locaux : 'graph_complet.json' (la vue "Dieu" avec toutes 
+    les données) et 'graph_decouvert.json' (la vue "Joueur" où les planètes non 
+    visitées sont masquées par '???'). 
+
+    Args (via requête JSON):
+        scanned_planets (list): La liste des planètes que le joueur a déjà scannées.
+
+    Returns:
+        Response: Une confirmation de l'écriture réussie des fichiers sur le disque.
+    """
     data = request.json
     scanned_planets = data.get("scanned_planets", [])
     
@@ -329,6 +447,17 @@ def save_graph_json():
 
 @app.route('/get_graph', methods=['GET'])
 def get_graph():
+    """
+    Restaure l'univers en chargeant les données depuis le fichier JSON de sauvegarde.
+
+    Recrée le graphe (nœuds et arêtes), peuple la base de données des planètes 
+    et met à jour la liste des noms utilisés. Permet au joueur de reprendre sa 
+    partie là où il l'avait laissée.
+
+    Returns:
+        Response: L'intégralité des données du graphe rechargées, ou une erreur 404 
+                  si aucun fichier de sauvegarde n'est détecté.
+    """
     global space_graph, planet_db, name_alerady_used
     try:
         if os.path.exists(PATH_COMPLET):
