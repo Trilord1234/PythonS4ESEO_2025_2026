@@ -64,8 +64,14 @@ var limit_y = 500
 var planet_size = 100
 var prompt_IA = ""
 var data_IA_save = null
+var is_loaded_from_save = false
 
 func _ready():
+	if is_loaded_from_save:
+		var load_angle = randf_range(0, 2 * PI)
+		var load_speed = randf_range(100, 250)
+		movement = Vector2.RIGHT.rotated(load_angle) * load_speed
+		return
 	prompt_IA = "Invente un nom, le poids, la taille, l'habitabilité, son type, sa gravité, sa dangerosité et une anecdote pour cette planète. "
 	
 	if randf() > 0.5:
@@ -131,11 +137,24 @@ func _on_planet_button_pressed():
 func python_call(prompt):
 	var url = "http://127.0.0.1:8000/analyse"
 	var headers = ["Content-Type: application/json"]
-	var data_to_send = JSON.stringify({"prompt": prompt})
-
+	var p_path = "none"
+	if $Planet.texture != null:
+		p_path = $Planet.texture.resource_path
+	var l_path = "none"
+	if $Layer.texture != null:
+		l_path = $Layer.texture.resource_path
+	var look_data = {
+		"planet": p_path,
+		"layer": l_path,
+		"planet_color": "#" + $Planet.self_modulate.to_html(false),
+		"layer_color": "#" + $Layer.self_modulate.to_html(false)
+	}
+	var data_to_send = JSON.stringify({
+		"prompt": prompt,
+		"look": look_data
+	})
 	if not $RequestIA.request_completed.is_connected(_on_response_received):
 		$RequestIA.request_completed.connect(_on_response_received)
-	
 	$RequestIA.request(url, headers, HTTPClient.METHOD_POST, data_to_send)
 
 func _on_response_received(_result, response_code, _headers, body):

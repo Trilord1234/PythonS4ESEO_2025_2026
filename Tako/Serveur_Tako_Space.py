@@ -32,6 +32,7 @@ space_graph = Graph()
 def analyser_planete():
     data = request.json
     prompt_received = data.get("prompt", "")
+    visual_look = data.get("look", {})
     
     if name_alerady_used:
         prompt_received += f"\n\nCONTRAINTE STRICTE : Tu ne dois ABSOLUMENT PAS utiliser l'un de ces noms (ils existent déjà) : {', '.join(name_alerady_used)}."
@@ -57,6 +58,7 @@ def analyser_planete():
         if "name" in IA_dictionary:
             name_alerady_used.append(IA_dictionary["name"])
             planet = IA_dictionary["name"]
+            IA_dictionary["look"] = visual_look
             planet_db[planet] = IA_dictionary
             space_graph.add_node(planet)
             print(f"Nœud ajouté : {planet} | Graphe actuel : {space_graph.nodes()}")
@@ -254,25 +256,31 @@ def tako_chat():
 def save_graph_json():
     data = request.json
     scanned_planets = data.get("scanned_planets", [])
+    
     def build_structured_data(mask_unknown=False):
         output = {}
         unknown_counter = 1
         name_map = {}
+        
         for node in space_graph.nodes():
             if not mask_unknown or node in scanned_planets:
                 name_map[node] = node
             else:
                 name_map[node] = f"??? ({unknown_counter})"
                 unknown_counter += 1
+                
         for node in space_graph.nodes():
             real_name = node
             display_name = name_map[node]
             voisins_bruts = space_graph.neighbors(real_name)
             voisins_affiches = [name_map[v] for v in voisins_bruts]
+            
             output[display_name] = {
                 "voisins": voisins_affiches,
-                "caractéristiques": {}
+                "caractéristiques": {},
+                "look": {}
             }
+            
             if not mask_unknown or node in scanned_planets:
                 infos = planet_db.get(real_name, {})
                 output[display_name]["caractéristiques"] = {
@@ -285,19 +293,57 @@ def save_graph_json():
                     "level of danger": infos.get("level of danger", "Inconnu"),
                     "description": infos.get("description", "Aucune description disponible.")
                 }
+                output[display_name]["look"] = infos.get("look", {
+                    "planet": "unknown_texture",
+                    "layer": "unknown_texture",
+                    "planet_color": "#ffffff",
+                    "layer_color": "#ffffff"
+                })
             else:
                 output[display_name]["caractéristiques"] = {
                     "status": "Données cryptées ou non scannées"
                 }
+                output[display_name]["look"] = {
+                    "status": "Visuel non disponible"
+                }
         return output
+  
     full_graph = build_structured_data(mask_unknown=False)
     masked_graph = build_structured_data(mask_unknown=True)
     with open("graph_complet.json", "w", encoding="utf-8") as f:
-        json.dump(full_graph, f, indent=4, ensure_ascii=False)
+        json.dump(full_graph, f, indent=4, ensure_ascii=False)   
+
     with open("graph_decouvert.json", "w", encoding="utf-8") as f:
-        json.dump(masked_graph, f, indent=4, ensure_ascii=False)
+        json.dump(masked_graph, f, indent=4, ensure_ascii=False) 
+
     print("Fichiers JSON générés avec succès !")
     return jsonify({"status": "Fichiers sauvegardés"})
+
+@app.route('/get_graph', methods=['GET'])
+def get_graph():
+    global space_graph, planet_db, name_alerady_used
+    try:
+        if os.path.exists("graph_complet.json"):
+            with open("graph_complet.json", "r", encoding="utf-8") as f:
+                data = json.load(f)
+            space_graph = Graph()
+            planet_db.clear()
+            name_alerady_used.clear()
+            for p_name, p_data in data.items():
+                space_graph.add_node(p_name)
+                name_alerady_used.append(p_name)
+                db_entry = p_data.get("caractéristiques", {})
+                db_entry["look"] = p_data.get("look", {})
+                planet_db[p_name] = db_entry
+                for voisin in p_data.get("voisins", []):
+                    space_graph.add_node(voisin)
+                    space_graph.add_edge(p_name, voisin)
+            print("Mémoire du serveur restaurée depuis le JSON !")
+            return jsonify(data)
+        else:
+            return jsonify({"erreur": "Aucun fichier de sauvegarde trouvé"}), 404
+    except Exception as e:
+        return jsonify({"erreur": str(e)}), 500
 
 if __name__ == '__main__':
     print("Le serveur de Tako est opérationnel ! En attente de signaux Godot...")

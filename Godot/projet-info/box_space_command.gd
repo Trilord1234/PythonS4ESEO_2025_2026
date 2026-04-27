@@ -85,7 +85,7 @@ func executer_saut_hyperspeed(destination: String):
 			if reponse.has("status") and reponse["status"] == "success":
 				var chemin = reponse["path"]
 				var route_texte = " -> ".join(chemin)
-				log_display.text += "\n> cRoute DFS validée :"
+				log_display.text += "\n> Route DFS validée :"
 				log_display.text += "\n> " + route_texte
 				log_display.text += "\n> SAUT IMMINENT !"
 				get_tree().create_timer(1.5).timeout.connect(func():

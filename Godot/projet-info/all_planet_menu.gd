@@ -79,7 +79,13 @@ func _on_planet_menu_pressed() :
 	if open == false :
 		PlanetMenuReload()
 		$".".visible = true
+		$"../Button Manager/ButtonBox".visible = false
+		$"../Button Manager/LoadJSON".visible = false
+		$"../Button Manager/Next".visible = false
 		open = true
 	else :
 		$".".visible = false
+		$"../Button Manager/ButtonBox".visible = true
+		$"../Button Manager/LoadJSON".visible = true
+		$"../Button Manager/Next".visible = true
 		open = false

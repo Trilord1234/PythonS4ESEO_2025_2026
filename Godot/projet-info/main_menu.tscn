@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b0gst8mgsy3gg"]
+[gd_scene load_steps=55 format=3 uid="uid://b0gst8mgsy3gg"]
 
 [ext_resource type="Script" uid="uid://xfnpkfei6lum" path="res://main_menu.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://cqtbqyefbrbox" path="res://ARTWORKS/BACKGROUND-ARTWORK/Main-Menu-Background/Background Animation Sheet.png" id="2_7vrkn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ddjk8xk0meukp" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_options.png" id="6_j5v2v"]
 [ext_resource type="Texture2D" uid="uid://h2fxsuu51o15" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_options_appuyé.png" id="7_iotk1"]
 [ext_resource type="Texture2D" uid="uid://jc0w74not5lo" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_exit.png" id="8_w44g7"]
+[ext_resource type="Texture2D" uid="uid://cqs3d62woj2wg" path="res://ARTWORKS/BUTTON-ARTWORK/boutton_exit_appuyé.png" id="9_0o4t1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fu7sn"]
 atlas = ExtResource("2_7vrkn")
@@ -379,6 +380,8 @@ texture_hover = ExtResource("7_iotk1")
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("8_w44g7")
+texture_pressed = ExtResource("9_0o4t1")
+texture_hover = ExtResource("9_0o4t1")
 
 [node name="Option Pop-up" type="Control" parent="."]
 layout_mode = 3

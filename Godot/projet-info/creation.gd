@@ -4,9 +4,12 @@ var planet_manager = preload("res://planete_manager.tscn")
 var count = 0
 var planet_selected = null
 var line_created = []
+@onready var btn_load_json = $"Button Manager/LoadJSON"
 
 func _ready() :
 	$"Button Manager/Delete".visible = false
+	if btn_load_json:
+		btn_load_json.pressed.connect(_on_load_json_pressed)
 	randomize()
 
 func _process(_delta):
@@ -59,12 +62,12 @@ func _on_planet_selected(targeted_planet):
 	$"Button Manager/Delete".visible = true
 	if targeted_planet.data_IA_save != null:
 		$"Info/InfoBox/Label/Name".text = targeted_planet.data_IA_save["name"]
-		$"Info/InfoBox/Label/Type".text = "Type : " + str(targeted_planet.data_IA_save["type"])
-		$"Info/InfoBox/Label/Weight".text = "Poids : " + str(targeted_planet.data_IA_save["weight"])
-		$"Info/InfoBox/Label/Size".text = "Taille : " + str(targeted_planet.data_IA_save["size"])
-		$"Info/InfoBox/Label/Gravity".text = "Gravité : " + str(targeted_planet.data_IA_save["gravity"])
-		$"Info/InfoBox/Label/Habitable".text = "Habitable : " + str(targeted_planet.data_IA_save["habitable"])
-		$"Info/InfoBox/Label/Level of danger".text = "Dangerosité : " + str(targeted_planet.data_IA_save["level of danger"])
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Type.text = "Type : " + str(targeted_planet.data_IA_save["type"])
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Weight.text = "Poids : " + str(targeted_planet.data_IA_save["weight"])
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Size.text = "Taille : " + str(targeted_planet.data_IA_save["size"])
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Gravity.text = "Gravité : " + str(targeted_planet.data_IA_save["gravity"])
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Habitable.text = "Habitable : " + str(targeted_planet.data_IA_save["habitable"])
+		$"Info/InfoBox/Label/LabelScroll/LabelContainer/Level of danger".text = "Dangerosité : " + str(targeted_planet.data_IA_save["level of danger"])
 		$"Info/InfoBox/Label/ScrollContainer/Description".text = str(targeted_planet.data_IA_save["description"])
 		var planet_name = targeted_planet.data_IA_save["name"]
 		var url = "http://127.0.0.1:8000/neighbors"
@@ -86,12 +89,12 @@ func _on_planet_selected(targeted_planet):
 		neighbors.request(url, header, HTTPClient.METHOD_POST, data)
 	else:
 		$"Info/InfoBox/Label/Name".text = "Analyse en cours..."
-		$"Info/InfoBox/Label/Type".text = "Type : ..."
-		$"Info/InfoBox/Label/Weight".text = "Poids : ..."
-		$"Info/InfoBox/Label/Size".text = "Taille : ..."
-		$"Info/InfoBox/Label/Gravity".text = "Gravité : ..."
-		$"Info/InfoBox/Label/Habitable".text = "Habitable : ..."
-		$"Info/InfoBox/Label/Level of danger".text = "Dangerosité : ..."
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Type.text = "Type : ..."
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Weight.text = "Poids : ..."
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Size.text = "Taille : ..."
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Gravity.text = "Gravité : ..."
+		$Info/InfoBox/Label/LabelScroll/LabelContainer/Habitable.text = "Habitable : ..."
+		$"Info/InfoBox/Label/LabelScroll/LabelContainer/Level of danger".text = "Dangerosité : ..."
 		$"Info/InfoBox/Label/ScrollContainer/Description".text = "Tako analyse l'atmosphère... Reclique dans un instant !"
 
 func create_line (planet_A, planet_B):
@@ -148,14 +151,14 @@ func _on_delete_pressed():
 	planet_selected.queue_free()
 	planet_selected = null
 	$"Info/InfoBox/Label/Name".text = "Planète supprimée."
-	$"Info/InfoBox/Label/Type".text = ""
+	$Info/InfoBox/Label/LabelScroll/LabelContainer/Type.text = ""
 	$"Info/InfoBox/Label/ScrollContainer/Description".text = ""
-	$Info/InfoBox/Label/Type.text = ""
-	$Info/InfoBox/Label/Weight.text = ""
-	$Info/InfoBox/Label/Size.text = ""
-	$Info/InfoBox/Label/Gravity.text = ""
-	$Info/InfoBox/Label/Habitable.text = ""
-	$"Info/InfoBox/Label/Level of danger".text = ""
+	$"Info/InfoBox/Label/ScrollContainer/Description".text = ""
+	$Info/InfoBox/Label/LabelScroll/LabelContainer/Weight.text = ""
+	$Info/InfoBox/Label/LabelScroll/LabelContainer/Size.text = ""
+	$Info/InfoBox/Label/LabelScroll/LabelContainer/Gravity.text = ""
+	$Info/InfoBox/Label/LabelScroll/LabelContainer/Habitable.text = ""
+	$"Info/InfoBox/Label/LabelScroll/LabelContainer/Level of danger".text = ""
 
 func _on_next_pressed() -> void:
 	get_tree().change_scene_to_file("res://exploration.tscn")
@@ -166,3 +169,65 @@ func _on_delete_all_link_pressed():
 		if dict["Planet_A"] == planet_selected or dict["Planet_B"] == planet_selected:
 			dict["Line"].queue_free() 
 			line_created.remove_at(i)
+
+func _on_load_json_pressed() -> void:
+	_on_clear_pressed()
+	var url = "http://127.0.0.1:8000/get_graph"
+	var request = HTTPRequest.new()
+	add_child(request)
+	request.request_completed.connect(func(_result, response_code, _headers, _body):
+		request.queue_free()
+		if response_code == 200:
+			var json_data = JSON.parse_string(_body.get_string_from_utf8())
+			if json_data:
+				recreer_univers(json_data)
+			else:
+				print("Erreur JSON vide")
+		else:
+			print("Erreur : Impossible de charger le JSON (Code: ", response_code, ")")
+	)
+	request.request(url, [], HTTPClient.METHOD_GET)
+
+func recreer_univers(data: Dictionary):
+	var box = $"Background Manager/PlaneteBox/HitBox/HitBox_Box"
+	for p_name in data.keys():
+		var p_data = data[p_name]
+		var new_planet = planet_manager.instantiate()
+		new_planet.is_loaded_from_save = true
+		count += 1
+		var look = p_data.get("look", {})
+		var p_path = look.get("planet", "none")
+		if p_path != "none" and p_path != "":
+			new_planet.get_node("Planet").texture = load(p_path)
+		var l_path = look.get("layer", "none")
+		if l_path != "none" and l_path != "":
+			new_planet.get_node("Layer").texture = load(l_path)
+		new_planet.get_node("Planet").self_modulate = Color.from_string(look.get("planet_color", "#ffffff"), Color.WHITE)
+		new_planet.get_node("Layer").self_modulate = Color.from_string(look.get("layer_color", "#ffffff"), Color.WHITE)
+		new_planet.data_IA_save = p_data.get("caractéristiques", {})
+		new_planet.limit_x = box.size.x
+		new_planet.limit_y = box.size.y
+		new_planet.position = Vector2(randf_range(100, box.size.x - 100), randf_range(100, box.size.y - 100))
+		new_planet.planet_selected.connect(_on_planet_selected)
+		box.add_child(new_planet)
+		GlobalData.universe[p_name] = {
+			"planet_texture": new_planet.get_node("Planet").texture,
+			"planet_color": new_planet.get_node("Planet").self_modulate,
+			"layer_texture": new_planet.get_node("Layer").texture,
+			"layer_color": new_planet.get_node("Layer").self_modulate,
+			"IA_data": new_planet.data_IA_save,
+			"node_reference": new_planet
+		}
+	var liens_deja_faits = []
+	for p_name in data.keys():
+		var voisins = data[p_name].get("voisins", [])
+		for voisin_name in voisins:
+			var lien_id = [p_name, voisin_name]
+			lien_id.sort()
+			if not liens_deja_faits.has(lien_id):
+				liens_deja_faits.append(lien_id)
+				var planet_A_node = GlobalData.universe[p_name]["node_reference"]
+				var planet_B_node = GlobalData.universe[voisin_name]["node_reference"]
+				create_line(planet_A_node, planet_B_node)
+	$Info/Nb/NbPLanet.text = "NB Planet = " + str(count)
+	print("Univers rechargé avec succès !")
