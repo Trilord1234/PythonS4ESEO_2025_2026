@@ -6,6 +6,22 @@ var planet_position = {}
 @onready var line_folder = Node2D.new()
 @onready var planet_folder = Node2D.new()
 
+"""
+Initialise la scène d'exploration et configure le point de départ du joueur.
+
+Cette fonction s'exécute au chargement de la scène. Elle vérifie d'abord si
+les données globales de l'univers ('GlobalData.universe') sont présentes. Si
+l'univers contient des données, elle ajoute les conteneurs nécessaires à la scène,
+sélectionne une planète de départ de manière aléatoire, puis déclenche la
+préparation du scan et la génération de la carte pour cette planète spécifique.
+
+Args:
+Aucun.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func _ready():
 	if GlobalData.universe.is_empty():
 		print("L'univers est vide")
@@ -15,6 +31,21 @@ func _ready():
 	current_planet = GlobalData.universe.keys().pick_random()
 	$"Background Manager/Box Manager/BoxSpaceCommand".prepare_new_scan(current_planet)
 	get_planet_map(current_planet)
+
+"""
+Récupère les données radar (ou carte locale) d'une planète spécifique via le serveur.
+
+Cette fonction envoie une requête HTTP POST à l'API locale pour obtenir les informations
+spatiales autour de la planète ciblée. Une fois la réponse reçue, elle libère le nœud
+de requête, analyse le contenu JSON et, si les données sont valides, transmet le
+résultat à la fonction 'build_planet_map()' pour générer l'affichage visuel.
+
+Args:
+planet_name (String): Le nom de la planète servant de point d'origine pour le scan radar.
+
+Returns:
+void : Ne retourne aucune valeur (le traitement des données est géré de manière asynchrone par un callback).
+"""
 
 func get_planet_map(planet_name) :
 	var url = "http://127.0.0.1:8000/radar"
@@ -30,6 +61,22 @@ func get_planet_map(planet_name) :
 			build_planet_map(json.get_data())
 	)
 	request.request(url, headers, HTTPClient.METHOD_POST, data)
+
+"""
+Génère et affiche la carte spatiale locale en simulant une perspective de profondeur.
+
+Cette fonction nettoie d'abord la carte précédente. Elle utilise ensuite les données radar
+pour positionner les planètes sur quatre niveaux de profondeur (0 à 3) à l'intérieur de
+la zone d'exploration. Pour simuler l'éloignement, la taille et la luminosité des planètes
+diminuent au fur et à mesure qu'elles sont loin. Enfin, elle trace les lignes de connexion
+primaires et secondaires entre les planètes affichées.
+
+Args:
+data (Dictionary): Les données radar fournies par le serveur, contenant les planètes triées par rang de profondeur ('rank'), les liens principaux ('link') et potentiellement secondaires ('secondary_link').
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
 
 func build_planet_map(data):
 	planet_position.clear()
@@ -99,6 +146,23 @@ func build_planet_map(data):
 			line.default_color = Color(0.2, 0.6, 1.0, 0.6)
 			line_folder.add_child(line)
 
+"""
+Construit le rendu visuel interactif et animé d'une planète pour la carte d'exploration.
+
+Cette fonction génère un nœud complexe contenant les sprites de la planète (base et couche),
+les colore via les données globales, et superpose un bouton transparent pour les interactions.
+Elle met également en place des animations fluides (Tweens) : un flottement naturel continu,
+ainsi qu'un effet de grossissement et de "tremblement" (wiggle) lorsque le joueur passe
+sa souris sur la planète.
+
+Args:
+planet_name (String): Le nom de la planète, servant de clé pour récupérer ses textures et couleurs dans 'GlobalData.universe'.
+size (float): Le facteur d'échelle (scale) de la planète, simulant sa profondeur ou sa taille sur la carte.
+
+Returns:
+Node2D : Le nœud racine fraîchement créé contenant les sprites animés et le bouton, prêt à être ajouté à l'écran.
+"""
+
 func create_visual_map(planet_name, size):
 	var data = GlobalData.universe[planet_name]
 	var visual = Node2D.new()
@@ -153,11 +217,41 @@ func create_visual_map(planet_name, size):
 	)
 	return visual
 
+"""
+Gère le déplacement du joueur vers une nouvelle planète et actualise l'environnement.
+
+Cette fonction met à jour la position courante du joueur en enregistrant le nom
+de la nouvelle planète. Elle prépare ensuite l'interface de commande spatiale
+(BoxSpaceCommand) pour cette nouvelle localisation et lance une requête radar
+pour générer et afficher la carte des alentours de la nouvelle destination.
+
+Args:
+destination_name (String): Le nom de la planète vers laquelle le joueur a choisi de se déplacer.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func planet_exploration(destination_name):
 	current_planet = destination_name
 	print("On se déplace en: " + destination_name)
 	$"Background Manager/Box Manager/BoxSpaceCommand".prepare_new_scan(current_planet)
 	get_planet_map(current_planet)
+
+"""
+Met à jour la position actuelle du joueur (Tako) sur le serveur.
+
+Cette fonction envoie une requête HTTP POST à l'API locale pour informer le backend
+(et potentiellement l'IA) de la nouvelle localisation du joueur. Elle transmet les
+données de la planète ciblée au format JSON, puis libère silencieusement la mémoire
+une fois la requête terminée, sans attendre de traitement particulier de la réponse.
+
+Args:
+planet_info (Dictionary): Les données détaillées de la planète de destination (généralement issues de 'GlobalData.universe').
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
 
 func update_tako_location(planet_info):
 	var url = "http://127.0.0.1:8000/set_current_planet"
