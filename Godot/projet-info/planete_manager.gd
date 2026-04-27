@@ -66,6 +66,27 @@ var prompt_IA = ""
 var data_IA_save = null
 var is_loaded_from_save = false
 
+"""
+Initialise la planète en définissant sa physique et son apparence visuelle unique.
+
+Cette fonction gère deux scénarios :
+
+Si la planète est chargée depuis une sauvegarde, elle se contente de lui attribuer
+un vecteur de mouvement aléatoire.
+
+Sinon, elle génère procéduralement l'apparence de la planète en choisissant des
+textures (base et couches supérieures) et des couleurs aléatoires. Elle construit
+simultanément un 'prompt' textuel décrivant ces caractéristiques visuelles, puis
+interroge un script Python pour générer dynamiquement les données narratives
+(nom, gravité, anecdotes, etc.) cohérentes avec le visuel obtenu.
+
+Args:
+Aucun.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func _ready():
 	if is_loaded_from_save:
 		var load_angle = randf_range(0, 2 * PI)
@@ -113,7 +134,23 @@ func _ready():
 	
 	python_call(prompt_IA)
 	print(prompt_IA)
-	
+
+"""
+Gère le mouvement continu de la planète et les collisions avec les bords de l'écran.
+
+À chaque image (frame), la position de la planète est mise à jour en fonction de son
+vecteur de mouvement. La fonction vérifie si la planète dépasse les limites
+définies ('limit_x' et 'limit_y'). Si un bord est touché, la position est
+rectifiée pour rester dans la zone de jeu et la direction du mouvement est
+inversée sur l'axe concerné (effet de rebond).
+
+Args:
+delta (float): Le temps écoulé depuis la dernière frame, utilisé pour rendre le mouvement indépendant du taux de rafraîchissement (FPS).
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func _process(delta):
 	position += movement * delta
 	if position.x <= 0:
@@ -131,8 +168,40 @@ func _process(delta):
 
 signal planet_selected(planete_node)
 
+"""
+Émet le signal de sélection lorsque l'utilisateur clique sur la planète.
+
+Cette fonction sert d'intermédiaire entre l'interaction physique (le clic sur
+le bouton ou la zone de collision) et la logique globale du jeu. En émettant
+le signal 'planet_selected' avec une référence à elle-même ('self'), elle
+permet aux gestionnaires d'interface ou de liens de savoir précisément quelle
+planète est devenue la cible active du joueur.
+
+Args:
+Aucun.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func _on_planet_button_pressed():
 	planet_selected.emit(self)
+
+"""
+Envoie la description visuelle et le prompt narratif au serveur d'IA.
+
+Cette fonction prépare un paquet de données contenant le prompt textuel ainsi que
+les informations esthétiques de la planète (chemins des textures et codes couleurs
+hexadécimaux). Elle configure ensuite le nœud 'RequestIA' pour envoyer une requête
+HTTP POST au serveur local. Elle s'assure également que le signal de réponse est
+correctement connecté à la fonction de traitement '_on_response_received'.
+
+Args:
+prompt (String): Le texte descriptif généré lors du '_ready' détaillant les caractéristiques visuelles.
+
+Returns:
+void : Ne retourne aucune valeur (la réponse est traitée de manière asynchrone).
+"""
 
 func python_call(prompt):
 	var url = "http://127.0.0.1:8000/analyse"
@@ -156,6 +225,25 @@ func python_call(prompt):
 	if not $RequestIA.request_completed.is_connected(_on_response_received):
 		$RequestIA.request_completed.connect(_on_response_received)
 	$RequestIA.request(url, headers, HTTPClient.METHOD_POST, data_to_send)
+
+"""
+Traite la réponse du serveur d'IA et enregistre l'identité de la planète.
+
+Cette fonction est appelée automatiquement dès que le serveur Python répond.
+Elle décode le corps de la réponse en JSON pour récupérer les caractéristiques
+narratives (nom, type, etc.). Si les données sont valides, elles sont stockées
+localement dans la planète et enregistrées dans le dictionnaire global
+'GlobalData.universe' avec toutes les propriétés visuelles associées.
+
+Args:
+_result : Résultat de la requête (non utilisé).
+response_code (int): Le code de statut HTTP (200 indique un succès).
+_headers : En-têtes de la réponse (non utilisés).
+body (PackedByteArray): Le contenu brut de la réponse du serveur.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
 
 func _on_response_received(_result, response_code, _headers, body):
 	if response_code == 200:
