@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3flo0uo00t6i"]
+
+[ext_resource type="AudioStream" uid="uid://cnt4kej0dhueg" path="res://SOUND/Card Game.mp3" id="1_bpacj"]
+
+[node name="BackGroundMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_bpacj")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
