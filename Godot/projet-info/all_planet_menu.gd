@@ -5,6 +5,22 @@ var open = false
 func _ready() :
 	$".".visible = false
 
+"""
+Réinitialise et reconstruit dynamiquement la liste des planètes dans l'interface utilisateur.
+
+Cette fonction nettoie le conteneur visuel actuel, parcourt les entités planétaires
+disponibles dans le 'Background Manager' et génère pour chaque planète valide une
+nouvelle ligne d'interface comprenant son icône (composée de deux couches), son
+nom, son type et un bouton de sélection.
+
+Args:
+Aucun : La fonction récupère ses références via les chemins de nœuds relatifs (get_node).
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
+
 func PlanetMenuReload():
 	var container = $"List/ScrollContainer/VBoxContainer"
 	for child in container.get_children():
@@ -74,6 +90,21 @@ func PlanetMenuReload():
 				ligne.add_child(phantom)
 				
 				container.add_child(ligne)
+				
+"""
+Gère l'ouverture et la fermeture du menu des planètes (Toggle).
+
+Selon l'état de la variable 'open', la fonction affiche le menu des planètes
+en rafraîchissant son contenu via 'PlanetMenuReload()', ou le masque pour
+réafficher les éléments principaux de l'interface (boutons de gestion,
+chargement JSON et navigation).
+
+Args:
+Aucun : Utilise la variable d'état locale 'open' et les chemins de nœuds relatifs.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
 
 func _on_planet_menu_pressed() :
 	if open == false :
