@@ -1,13 +1,21 @@
 from flask import Flask, request, jsonify
 import os
+import sys
 import json
 from groq import Groq
 from graph import Graph
 from algorithms import dfs_path
 app = Flask(__name__)
 
-from TakoAPIKey import api_key_backup
+from TakoAPIKey import api_key_backup, api_key
 client = Groq(api_key=api_key_backup) #or api_key
+
+if getattr(sys, 'frozen', False):
+    base_path = os.path.dirname(sys.executable)
+else:
+    base_path = os.path.dirname(os.path.abspath(__file__))
+PATH_COMPLET = os.path.join(base_path, "graph_complet.json")
+PATH_DECOUVERT = os.path.join(base_path, "graph_decouvert.json")
 
 name_alerady_used = []
 planet_db = {}
@@ -310,10 +318,10 @@ def save_graph_json():
   
     full_graph = build_structured_data(mask_unknown=False)
     masked_graph = build_structured_data(mask_unknown=True)
-    with open("graph_complet.json", "w", encoding="utf-8") as f:
+    with open(PATH_COMPLET, "w", encoding="utf-8") as f:
         json.dump(full_graph, f, indent=4, ensure_ascii=False)   
 
-    with open("graph_decouvert.json", "w", encoding="utf-8") as f:
+    with open(PATH_DECOUVERT, "w", encoding="utf-8") as f:
         json.dump(masked_graph, f, indent=4, ensure_ascii=False) 
 
     print("Fichiers JSON générés avec succès !")
@@ -323,8 +331,8 @@ def save_graph_json():
 def get_graph():
     global space_graph, planet_db, name_alerady_used
     try:
-        if os.path.exists("graph_complet.json"):
-            with open("graph_complet.json", "r", encoding="utf-8") as f:
+        if os.path.exists(PATH_COMPLET):
+            with open(PATH_COMPLET, "r", encoding="utf-8") as f:
                 data = json.load(f)
             space_graph = Graph()
             planet_db.clear()
