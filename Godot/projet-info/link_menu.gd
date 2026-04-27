@@ -2,9 +2,41 @@ extends Control
 
 var open = false
 
+"""
+Initialise l'état visuel du nœud et de ses dépendances au chargement de la scène.
+
+Cette fonction s'exécute automatiquement lorsque le nœud entre dans l'arbre
+de la scène. Elle masque par défaut l'élément courant (le nœud auquel ce script
+est attaché) et navigue dans l'arborescence parente pour cacher également
+le bouton de suppression massive ("DeleteAll_Link") situé dans le gestionnaire
+de boutons.
+
+Args:
+Aucun.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func _ready() :
 	$".".visible = false
 	$"../../../Button Manager/DeleteAll_Link".visible = false
+
+"""
+Met à jour et affiche le menu des connexions possibles pour une planète donnée.
+
+Cette fonction nettoie le conteneur visuel actuel et le reconstruit en listant
+uniquement les planètes éligibles à une nouvelle liaison. Elle exclut automatiquement
+la planète source elle-même, ainsi que les planètes avec lesquelles une connexion
+existe déjà. Pour chaque planète disponible, elle crée une ligne d'interface avec
+son icône, son nom et un bouton permettant d'établir le lien.
+
+Args:
+planet_source (Node): La planète actuellement sélectionnée depuis laquelle le joueur souhaite créer une connexion.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
 
 func LinkMenuReload(planet_source):
 	var container = $ScrollContainer/VBoxContainer
@@ -90,7 +122,24 @@ func LinkMenuReload(planet_source):
 				ligne.add_child(phantom)
 				
 				container.add_child(ligne)
-				
+
+"""
+Met à jour et affiche le menu de suppression des connexions pour une planète donnée.
+
+Cette fonction nettoie le conteneur visuel actuel et le reconstruit en listant
+uniquement les planètes qui sont déjà reliées à la planète source. Pour chaque
+connexion trouvée dans le tableau global des liaisons, elle crée une ligne
+d'interface comprenant l'icône de la planète voisine, son nom, son type,
+et un bouton permettant de rompre ce lien spécifique.
+
+Args:
+planet_source (Node): La planète actuellement sélectionnée dont on souhaite gérer et potentiellement supprimer les liaisons.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
+
 func DeleteLinkMenuReload(planet_source):
 	var container = $ScrollContainer/VBoxContainer
 	for child in container.get_children():
@@ -174,6 +223,21 @@ func DeleteLinkMenuReload(planet_source):
 				
 				container.add_child(ligne)
 
+"""
+Gère l'affichage (Toggle) du menu de création de liens pour la planète sélectionnée.
+
+Cette fonction vérifie d'abord si une planète est actuellement sélectionnée dans
+le script principal. Si c'est le cas, elle bascule l'état de visibilité du menu :
+soit elle l'ouvre en rafraîchissant la liste des connexions possibles via
+'LinkMenuReload()', soit elle le referme si celui-ci était déjà affiché.
+
+Args:
+Aucun : Récupère la planète active via le chemin absolu du nœud '/root/Creation'.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
+
 func _on_link_pressed():
 	var planet_active = get_node("/root/Creation").planet_selected
 	if planet_active == null :
@@ -185,6 +249,21 @@ func _on_link_pressed():
 	else :
 		$".".visible = false
 		open = false
+
+"""
+Gère l'affichage (Toggle) du menu de suppression de liens pour la planète sélectionnée.
+
+Cette fonction vérifie si une planète est actuellement active. Si c'est le cas,
+elle bascule l'état du menu de suppression : elle l'ouvre en listant les liens
+existants via 'DeleteLinkMenuReload()' et affiche le bouton d'action globale
+'DeleteAll_Link', ou elle referme l'ensemble si le menu était déjà ouvert.
+
+Args:
+Aucun : Récupère la planète cible via le script principal de création.
+
+Returns:
+void : Ne retourne aucune valeur.
+"""
 
 func _on_delete_link_pressed():
 	var planet_active = get_node("/root/Creation").planet_selected
