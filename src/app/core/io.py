@@ -37,10 +37,12 @@ def save_graph(graph: Graph, filepath: str | Path) -> None:
         >>> g.add_edge("A", "B")
         >>> save_graph(g, "my_graph.json")
     """
-    # TODO: implémenter
-    # Astuce : utiliser graph.nodes() et graph.edges()
-    # Convertir les edges en liste de listes pour JSON
-    pass
+    data = graph_to_dict(graph)
+    try:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4)
+    except IOError as e:
+        raise IOError(f"Erreur lors de l'écriture dans le fichier {filepath}: {e}")
 
 
 def load_graph(filepath: str | Path) -> Graph:
@@ -69,14 +71,14 @@ def load_graph(filepath: str | Path) -> Graph:
         >>> g.has_node("A")
         True
     """
-    # TODO: implémenter
-    # Astuce :
-    # 1. Ouvrir et parser le JSON
-    # 2. Créer un graphe vide
-    # 3. Ajouter les nœuds
-    # 4. Ajouter les arêtes
-    # 5. Gérer les exceptions proprement
-    pass
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Le fichier {filepath} n'existe pas.")
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Le fichier JSON est invalide : {e}")
+    return dict_to_graph(data)
 
 
 def graph_to_dict(graph: Graph) -> dict:
@@ -95,8 +97,10 @@ def graph_to_dict(graph: Graph) -> dict:
         >>> graph_to_dict(g)
         {'nodes': ['A', 'B'], 'edges': [['A', 'B']]}
     """
-    # TODO: implémenter
-    pass
+    return {
+        "nodes": list(graph.nodes()),
+        "edges": [list(edge) for edge in graph.edges()]
+    }
 
 
 def dict_to_graph(data: dict) -> Graph:
@@ -128,14 +132,22 @@ def dict_to_graph(data: dict) -> Graph:
         >>> g.has_edge("A", "B")
         True
     """
-    # TODO: implémenter
-    # Validation requise :
-    # 1. Vérifier que "nodes" et "edges" existent
-    # 2. Créer un graphe vide
-    # 3. Ajouter tous les nœuds
-    # 4. Pour chaque arête :
-    #    - Vérifier format (liste/tuple de 2 éléments)
-    #    - Vérifier que a et b existent dans nodes
-    #    - Ajouter l'arête
-    # 5. Gérer les exceptions proprement
-    pass
+    if "nodes" not in data or "edges" not in data:
+        raise KeyError("Le dictionnaire doit contenir les clés 'nodes' et 'edges'.")
+    nodes_data = data["nodes"]
+    edges_data = data["edges"]
+    if not isinstance(nodes_data, list):
+        raise ValueError("La valeur associée à 'nodes' doit être une liste.")
+    if not isinstance(edges_data, list):
+        raise ValueError("La valeur associée à 'edges' doit être une liste.")
+    g = Graph()
+    for node in nodes_data:
+        g.add_node(node)
+    for edge in edges_data:
+        if not isinstance(edge, (list, tuple)) or len(edge) != 2:
+            raise ValueError(f"Format d'arête invalide : {edge}. Chaque arête doit être une liste ou un tuple de 2 éléments.")
+        u, v = edge
+        if u not in nodes_data or v not in nodes_data:
+            raise ValueError(f"L'arête ({u}, {v}) référence des nœuds qui ne sont pas dans la liste des 'nodes'.")
+        g.add_edge(u, v)
+    return g
